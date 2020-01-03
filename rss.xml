@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Kevin McKelvin]]></title><description><![CDATA[The online musings of Kevin McKelvin]]></description><link>https://kmckelvin.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 03 Jan 2020 19:16:34 GMT</lastBuildDate><item><title><![CDATA[My 2019 in review]]></title><description><![CDATA[My 2019 in review When Twitter’s 5 word summaries of the year were trending, I came up with “rollercoaster with a happy ending.” It’s been a…]]></description><link>https://kmckelvin.com/2020-01-01-my-2019-in-review/</link><guid isPermaLink="false">https://kmckelvin.com/2020-01-01-my-2019-in-review/</guid><pubDate>Wed, 01 Jan 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;My 2019 in review&lt;/h1&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Kevin McKelvin]]></title><description><![CDATA[The online musings of Kevin McKelvin]]></description><link>https://kmckelvin.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 03 Jan 2020 19:46:28 GMT</lastBuildDate><item><title><![CDATA[My 2019 in review]]></title><description><![CDATA[My 2019 in review When Twitter’s 5 word summaries of the year were trending, I came up with “rollercoaster with a happy ending.” It’s been a…]]></description><link>https://kmckelvin.com/2020-01-01-my-2019-in-review/</link><guid isPermaLink="false">https://kmckelvin.com/2020-01-01-my-2019-in-review/</guid><pubDate>Wed, 01 Jan 2020 00:00:00 GMT</pubDate><content:encoded>&lt;h1&gt;My 2019 in review&lt;/h1&gt;
 &lt;p&gt;When Twitter’s 5 word summaries of the year were trending, I came up with “rollercoaster with a happy ending.” It’s been a challenging 12 months, but looking back I know I have a heck of a lot to be grateful for.&lt;/p&gt;
 &lt;p&gt;In May my wife’s aunt passed away after a year of battling with cancer.&lt;/p&gt;
 &lt;p&gt;Around the same time my Dad’s health took a turn for the worse. It must be a generational thing but my parents tend to avoid going to doctors or the hospital if at all possible - there’s little trust in the healthcare system. Eventually in July he got a diagnosis, but at the same time my Mom’s health took a dive and she had a stroke.&lt;/p&gt;
@@ -1314,41 +1314,189 @@ public class OrderDetail
 &lt;p&gt;I really like the freedom of workflow Git provides and the speed and robustness of it. I’m pretty sure that more and more enterprise users will take up on Git over the next year or so, particularly with the power provided by providers such as GitHub.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[NHibernate XML Mappings – Part 2 – Mapping the Product]]></title><description><![CDATA[Continuing where we left off from part 1, we had created a class library called DomainModel and created four classes to act as data transfer…]]></description><link>https://kmckelvin.com/2010-06-15-nhibernate-xml-mappings-part-2-mapping-the-product/</link><guid isPermaLink="false">https://kmckelvin.com/2010-06-15-nhibernate-xml-mappings-part-2-mapping-the-product/</guid><pubDate>Mon, 14 Jun 2010 23:01:00 GMT</pubDate><content:encoded>&lt;p&gt;Continuing where we left off from part 1, we had created a class library called DomainModel and created four classes to act as data transfer objects.&lt;/p&gt;
 &lt;p&gt;In this part we’ll create our first NHibernate mapping for the Product entity.&lt;/p&gt;
 &lt;p&gt;Lets revisit what our Product class looks like first.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.mcdev.za.net/images/2010/06/image5.png&quot;&gt;&lt;img src=&quot;http://www.mcdev.za.net/images/2010/06/image_thumb5.png&quot; alt=&quot;image&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;image5.png&quot;&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 372px;&quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 28.763440860215056%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAAA7DAAAOwwHHb6hkAAABHUlEQVQY012Q23KDMAxE+f+fy0tpIRMgAULSFBqIzR10KsNDp9XMjleSvV7JiyMoSyHPoLgJVduT1YZP27HIyt+Qf9hjXfd7RVHgOT4OwjDANAmjYphWplm2fFlgnucNohoud2801XxVOOFdME1TvNaA/yZkmVDX4BxHJ6gqSCLhpDxOUrI00QctQWi1Z0jOE2XVqJGJvt+dXi5nvNdTOByEJNZxK+EYCsGHcL+r2HHlzVfB+EoQvBNFkX6Y6Ic3XU+H7wtfDyc+0g+j9k94o46a5/B8QtepsxIeDza39xtcr9C2C9/aqOun8lXdgu2WbYq21V0v4+YwVyHP2JcWG6xtMGY/N65wdQdjXlqzWGM2/ltzp6GpGzXTEYYhP0w7y3nBclssAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;image&quot;
+        title=&quot;image&quot;
+        src=&quot;/static/977177e487758352fd49c48c74b2348a/d0064/image_thumb5.png&quot;
+        srcset=&quot;/static/977177e487758352fd49c48c74b2348a/00d96/image_thumb5.png 148w,
+/static/977177e487758352fd49c48c74b2348a/0b23c/image_thumb5.png 295w,
+/static/977177e487758352fd49c48c74b2348a/d0064/image_thumb5.png 372w&quot;
+        sizes=&quot;(max-width: 372px) 100vw, 372px&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;We have three properties which we want to map to our columns in the database. NHibernate does this using XML files.&lt;/p&gt;
 &lt;p&gt;Quick tip: Make sure you’ve brought the nhibernate-configuration.xsd and nhibernate-mapping.xsd files into your solution. They are in the NHibernate redistributable you would have downloaded from nhforge. This will give you IntelliSense when editing the NHibernate xml mapping and configuration files.&lt;/p&gt;
 &lt;h3&gt;Create the Mapping File&lt;/h3&gt;
 &lt;p&gt;Create a new folder in your DomainModel project called Mappings and inside it create an xml file called Product.hbm.xml.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.mcdev.za.net/images/2010/06/image6.png&quot;&gt;&lt;img src=&quot;http://www.mcdev.za.net/images/2010/06/image_thumb6.png&quot; alt=&quot;image&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.mcdev.za.net/images/2010/06/image7.png&quot;&gt;&lt;img src=&quot;http://www.mcdev.za.net/images/2010/06/image_thumb7.png&quot; alt=&quot;image&quot;&gt;&lt;/a&gt; For NHibernate to read your configuration at run-time, this file needs to be made an embedded resource. Select the file in your solution explorer, then go to properties and set Build Action to Embedded Resource.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;image6.png&quot;&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 182px;&quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 21.978021978021978%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAYAAACOXx+WAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAA3UlEQVQY032QyUrEUBBF8/8/4Ee4cie9tuk0CSadvMz9nk2MmAkHFDKZHF/SW/FCQXGruHUoY5omyrJkVaV2tPKeXCoOB5M4ijg5PmmaEviC9u1j25vneatlWa79z7z5UkqMrutQuln1LO5I9je0VUOSRNjmEffR2w5apsn75zf/ybZtjL8GzVfPQ1CQX3LkWVFXL5wjSd3UxF6ALyIu6kn7FSrLyOIr0Ml1McZxZKUchoG+7zX+QKxeud25FIUOSjNNaXPcmwj9gtD1cRwP4QmSMMTTIXGYbYGWZfELUconioqT7VwAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;image&quot;
+        title=&quot;image&quot;
+        src=&quot;/static/be4decefc60e8d3b7d2576ac428a8052/4852f/image_thumb6.png&quot;
+        srcset=&quot;/static/be4decefc60e8d3b7d2576ac428a8052/00d96/image_thumb6.png 148w,
+/static/be4decefc60e8d3b7d2576ac428a8052/4852f/image_thumb6.png 182w&quot;
+        sizes=&quot;(max-width: 182px) 100vw, 182px&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;image7.png&quot;&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 300px;&quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 67%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAAA7DAAAOwwHHb6hkAAACiklEQVQ4y32TW3PaSBCF9XP3cSsPqX1JnpOn/SGp2o2BJL7iOCZlUsQGgQQSugEy4mKLiwTBxsC3rUm8lVQl6apT3T2aOdN9eqT1nXM61jnddom+95F0XGN5WycZVZkPr8R/zRc3uvL38xbr73A/a/IlbnA3NTCvjtEcx0dvGFzWLaq1BuWKTr3RxLR9XLcnCGlbLpYluddjs+Onli3r9SZaqepxpRtc+zpN26Z82eST7nJpdr+hQ6URfINPpe7/mGde1q5aIQenZbRXB58pvj/DuSxwUalw9KHKyUWTw48mByWDwwwSn1y0KJYthSw+yeJPtsqPsu9lm3/enqHdxhPCXkjLNLDtNpbAaXus7u552GxVi0maYtRNaduiVtUxjRYNw8S2ZK9INpun7GRfq2WhzedzppOYjt8hiiKi65DA9xkPRwz6A0Gf0XBI4PmyJ6ATBPI9YDabsZCLlsslm81G6eh5Htp0OlOEvuviB12pVgbhtNWhQTSkH14zHo25ubkhvo2ZZB2Foar+0R4JXcdFy27KCLvdEF9IssO9bo80SfmdbbdbRfTovxI6j4QTKTeg3XYZDkaKuGU00XVTNKsxlEt+ZTsR74cKp7M5SSyteTahazPoOPCwzGoQrBXWXxKlYbfTVdVnWkaibSbH9+/S90XDVTohV1/wVyHh5fGcZ28mPN1/4FkRnhd3PD2CPXPNZDygI4RRNFA6K8LriHSxIBvsarWiIT+Itr1LyTXXPH8Pf5fhRQn+fLcTbHmyv+WP/I5XjTUPq5SJDDBJEpnwlDTNvLyQ6ZQ4jtXEazUdrVg8ZT//L2cHexTfveZ0/zXnh3v/oyQ4frtHLpejkM+TF/zMFwoFFf8HNYGpaexeYMcAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;image&quot;
+        title=&quot;image&quot;
+        src=&quot;/static/a5c43a9d7ea448251b8752e38be09e8c/8c2ab/image_thumb7.png&quot;
+        srcset=&quot;/static/a5c43a9d7ea448251b8752e38be09e8c/00d96/image_thumb7.png 148w,
+/static/a5c43a9d7ea448251b8752e38be09e8c/0b23c/image_thumb7.png 295w,
+/static/a5c43a9d7ea448251b8752e38be09e8c/8c2ab/image_thumb7.png 300w&quot;
+        sizes=&quot;(max-width: 300px) 100vw, 300px&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/a&gt; For NHibernate to read your configuration at run-time, this file needs to be made an embedded resource. Select the file in your solution explorer, then go to properties and set Build Action to Embedded Resource.&lt;/p&gt;
 &lt;p&gt;NHibernate’s convention is to name your mapping with a .hbm.xml extension. This can be overridden if needed, but would defeat the objective of convention over configuration ;)&lt;/p&gt;
 &lt;h3&gt;Build the Mapping&lt;/h3&gt;
 &lt;p&gt;For NHibernate to map your entity to the database, it needs to know&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;The assembly and namespace of the class being mapped. &lt;/li&gt;
-&lt;li&gt;The name of the class being mapped. &lt;/li&gt;
-&lt;li&gt;The name of the table the class is being mapped to. &lt;/li&gt;
-&lt;li&gt;What the unique identifier of the class is. &lt;/li&gt;
-&lt;li&gt;What column each property must be mapped to. &lt;/li&gt;
+&lt;li&gt;The assembly and namespace of the class being mapped.&lt;/li&gt;
+&lt;li&gt;The name of the class being mapped.&lt;/li&gt;
+&lt;li&gt;The name of the table the class is being mapped to.&lt;/li&gt;
+&lt;li&gt;What the unique identifier of the class is.&lt;/li&gt;
+&lt;li&gt;What column each property must be mapped to.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Open your Product.hbm.xml file and add your root element.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.mcdev.za.net/images/2010/06/image8.png&quot;&gt;&lt;img src=&quot;http://www.mcdev.za.net/images/2010/06/image_thumb8.png&quot; alt=&quot;image&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;The hibernate-mapping element defines three attributes here. &lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;image8.png&quot;&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 387px;&quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 13.436692506459949%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAADCAYAAACTWi8uAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAoklEQVQI112L7YrCMBRE+/4P5oql/eNX0laquYrdXW5aVATR5BgVBB04HGZgsqGyHJwkHEdx+IVhaFvOqVMZLtKxlTPOBdZtwCwjqyZSVyHtN2bTiDUBkchvF8j4Towvn45QN4kaNsJeLswX0KRqLcxnMAxXQvi8ZaqKev/GP9z36G6Hjn7QosDnE2S5Ji+VfKKUhTIee4z9o+v+6fvHT5++A+4b4JTkozjGAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;image&quot;
+        title=&quot;image&quot;
+        src=&quot;/static/1fcdfb5093f2b38c581d961762d866e8/3464d/image_thumb8.png&quot;
+        srcset=&quot;/static/1fcdfb5093f2b38c581d961762d866e8/00d96/image_thumb8.png 148w,
+/static/1fcdfb5093f2b38c581d961762d866e8/0b23c/image_thumb8.png 295w,
+/static/1fcdfb5093f2b38c581d961762d866e8/3464d/image_thumb8.png 387w&quot;
+        sizes=&quot;(max-width: 387px) 100vw, 387px&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The hibernate-mapping element defines three attributes here.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;The xmlns attribute sets your namespace and lets Visual Studio give you IntelliSense &lt;/li&gt;
-&lt;li&gt;The assembly attribute tells NHibernate what the default assembly is for types that don’t have fully qualified type names. &lt;/li&gt;
-&lt;li&gt;The namespace attribute tells NHibernate which namespace to look in for types that don’t have fully qualified type names. &lt;/li&gt;
+&lt;li&gt;The xmlns attribute sets your namespace and lets Visual Studio give you IntelliSense&lt;/li&gt;
+&lt;li&gt;The assembly attribute tells NHibernate what the default assembly is for types that don’t have fully qualified type names.&lt;/li&gt;
+&lt;li&gt;The namespace attribute tells NHibernate which namespace to look in for types that don’t have fully qualified type names.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The next thing NHibernate needs to know is the detail about the class being mapped, so add a class element.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.mcdev.za.net/images/2010/06/image9.png&quot;&gt;&lt;img src=&quot;http://www.mcdev.za.net/images/2010/06/image_thumb9.png&quot; alt=&quot;image&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;image9.png&quot;&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 178px;&quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 19.662921348314608%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAYAAACOXx+WAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAA8ElEQVQY022MbU+CUACF+f+/xexDc85akzZxUsC9gUgqygjMl5BE0akLnm597tmeL2fnHC2LN+RDl63vU8xCrocSwpDaHIDRJ5sXTMINz72a6Rxsq8YTNYEP/njLsdzzS5Zl9A0DLV9kHOKIXTijiCIu+5J6uaIKAvCG5Osr12/4eD8RpzVRVDGfViRJRXmCy/n4d5gmCTeNBhr/EU7AcZQuCIfP5Mw0OOC/wSIFswejEQRjSOIv8h0sV2tum00027KRQqidoxRIqdR1ZKuF7HQQD48YPYH14jIwBXpX0rqTtNuSrq5y61XpoetP3Kv+D1dEIPiJ2HtjAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;image&quot;
+        title=&quot;image&quot;
+        src=&quot;/static/1db77708b020708cb73f11fa5cc533aa/5107a/image_thumb9.png&quot;
+        srcset=&quot;/static/1db77708b020708cb73f11fa5cc533aa/00d96/image_thumb9.png 148w,
+/static/1db77708b020708cb73f11fa5cc533aa/5107a/image_thumb9.png 178w&quot;
+        sizes=&quot;(max-width: 178px) 100vw, 178px&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Based on the assembly and namespace in the hibernate-mapping element, this tells NHibernate to map the DomainModel.Product class from the DomainModel assembly to the table called Product. Note that we could have omitted the table attribute here and NHibernate would have used the class name as the table name. However, I find using the table attribute makes the mapping file easier to understand when reading it.&lt;/p&gt;
 &lt;p&gt;NHibernate needs to know two more things about our entity now. It needs a unique identifier for the entity. This is done with the Id element under the class element.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.mcdev.za.net/images/2010/06/image10.png&quot;&gt;&lt;img src=&quot;http://www.mcdev.za.net/images/2010/06/image_thumb10.png&quot; alt=&quot;image&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;image10.png&quot;&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 262px;&quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 20.99236641221374%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAYAAACOXx+WAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAA5UlEQVQY0zWPi2qDQBRE8/9/VihJi9gkjZroqqn78tVV25g93TZ0YLgwA5czm145xrKCoQdRQFHgCkNZf5OJO4tzITvj8wrZfFKKlY8a0jNICbXwpJmnqhaEuLJZ3EJbaVySMB0OzPs9wzGhVTMm7/Bpwi16w5xKjscbrzvP6d2ze1nJ85G69OTFyjzD5VKwIagVLXIbsRjDYi1TVRLQYBohy7ibga/7Y8BvZdtAFijX9eF/Xa+BMEl7Dk/PnKIMPQzo8FR3HVJrGm2QfY+yIVMNXSf/bK2kDZZhs1LhNk3ILHEc8wNPJSzRf+fjWAAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;image&quot;
+        title=&quot;image&quot;
+        src=&quot;/static/3ff82b0b78953827129cc8e7a2f189c7/149b9/image_thumb10.png&quot;
+        srcset=&quot;/static/3ff82b0b78953827129cc8e7a2f189c7/00d96/image_thumb10.png 148w,
+/static/3ff82b0b78953827129cc8e7a2f189c7/149b9/image_thumb10.png 262w&quot;
+        sizes=&quot;(max-width: 262px) 100vw, 262px&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;From this, NHibernate will use the Id column on the table as the unique identifier for each record and knows that the database will generate new identity values for new records. Note that no property on our class maps to the Id column and therefore we need to explicitly tell it that it is of type System.Int32.&lt;/p&gt;
 &lt;p&gt;The last thing NHibernate needs to know about our Product is the properties that it must map. These are added using the property tag after the id tag.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.mcdev.za.net/images/2010/06/image11.png&quot;&gt;&lt;img src=&quot;http://www.mcdev.za.net/images/2010/06/image_thumb11.png&quot; alt=&quot;image&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;image11.png&quot;&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 230px;&quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 23.478260869565215%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAAA7DAAAOwwHHb6hkAAABGklEQVQY01WQXW+CQBBF+f8/ytimD9pEXPmMsCAKaBuDunwJtcvptn1pJ5m5D5O5M2csle1pixyVpNTZjvZ0QrcdhCH4PnV5I8s7HAGHg2IYRs5nmKYJU/kbbdtgXaKEOk25bmOafI/KMnTdgOeb9LiVLXkx4jrw9q7N0ITZiVKTMYeuezCOI1pDVV2xqq1EpQmVH6J2KTdz5UPVaCGY1mtUcSWKemyhjWryXCNszWql2YiJwO9pu5bTEYrygtVlOUNZ0Bnkbx2OpjN+GNzgB3k49+SlMTrAPsMYwv0+0NTw+PxHTN93WOL5BW+5YDN/IrRXuIsFkeMh53OS2QznNWDjJKxtyXL5m1JKhJAEoSRJJHEck5q3ea7LF7+Ucrvfi3VqAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;image&quot;
+        title=&quot;image&quot;
+        src=&quot;/static/ff0e7b05b7a68c852d3f10c03256f74b/2eb7e/image_thumb11.png&quot;
+        srcset=&quot;/static/ff0e7b05b7a68c852d3f10c03256f74b/00d96/image_thumb11.png 148w,
+/static/ff0e7b05b7a68c852d3f10c03256f74b/2eb7e/image_thumb11.png 230w&quot;
+        sizes=&quot;(max-width: 230px) 100vw, 230px&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;After adding these three lines, here’s our complete mapping file.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.mcdev.za.net/images/2010/06/image12.png&quot;&gt;&lt;img src=&quot;http://www.mcdev.za.net/images/2010/06/image_thumb12.png&quot; alt=&quot;image&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;image12.png&quot;&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 378px;&quot;
+    &gt;
+      &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 65.87301587301587%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAANCAYAAACpUE5eAAAACXBIWXMAAA7DAAAOwwHHb6hkAAACCElEQVQ4y42TiW6bQBCGef9nq1Q1iRNjY8wNxmBOc+9+HZzUbWql6kqjRbPaf/9jMFI3o7T3LJGPOu6YLIs0rvC9Bp34aNtifnujskM8f8Jzei75lbqamaeJcRhvhVaEgYdRhWfaIKANQ65hTOt5VI5P40dwOLCYFrlbEngaeQtzC9YebFsjVzhIz5WzooCt6WLw5VrgeIDn5xtK5NT8eFrYbDTPT7B5WWiaHq2FnLBbVxRFGMus6S4FgzyhqxqV5RTlTHbW5OaZ3g3gnDKVV+SI5CT9THM6QdcplNICqG+AoVA2lkUz1g3j9SrcXdS378R+j2lqNiLvXMJ8Z63/2PW9q5T6Dbh+DL2izy/SCVYtZBLIGkDnxnQ7j8jvcI7giVdxpHEcRX6Z3qGF3V+AawOyQ0hp7mkdh+spZTlnN/frpGZvaXbb1Xwl5s+07TuQ/gpwTb2IcqZRf53Rel1/lv5unX6UPE8LUyM+lgXT6mVVMecll0JR1zPTpB7AP3K47Q+AbTWQv+0oZICbJEE0Mr3ueNkuMnsK318L8lx87TSL+gz6AHitRwrrSCVT2qbpLe1xd8QNFglDEccja7vrRMmk76Pyq+6A8oMYwwBlXFKbwu5UokYxtJeB7YcPOfz3iuMYI3IvJNst6X5Patmcjzbx5pVEEs9OOV3fSartP6sR/wdhZts2PwHvn+X0NFa60AAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;image&quot;
+        title=&quot;image&quot;
+        src=&quot;/static/0670adce32a4ec23d99c0efeb1a495b9/aac1f/image_thumb12.png&quot;
+        srcset=&quot;/static/0670adce32a4ec23d99c0efeb1a495b9/00d96/image_thumb12.png 148w,
+/static/0670adce32a4ec23d99c0efeb1a495b9/0b23c/image_thumb12.png 295w,
+/static/0670adce32a4ec23d99c0efeb1a495b9/aac1f/image_thumb12.png 378w&quot;
+        sizes=&quot;(max-width: 378px) 100vw, 378px&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+    &lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;And that’s it! We could now open a new NHibernate.ISession and get a list of all of our products from the database.&lt;/p&gt;
 &lt;p&gt;In the next part of this series we’ll map our Order and OrderDetail classes and handle the one-to-many and many-to-one elements in the NHibernate configuration. We’ll also look at the different types of collections NHibernate uses and when each is appropriate.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[NHibernate XML Mappings – Part 1 (The Domain Model)]]></title><description><![CDATA[XML mappings is one of the first things newcomers to NHibernate struggle with. What’s more I’ve found most of the documentation around goes…]]></description><link>https://kmckelvin.com/2010-06-13-nhibernate-xml-mappings-part-1-the-domain-model/</link><guid isPermaLink="false">https://kmckelvin.com/2010-06-13-nhibernate-xml-mappings-part-1-the-domain-model/</guid><pubDate>Sun, 13 Jun 2010 14:08:28 GMT</pubDate><content:encoded>&lt;p&gt;XML mappings is one of the first things newcomers to NHibernate struggle with. What’s more I’ve found most of the documentation around goes into far more detail than is typically required to get mappings built.&lt;/p&gt;
 &lt;p&gt;In these posts I’ll go through the basics of mapping out a basic data schema in NHibernate. I don’t intend to cover all the advanced details of mapping, just enough to get you going.&lt;/p&gt;
@@ -1381,10 +1529,9 @@ public class OrderDetail
 &lt;li&gt;1 Product to Many OrderDetails&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Now lets go map these into C# POCOs. In Visual Studio, add a Class Library to your solution and call it DomainModel.&lt;/p&gt;
-&lt;p&gt;To create this schema, just run this file against your SQL Server instance. &lt;a href=&quot;http://www.mcdev.za.net/files/NHMappingsSchema.sql&quot;&gt;NHMappingsSchema.sql&lt;/a&gt;&lt;/p&gt;
 &lt;h3&gt;The Domain&lt;/h3&gt;
 &lt;p&gt;First step is to define some POCOs to hold our data in our domain model. Create four classes as defined below:&lt;/p&gt;
-&lt;p&gt;  &lt;a href=&quot;./image1.png&quot;&gt;&lt;span
+&lt;p&gt;&lt;a href=&quot;./image1.png&quot;&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 374px;&quot;
     &gt;
