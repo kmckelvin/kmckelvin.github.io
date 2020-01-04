@@ -6,74 +6,74 @@
 <p>The accepted way of using NHibernate is to use a pattern known as “Session per request” – where at the beginning of a request we bind a session to the CurrentSessionContext – then unbind it at the end of the request.</p>
 <p>Before we can do that however, we need an ISessionFactory. This is the single entry point to NHibernate. It’s an expensive operation to create an ISessionFactory, but you only do it once.</p>
 <p>In keeping with NHibernate 3, I’m going to use the new Loquacious API to configure my ISessionFactory. This goes in the MvcApplication class:</p>
-<div class="gatsby-highlight" data-language="c#"><pre class="language-c#"><code class="language-c#">private static ISessionFactory SessionFactory = CreateSessionFactory();
+<div class="gatsby-highlight" data-language="csharp"><pre class="language-csharp"><code class="language-csharp"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">ISessionFactory</span> SessionFactory <span class="token operator">=</span> <span class="token function">CreateSessionFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-private static ISessionFactory CreateSessionFactory()
-{
-    var config = new Configuration();
+<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">ISessionFactory</span> <span class="token function">CreateSessionFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">var</span> config <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Configuration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    config.DataBaseIntegration(
-        db =&gt;
-            {
-                db.ConnectionStringName = &quot;MusicStoreConnection&quot;,
-                db.Dialect&lt;MsSql2005Dialect&gt;();
-            })
-        .Proxy(p =&gt; p.ProxyFactoryFactory&lt;ProxyFactoryFactory&gt;())
-        .AddAssembly(typeof (Album).Assembly);
+    config<span class="token punctuation">.</span><span class="token function">DataBaseIntegration</span><span class="token punctuation">(</span>
+        db <span class="token operator">=></span>
+            <span class="token punctuation">{</span>
+                db<span class="token punctuation">.</span>ConnectionStringName <span class="token operator">=</span> <span class="token string">"MusicStoreConnection"</span><span class="token punctuation">,</span>
+                db<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">Dialect</span><span class="token punctuation">&lt;</span><span class="token class-name">MsSql2005Dialect</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">Proxy</span><span class="token punctuation">(</span>p <span class="token operator">=></span> p<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">ProxyFactoryFactory</span><span class="token punctuation">&lt;</span><span class="token class-name">ProxyFactoryFactory</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">AddAssembly</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token punctuation">(</span>Album<span class="token punctuation">)</span><span class="token punctuation">.</span>Assembly<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    return config.BuildSessionFactory();
-}</code></pre></div>
+    <span class="token keyword">return</span> config<span class="token punctuation">.</span><span class="token function">BuildSessionFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
 <p>I won’t be using the ISession directly in my code, I’ll now implement my IMusicStoreContext and use one of those per session / per request.</p>
-<div class="gatsby-highlight" data-language="c#"><pre class="language-c#"><code class="language-c#">public class MusicStoreContext : IMusicStoreContext
-{
-    private readonly ISession _currentSession;
+<div class="gatsby-highlight" data-language="csharp"><pre class="language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MusicStoreContext</span> <span class="token punctuation">:</span> <span class="token class-name">IMusicStoreContext</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">readonly</span> <span class="token class-name">ISession</span> _currentSession<span class="token punctuation">;</span>
 
-    public MusicStoreContext(ISession currentSession)
-    {
-        _currentSession = currentSession;
-    }
+    <span class="token keyword">public</span> <span class="token function">MusicStoreContext</span><span class="token punctuation">(</span><span class="token class-name">ISession</span> currentSession<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        _currentSession <span class="token operator">=</span> currentSession<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    public ISession Session
-    {
-        get { return _currentSession; }
-    }
+    <span class="token keyword">public</span> <span class="token class-name">ISession</span> Session
+    <span class="token punctuation">{</span>
+        <span class="token keyword">get</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> _currentSession<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    public IQueryable&lt;Album&gt; Albums
-    {
-        get { return _currentSession.Query&lt;Album&gt;(); }
-    }
+    <span class="token keyword">public</span> IQueryable<span class="token operator">&lt;</span>Album<span class="token operator">></span> Albums
+    <span class="token punctuation">{</span>
+        <span class="token keyword">get</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> _currentSession<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">Query</span><span class="token punctuation">&lt;</span><span class="token class-name">Album</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    public IQueryable&lt;Artist&gt; Artists
-    {
-        get { return _currentSession.Query&lt;Artist&gt;(); }
-    }
+    <span class="token keyword">public</span> IQueryable<span class="token operator">&lt;</span>Artist<span class="token operator">></span> Artists
+    <span class="token punctuation">{</span>
+        <span class="token keyword">get</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> _currentSession<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">Query</span><span class="token punctuation">&lt;</span><span class="token class-name">Artist</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    public IQueryable&lt;Cart&gt; Carts
-    {
-        get { return _currentSession.Query&lt;Cart&gt;(); }
-    }
+    <span class="token keyword">public</span> IQueryable<span class="token operator">&lt;</span>Cart<span class="token operator">></span> Carts
+    <span class="token punctuation">{</span>
+        <span class="token keyword">get</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> _currentSession<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">Query</span><span class="token punctuation">&lt;</span><span class="token class-name">Cart</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    public IQueryable&lt;Genre&gt; Genres
-    {
-        get { return _currentSession.Query&lt;Genre&gt;(); }
-    }
+    <span class="token keyword">public</span> IQueryable<span class="token operator">&lt;</span>Genre<span class="token operator">></span> Genres
+    <span class="token punctuation">{</span>
+        <span class="token keyword">get</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> _currentSession<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">Query</span><span class="token punctuation">&lt;</span><span class="token class-name">Genre</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    public IQueryable&lt;Order&gt; Orders
-    {
-        get { return _currentSession.Query&lt;Order&gt;(); }
-    }
-}</code></pre></div>
+    <span class="token keyword">public</span> IQueryable<span class="token operator">&lt;</span>Order<span class="token operator">></span> Orders
+    <span class="token punctuation">{</span>
+        <span class="token keyword">get</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> _currentSession<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">Query</span><span class="token punctuation">&lt;</span><span class="token class-name">Order</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
 <p>To create one of these per request, I simply create a new MusicStoreContext object that wraps the session for the request and expose it as a public static method on MvcApplication.</p>
-<div class="gatsby-highlight" data-language="c#"><pre class="language-c#"><code class="language-c#">public static IMusicStoreContext GetCurrentRequestContext()
-{
-    // get the ISession bound to the current request
-    var currentSession = SessionFactory.GetCurrentSession();
+<div class="gatsby-highlight" data-language="csharp"><pre class="language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">IMusicStoreContext</span> <span class="token function">GetCurrentRequestContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// get the ISession bound to the current request</span>
+    <span class="token keyword">var</span> currentSession <span class="token operator">=</span> SessionFactory<span class="token punctuation">.</span><span class="token function">GetCurrentSession</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // build a context object to wrap it
-    var context = new MusicStoreContext(currentSession);
+    <span class="token comment">// build a context object to wrap it</span>
+    <span class="token keyword">var</span> context <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MusicStoreContext</span><span class="token punctuation">(</span>currentSession<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    return context;
-}</code></pre></div>
+    <span class="token keyword">return</span> context<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
 <p>And from here I have an NHibernate session available to my controllers, per request! I’m still deciding whether I should change things around to do some IoC or not, StructureMap really makes this kind of stuff easy without referring to a static method and tightly coupling a controller to the MvcApplication. The other way might be to use a custom controller loader – but that’s a discussion for another post.</p></section><hr style="margin-bottom:1.75rem"/><footer><div style="display:flex;margin-bottom:4.375rem"><div class=" gatsby-image-wrapper" style="position:relative;overflow:hidden;display:inline-block;width:50px;height:50px;margin-right:0.875rem;margin-bottom:0;min-width:50px;border-radius:100%"><img src="data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAUABQDASIAAhEBAxEB/8QAGgABAAIDAQAAAAAAAAAAAAAAAAMEAQIFBv/EABcBAAMBAAAAAAAAAAAAAAAAAAABAwL/2gAMAwEAAhADEAAAAdLMU869NhuXlbYzsBP/xAAcEAEAAgIDAQAAAAAAAAAAAAABAgMQEQQTIjL/2gAIAQEAAQUC2xIs6seeusMXfXGmqBr/xAAVEQEBAAAAAAAAAAAAAAAAAAARIP/aAAgBAwEBPwEj/8QAFBEBAAAAAAAAAAAAAAAAAAAAIP/aAAgBAgEBPwEf/8QAIBAAAQMCBwAAAAAAAAAAAAAAAAECERASAyEiMUJRof/aAAgBAQAGPwJLefhvc2mHJqbEVz6EP//EABwQAAMBAAMBAQAAAAAAAAAAAAABESExUZFBgf/aAAgBAQABPyHe5XITpsn6VMFr56Gngidino3nEIlXY86fD//aAAwDAQACAAMAAAAQuz+8/8QAFxEBAQEBAAAAAAAAAAAAAAAAAQAREP/aAAgBAwEBPxBGK8Fxi//EABcRAQEBAQAAAAAAAAAAAAAAAAEAEBH/2gAIAQIBAT8QFxDpN//EAB0QAQEAAgMAAwAAAAAAAAAAAAERAEEhMZFRweH/2gAIAQEAAT8Q6ubR2jhfMuNpfkrgDt7ibDQhtt9Yde3BpckKJyuIzUHA0YOcoW82P5kiShhc/9k=" alt="Kevin McKelvin" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:1;transition-delay:500ms;border-radius:50%"/><noscript><picture><source srcset="/static/2825c4a02b8ece4cc82cc1cc0ab894dc/30d3a/profile-pic.jpg 1x,
 /static/2825c4a02b8ece4cc82cc1cc0ab894dc/66c95/profile-pic.jpg 1.5x,
 /static/2825c4a02b8ece4cc82cc1cc0ab894dc/aacbd/profile-pic.jpg 2x" /><img loading="lazy" width="50" height="50" srcset="/static/2825c4a02b8ece4cc82cc1cc0ab894dc/30d3a/profile-pic.jpg 1x,

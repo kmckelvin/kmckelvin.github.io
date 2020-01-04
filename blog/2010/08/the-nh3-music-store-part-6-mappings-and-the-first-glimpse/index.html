@@ -24,16 +24,16 @@
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>class</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>hibernate-mapping</span><span class="token punctuation">></span></span></code></pre></div>
 <p>So at this point the solution is compiling and runs, I’ve got one last problem to iron out however. NHibernate doesn’t like this LINQ query on the HomeController:</p>
-<div class="gatsby-highlight" data-language="c#"><pre class="language-c#"><code class="language-c#">return storeContext.Albums
-    .OrderBy(a =&gt; a.OrderDetails.Count())
-    .Take(count)
-    .ToList();</code></pre></div>
+<div class="gatsby-highlight" data-language="csharp"><pre class="language-csharp"><code class="language-csharp"><span class="token keyword">return</span> storeContext<span class="token punctuation">.</span>Albums
+    <span class="token punctuation">.</span><span class="token function">OrderBy</span><span class="token punctuation">(</span>a <span class="token operator">=></span> a<span class="token punctuation">.</span>OrderDetails<span class="token punctuation">.</span><span class="token function">Count</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">Take</span><span class="token punctuation">(</span>count<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">ToList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>To get this to work I’ve changed the query around to use the QueryOver API</p>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">return storeContext.Session.QueryOver&lt;Album&gt;()
-    .Fetch(x =&gt; x.OrderDetails).Eager
-    .List&lt;Album&gt;()
-    .Take(count)
-    .ToList();</code></pre></div>
+<div class="gatsby-highlight" data-language="csharp"><pre class="language-csharp"><code class="language-csharp"><span class="token keyword">return</span> storeContext<span class="token punctuation">.</span>Session<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">QueryOver</span><span class="token punctuation">&lt;</span><span class="token class-name">Album</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">Fetch</span><span class="token punctuation">(</span>x <span class="token operator">=></span> x<span class="token punctuation">.</span>OrderDetails<span class="token punctuation">)</span><span class="token punctuation">.</span>Eager
+    <span class="token punctuation">.</span><span class="token generic-method"><span class="token function">List</span><span class="token punctuation">&lt;</span><span class="token class-name">Album</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">Take</span><span class="token punctuation">(</span>count<span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">ToList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>I know this isn’t ideal, unbounded result sets everywhere, however I’m more interested in getting the system to work in the first place than performance at this point. That aside, the query that EF4 generates here is just as bad. If there are any suggestions, I’d love to see how you’d write this query.</p>
 <p>So, holding thumbs I hit F5 again, and here’s what we get:</p>
 <p><a href="http://www.mcdev.za.net/images/2010/08/image.png"><img src="http://www.mcdev.za.net/images/2010/08/image_thumb.png" alt="image"></a></p>

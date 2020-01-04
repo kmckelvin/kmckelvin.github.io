@@ -75,35 +75,35 @@
 <p><strong>And you’re ready to start writing isolated tests!</strong></p>
 <p>To run a test with TypeMock Isolator is pretty simple, just add an Isolated attribute to your unit test and use TypeMock’s fluent Isolate API to mock the method calls.</p>
 <p>Returning to our DateTime example, here’s how you could Isolate a static call to DateTime.Now:</p>
-<div class="gatsby-highlight" data-language="c#"><pre class="language-c#"><code class="language-c#">[Test, Isolated]
-public void ReplaceDateTimeNowWithValue()
-{
-    Isolate.WhenCalled(() =&gt; DateTime.Now).WillReturn(new DateTime(2010, 1, 2));
+<div class="gatsby-highlight" data-language="csharp"><pre class="language-csharp"><code class="language-csharp"><span class="token punctuation">[</span><span class="token class-name">Test</span><span class="token punctuation">,</span> Isolated<span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">ReplaceDateTimeNowWithValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    Isolate<span class="token punctuation">.</span><span class="token function">WhenCalled</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> DateTime<span class="token punctuation">.</span>Now<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">WillReturn</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">DateTime</span><span class="token punctuation">(</span><span class="token number">2010</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    Assert.AreEqual(new DateTime(2010, 1, 2), DateTime.Now);
-}</code></pre></div>
+    Assert<span class="token punctuation">.</span><span class="token function">AreEqual</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">DateTime</span><span class="token punctuation">(</span><span class="token number">2010</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> DateTime<span class="token punctuation">.</span>Now<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
 <p>Mocking out a concrete instance method is also easy. Below, I’m mocking the behaviour of a method in a sealed class - UserRepository.GetQuery()</p>
-<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">[Test, Isolated]
-public void LoginWithRealRepository()
-{
-    // arrange
-    var ur = Isolate.Fake.Instance&lt;UserRepository&gt;();
-    Isolate.WhenCalled(() =&gt; ur.GetQuery()).WillReturn(new List&lt;User&gt;
-        {
-            new User
-                {
-                    Username = &quot;kevin&quot;,
-                    Password = &quot;abc&quot;
-                }
-        }.AsQueryable());
+<div class="gatsby-highlight" data-language="csharp"><pre class="language-csharp"><code class="language-csharp"><span class="token punctuation">[</span><span class="token class-name">Test</span><span class="token punctuation">,</span> Isolated<span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">LoginWithRealRepository</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// arrange</span>
+    <span class="token keyword">var</span> ur <span class="token operator">=</span> Isolate<span class="token punctuation">.</span>Fake<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">Instance</span><span class="token punctuation">&lt;</span><span class="token class-name">UserRepository</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Isolate<span class="token punctuation">.</span><span class="token function">WhenCalled</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> ur<span class="token punctuation">.</span><span class="token function">GetQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">WillReturn</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">List</span><span class="token operator">&lt;</span>User<span class="token operator">></span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">new</span> <span class="token class-name">User</span>
+                <span class="token punctuation">{</span>
+                    Username <span class="token operator">=</span> <span class="token string">"kevin"</span><span class="token punctuation">,</span>
+                    Password <span class="token operator">=</span> <span class="token string">"abc"</span>
+                <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">.</span><span class="token function">AsQueryable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    //act
-    var login = new UserLoginController(ur);
-    User loggedInUser = login.Login(&quot;kevin&quot;, &quot;abc&quot;);
+    <span class="token comment">//act</span>
+    <span class="token keyword">var</span> login <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UserLoginController</span><span class="token punctuation">(</span>ur<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">User</span> loggedInUser <span class="token operator">=</span> login<span class="token punctuation">.</span><span class="token function">Login</span><span class="token punctuation">(</span><span class="token string">"kevin"</span><span class="token punctuation">,</span> <span class="token string">"abc"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // assert
-    Assert.IsNotNull(loggedInUser);
-}</code></pre></div>
+    <span class="token comment">// assert</span>
+    Assert<span class="token punctuation">.</span><span class="token function">IsNotNull</span><span class="token punctuation">(</span>loggedInUser<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
 <p>There’s a great debate about when isolation frameworks should and shouldn’t be used. Having learnt how to do unit testing via TDD without requiring an isolator I would still use it sparingly, only pulling it in when I want to test the class whose responsibility is to bridge the divide between my code and a global state such as a database or the file system. A tool like this isn’t an excuse to write code with mixed concerns simply because it can be isolated later. Writing testable code helps drive good object oriented design and loose coupling – both are important design objectives.</p>
 <p><a href="http://www.typemock.com/isolator-product-page">TypeMock Isolator</a> is an impressive bit of software. There are clear advantages in using this in the future.</p>
 <p>It allows developers to be more pragmatic about when to write polymorphic code and focus more on testing behaviour rather than how to fake things in tests. Truth be told it makes unit testing C# feel a lot more like testing in dynamic languages.</p>

@@ -9,14 +9,14 @@
 <p>In comes <strong>EFHooks</strong>.  It’s a project I’ve just started to make it easier to hook into Entity Framework.  Check the code out on <a href="https://github.com/kmckelvin/EFHooks">Github here</a>.</p>
 <p>EFHooks allows you to separate the concerns of writing pre-action hook code from accessing the extension points and registering your hooked code for execution.  This means unit testing your hook without using a DbContext becomes easy.</p>
 <p>Here’s an example of a hook to run before any entity that inherits from ITimeStamped gets inserted.  Everything is strongly typed, so only ITimeStamped entities will be passed into this hook.</p>
-<div class="gatsby-highlight" data-language="c#"><pre class="language-c#"><code class="language-c#">// TimestampPreInsertHook.cs
-public class TimestampPreInsertHook : PreInsertHook&lt;ITimeStamped&gt;
-{
-    public override void Hook(ITimeStamped entity, HookEntityMetadata metadata)
-    {
-        entity.CreatedAt = DateTime.Now;
-    }
-}</code></pre></div>
+<div class="gatsby-highlight" data-language="csharp"><pre class="language-csharp"><code class="language-csharp"><span class="token comment">// TimestampPreInsertHook.cs</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TimestampPreInsertHook</span> <span class="token punctuation">:</span> <span class="token class-name">PreInsertHook</span><span class="token operator">&lt;</span>ITimeStamped<span class="token operator">></span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Hook</span><span class="token punctuation">(</span><span class="token class-name">ITimeStamped</span> entity<span class="token punctuation">,</span> <span class="token class-name">HookEntityMetadata</span> metadata<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        entity<span class="token punctuation">.</span>CreatedAt <span class="token operator">=</span> DateTime<span class="token punctuation">.</span>Now<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
 <p>This means you don’t need to write code to set your CreatedAt date every time you create an entity that implements ITimeStamped.  By the same pattern you could use .NET reflection on System.Object and not even have to use an interface.</p>
 <p>Note I said “pre-action” – This handles 99% of the use cases I’ve ever hit.  I’m working on a way to handle post-action hooks as well and I’ll have it all in a Nuget package as soon as it’s stable.</p>
 <p>Check the code out, build it, play with it and please let me know if you have any problems with it.</p>

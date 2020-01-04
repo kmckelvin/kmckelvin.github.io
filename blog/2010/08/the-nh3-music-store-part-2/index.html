@@ -8,65 +8,65 @@
 <p>For example <a href="http://localhost/albums/1">http://localhost/albums/1</a> must point to the album with id 1, so I’m going to need to keep my Id available to me in code. This is a design decision that’s important with NHibernate that isn’t possible with EF4.</p>
 <p>Here’s the domain model I’ve come up with so far. This might change at some stage in the future. I had to add OrderDetail.</p>
 <p>Notice that instead of passing around integer Id’s, I’m referencing the related types directly. For example – Genre on the Album class.</p>
-<div class="gatsby-highlight" data-language="c#"><pre class="language-c#"><code class="language-c#">public class Album
-{
-    public virtual int AlbumId { get; set;}
-    public virtual Genre Genre { get; set;}
-    public virtual Artist Artist { get; set; }
-    public virtual string Title { get; set; }
-    public virtual decimal Price { get; set; }
-    public virtual string AlbumArtUrl { get; set; }
-}
+<div class="gatsby-highlight" data-language="csharp"><pre class="language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Album</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">int</span> AlbumId <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token class-name">Genre</span> Genre <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token class-name">Artist</span> Artist <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">string</span> Title <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">decimal</span> Price <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">string</span> AlbumArtUrl <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-public class Artist
-{
-    public virtual int ArtistId { get; set; }
-    public virtual string Name { get; set; }
-}
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Artist</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">int</span> ArtistId <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">string</span> Name <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-public class Cart
-{
-    public virtual int RecordId { get; set; }
-    public virtual string CartId { get; set; }
-    public virtual Album Album { get; set; }
-    public virtual int Count { get; set; }
-    public virtual DateTime DateCreated { get; set; }
-}
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Cart</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">int</span> RecordId <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">string</span> CartId <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token class-name">Album</span> Album <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">int</span> Count <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token class-name">DateTime</span> DateCreated <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-public class Genre
-{
-    public virtual int GenreId { get; set; }
-    public virtual string Name { get; set; }
-    public virtual string Description { get; set; }
-}
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Genre</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">int</span> GenreId <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">string</span> Name <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">string</span> Description <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-public class Order
-{
-    public virtual int OrderId { get; set; }
-    public virtual DateTime OrderDate { get; set; }
-    public virtual string Username { get; set; }
-    public virtual string FirstName { get; set; }
-    public virtual string LastName { get; set; }
-    public virtual string Address { get; set; }
-    public virtual string City { get; set; }
-    public virtual string State { get; set; }
-    public virtual string PostalCode { get; set; }
-    public virtual string Country { get; set; }
-    public virtual string Phone { get; set; }
-    public virtual string Email { get; set; }
-    public virtual string Total { get; set; }
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Order</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">int</span> OrderId <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token class-name">DateTime</span> OrderDate <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">string</span> Username <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">string</span> FirstName <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">string</span> LastName <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">string</span> Address <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">string</span> City <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">string</span> State <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">string</span> PostalCode <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">string</span> Country <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">string</span> Phone <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">string</span> Email <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">string</span> Total <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
 
-    public virtual ICollection&lt;OrderDetail&gt; OrderDetails { get; set; }
-}
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> ICollection<span class="token operator">&lt;</span>OrderDetail<span class="token operator">></span> OrderDetails <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-public class OrderDetail
-{
-    public virtual int OrderDetailId { get; set; }
-    public virtual Order Order { get; set; }
-    public virtual Album Album { get; set; }
-    public virtual int Quantity { get; set; }
-    public virtual decimal UnitPrice { get; set; }
-}</code></pre></div>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OrderDetail</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">int</span> OrderDetailId <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token class-name">Order</span> Order <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token class-name">Album</span> Album <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">int</span> Quantity <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token keyword">decimal</span> UnitPrice <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
 <p>After all of this I’m down to 26 compiler errors. Yay!</p></section><hr style="margin-bottom:1.75rem"/><footer><div style="display:flex;margin-bottom:4.375rem"><div class=" gatsby-image-wrapper" style="position:relative;overflow:hidden;display:inline-block;width:50px;height:50px;margin-right:0.875rem;margin-bottom:0;min-width:50px;border-radius:100%"><img src="data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAUABQDASIAAhEBAxEB/8QAGgABAAIDAQAAAAAAAAAAAAAAAAMEAQIFBv/EABcBAAMBAAAAAAAAAAAAAAAAAAABAwL/2gAMAwEAAhADEAAAAdLMU869NhuXlbYzsBP/xAAcEAEAAgIDAQAAAAAAAAAAAAABAgMQEQQTIjL/2gAIAQEAAQUC2xIs6seeusMXfXGmqBr/xAAVEQEBAAAAAAAAAAAAAAAAAAARIP/aAAgBAwEBPwEj/8QAFBEBAAAAAAAAAAAAAAAAAAAAIP/aAAgBAgEBPwEf/8QAIBAAAQMCBwAAAAAAAAAAAAAAAAECERASAyEiMUJRof/aAAgBAQAGPwJLefhvc2mHJqbEVz6EP//EABwQAAMBAAMBAQAAAAAAAAAAAAABESExUZFBgf/aAAgBAQABPyHe5XITpsn6VMFr56Gngidino3nEIlXY86fD//aAAwDAQACAAMAAAAQuz+8/8QAFxEBAQEBAAAAAAAAAAAAAAAAAQAREP/aAAgBAwEBPxBGK8Fxi//EABcRAQEBAQAAAAAAAAAAAAAAAAEAEBH/2gAIAQIBAT8QFxDpN//EAB0QAQEAAgMAAwAAAAAAAAAAAAERAEEhMZFRweH/2gAIAQEAAT8Q6ubR2jhfMuNpfkrgDt7ibDQhtt9Yde3BpckKJyuIzUHA0YOcoW82P5kiShhc/9k=" alt="Kevin McKelvin" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:1;transition-delay:500ms;border-radius:50%"/><noscript><picture><source srcset="/static/2825c4a02b8ece4cc82cc1cc0ab894dc/30d3a/profile-pic.jpg 1x,
 /static/2825c4a02b8ece4cc82cc1cc0ab894dc/66c95/profile-pic.jpg 1.5x,
 /static/2825c4a02b8ece4cc82cc1cc0ab894dc/aacbd/profile-pic.jpg 2x" /><img loading="lazy" width="50" height="50" srcset="/static/2825c4a02b8ece4cc82cc1cc0ab894dc/30d3a/profile-pic.jpg 1x,

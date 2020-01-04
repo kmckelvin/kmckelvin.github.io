@@ -28,11 +28,11 @@
 </ul>
 <p>From a conceptual point of view it’s great, we have a nice easy object graph to traverse and it’s pretty discoverable as well.</p>
 <p>However lets look at it from a SQL point of view. If I were to run this code:</p>
-<div class="gatsby-highlight" data-language="c#"><pre class="language-c#"><code class="language-c#">order = session.Get&lt;Order&gt;(orderId);
-foreach (var line in order.Lines)
-{
-    Console.WriteLine(line.Product.Description);
-}</code></pre></div>
+<div class="gatsby-highlight" data-language="csharp"><pre class="language-csharp"><code class="language-csharp">order <span class="token operator">=</span> session<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">Get</span><span class="token punctuation">&lt;</span><span class="token class-name">Order</span><span class="token punctuation">></span></span><span class="token punctuation">(</span>orderId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token keyword">var</span> line <span class="token keyword">in</span> order<span class="token punctuation">.</span>Lines<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>line<span class="token punctuation">.</span>Product<span class="token punctuation">.</span>Description<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
 <p>NHibernate has to retrieve the whole Product object for every line in the order. Even with eager-fetching we would bring back the image for every iteration of the loop. If we’re going across to SQL every time, this becomes painfully slow.</p>
 <p>In comes lazy column loading to save the day!</p>
 <p>By adding the code lazy=”true” to the column’s XML mapping we can lazily load a single column – as below:</p>

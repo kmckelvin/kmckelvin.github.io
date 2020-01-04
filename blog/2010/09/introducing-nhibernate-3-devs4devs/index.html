@@ -3,37 +3,37 @@
 /static/2825c4a02b8ece4cc82cc1cc0ab894dc/c16ee/profile-pic.jpg 2x" /><img loading="lazy" width="60" height="60" srcset="/static/2825c4a02b8ece4cc82cc1cc0ab894dc/d616a/profile-pic.jpg 1x,
 /static/2825c4a02b8ece4cc82cc1cc0ab894dc/7e70b/profile-pic.jpg 1.5x,
 /static/2825c4a02b8ece4cc82cc1cc0ab894dc/c16ee/profile-pic.jpg 2x" src="/static/2825c4a02b8ece4cc82cc1cc0ab894dc/d616a/profile-pic.jpg" alt="" style="position:absolute;top:0;left:0;opacity:1;width:100%;height:100%;object-fit:cover;object-position:center"/></picture></noscript></div><h1 style="margin:0;font-family:Montserrat, sans-serif"><a style="box-shadow:none;text-decoration:none;color:inherit" href="/">Kevin McKelvin</a></h1></header><main><article><header><h1 style="margin-top:1.75rem;margin-bottom:0">Introducing NHibernate 3 (Devs4Devs)</h1><p style="font-size:0.83255rem;line-height:1.75rem;display:block;margin-bottom:1.75rem">4 September 2010</p></header><section><p>Thanks to all who attended my 20 minute introduction to NHibernate 3 this morning. Here are my slides from the presentation</p>
-<p><a href="http://mcdev.za.net/downloads/Introducing_NHibernate3.pptx">Introducing_NHibernate3.pptx</a></p>
+<p><a href="/2cc0c736c7b08958983fe360ddd3be12/Introducing_NHibernate3.pptx">Introducing_NHibernate3.pptx</a></p>
 <p>And the code samples:</p>
 <p><em>Loquacious SessionFactory configuration</em></p>
-<div class="gatsby-highlight" data-language="c#"><pre class="language-c#"><code class="language-c#">var config = new Configuration();
+<div class="gatsby-highlight" data-language="csharp"><pre class="language-csharp"><code class="language-csharp"><span class="token keyword">var</span> config <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Configuration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-config.DataBaseIntegration(db =&gt;
-						   {
-							   db.ConnectionStringName = &quot;ConnectionString&quot;;
-							   db.Dialect&lt;MsSql2008Dialect&gt;();
-						   })
-	.Proxy(p =&gt; p.ProxyFactoryFactory&lt;ProxyFactoryFactory&gt;())
-	.SetProperty(NHibernate.Cfg.Environment.CurrentSessionContextClass, &quot;web&quot;)
-	.AddAssembly(typeof (Artist).Assembly);
+config<span class="token punctuation">.</span><span class="token function">DataBaseIntegration</span><span class="token punctuation">(</span>db <span class="token operator">=></span>
+						   <span class="token punctuation">{</span>
+							   db<span class="token punctuation">.</span>ConnectionStringName <span class="token operator">=</span> <span class="token string">"ConnectionString"</span><span class="token punctuation">;</span>
+							   db<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">Dialect</span><span class="token punctuation">&lt;</span><span class="token class-name">MsSql2008Dialect</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+						   <span class="token punctuation">}</span><span class="token punctuation">)</span>
+	<span class="token punctuation">.</span><span class="token function">Proxy</span><span class="token punctuation">(</span>p <span class="token operator">=></span> p<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">ProxyFactoryFactory</span><span class="token punctuation">&lt;</span><span class="token class-name">ProxyFactoryFactory</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token punctuation">.</span><span class="token function">SetProperty</span><span class="token punctuation">(</span>NHibernate<span class="token punctuation">.</span>Cfg<span class="token punctuation">.</span>Environment<span class="token punctuation">.</span>CurrentSessionContextClass<span class="token punctuation">,</span> <span class="token string">"web"</span><span class="token punctuation">)</span>
+	<span class="token punctuation">.</span><span class="token function">AddAssembly</span><span class="token punctuation">(</span><span class="token keyword">typeof</span> <span class="token punctuation">(</span>Artist<span class="token punctuation">)</span><span class="token punctuation">.</span>Assembly<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
+HibernatingRhinos<span class="token punctuation">.</span>Profiler<span class="token punctuation">.</span>Appender<span class="token punctuation">.</span>NHibernate<span class="token punctuation">.</span>NHibernateProfiler<span class="token punctuation">.</span><span class="token function">Initialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-return config.BuildSessionFactory();</code></pre></div>
+<span class="token keyword">return</span> config<span class="token punctuation">.</span><span class="token function">BuildSessionFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p><em>Querying the Music Store</em></p>
-<div class="gatsby-highlight" data-language="c#"><pre class="language-c#"><code class="language-c#">IMusicStoreContext context = MvcApplication.GetCurrentRequestSession();
+<div class="gatsby-highlight" data-language="csharp"><pre class="language-csharp"><code class="language-csharp"><span class="token class-name">IMusicStoreContext</span> context <span class="token operator">=</span> MvcApplication<span class="token punctuation">.</span><span class="token function">GetCurrentRequestSession</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-using (var tx = context.Session.BeginTransaction(IsolationLevel.ReadUncommitted))
-{
-    var artists = (from artist in context.Artists
-                  where artist.Name.StartsWith(&quot;a&quot;)
-                  orderby artist.Name descending
-                  select artist).Fetch(x =&gt; x.Albums).ToList();
+<span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token keyword">var</span> tx <span class="token operator">=</span> context<span class="token punctuation">.</span>Session<span class="token punctuation">.</span><span class="token function">BeginTransaction</span><span class="token punctuation">(</span>IsolationLevel<span class="token punctuation">.</span>ReadUncommitted<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">var</span> artists <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">from</span> artist <span class="token keyword">in</span> context<span class="token punctuation">.</span><span class="token class-name">Artists</span>
+                  <span class="token keyword">where</span> artist<span class="token punctuation">.</span>Name<span class="token punctuation">.</span><span class="token function">StartsWith</span><span class="token punctuation">(</span><span class="token string">"a"</span><span class="token punctuation">)</span>
+                  <span class="token keyword">orderby</span> artist<span class="token punctuation">.</span><span class="token class-name">Name</span> <span class="token keyword">descending</span>
+                  <span class="token keyword">select</span> artist<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Fetch</span><span class="token punctuation">(</span>x <span class="token operator">=></span> x<span class="token punctuation">.</span>Albums<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ToList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    tx.Commit();
+    tx<span class="token punctuation">.</span><span class="token function">Commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    return View(artists);
-}</code></pre></div>
+    <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span>artists<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre></div>
 <p>One change I’ve made here is the call to .ToList() when selecting the artists. By enumerating the collection, we’re forcing NHibernate to get the objects from the database - to ensure that the select happens inside the transaction boundary.</p>
 <p><em>The View code</em></p>
 <div class="gatsby-highlight" data-language="html"><pre class="language-html"><code class="language-html">&lt;% foreach (var artist in Model)

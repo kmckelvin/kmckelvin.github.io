@@ -6,32 +6,32 @@
 <p>To keep the code clean, I’m going to change things around a bit to use an IoC container. I’ve read about the Ninject.Web.Mvc project and I’d like to learn how to use it, so here we go :)</p>
 <p>I’ve downloaded and built the Ninject.Web.Mvc project, it’s now part of the lib folder in my project’s <a href="http://github.com/kmckelvin/nh3-musicstore">GitHub repo</a> as well.</p>
 <p>The Ninject MVC project provides a NinjectHttpApplication abstract class that we’ll inherit from instead of the System.Web.HttpApplication on our MvcApplication class. We’ll also override the CreateKernel() method on the NinjectHttpApplication.</p>
-<div class="gatsby-highlight" data-language="c#"><pre class="language-c#"><code class="language-c#">public class MvcApplication : NinjectHttpApplication
-{ 
-    ...
-    protected override IKernel CreateKernel()
-    {
-        return new StandardKernel(new MusicStoreNinjectModule());
-    }
-}</code></pre></div>
+<div class="gatsby-highlight" data-language="csharp"><pre class="language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MvcApplication</span> <span class="token punctuation">:</span> <span class="token class-name">NinjectHttpApplication</span>
+<span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token keyword">protected</span> <span class="token keyword">override</span> <span class="token class-name">IKernel</span> <span class="token function">CreateKernel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">StandardKernel</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">MusicStoreNinjectModule</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
 <p>The Application<em>Start() method must be renamed to override the OnApplicationStarted method – or you can add an event binding to it in the constructor. The NinjectHttpApplication doesn’t execute the Application</em>Start method by default as the standard HttpApplication does.</p>
-<p>And we’ll create the MusicStoreNinjectModule to resolve our controllers and our IMusicStoreContext like this: </p>
-<div class="gatsby-highlight" data-language="c#"><pre class="language-c#"><code class="language-c#">public class MusicStoreNinjectModule : NinjectModule
-{
-    public override void Load()
-    {
-        Bind&lt;AccountController&gt;().ToSelf();
-        Bind&lt;CheckoutController&gt;().ToSelf();
-        Bind&lt;HomeController&gt;().ToSelf();
-        Bind&lt;ShoppingCartController&gt;().ToSelf();
-        Bind&lt;StoreController&gt;().ToSelf();
-        Bind&lt;StoreManagerController&gt;().ToSelf();
+<p>And we’ll create the MusicStoreNinjectModule to resolve our controllers and our IMusicStoreContext like this:</p>
+<div class="gatsby-highlight" data-language="csharp"><pre class="language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MusicStoreNinjectModule</span> <span class="token punctuation">:</span> <span class="token class-name">NinjectModule</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Load</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token generic-method"><span class="token function">Bind</span><span class="token punctuation">&lt;</span><span class="token class-name">AccountController</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ToSelf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token generic-method"><span class="token function">Bind</span><span class="token punctuation">&lt;</span><span class="token class-name">CheckoutController</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ToSelf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token generic-method"><span class="token function">Bind</span><span class="token punctuation">&lt;</span><span class="token class-name">HomeController</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ToSelf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token generic-method"><span class="token function">Bind</span><span class="token punctuation">&lt;</span><span class="token class-name">ShoppingCartController</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ToSelf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token generic-method"><span class="token function">Bind</span><span class="token punctuation">&lt;</span><span class="token class-name">StoreController</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ToSelf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token generic-method"><span class="token function">Bind</span><span class="token punctuation">&lt;</span><span class="token class-name">StoreManagerController</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ToSelf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        // This will be injected into our controller to give us access to our context
-        // without introducing a tight coupling to a static resource.
-        Bind&lt;IMusicStoreContext&gt;().ToMethod(c =&gt; MvcApplication.GetCurrentRequestContext());
-    }
-}</code></pre></div>
+        <span class="token comment">// This will be injected into our controller to give us access to our context</span>
+        <span class="token comment">// without introducing a tight coupling to a static resource.</span>
+        <span class="token generic-method"><span class="token function">Bind</span><span class="token punctuation">&lt;</span><span class="token class-name">IMusicStoreContext</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ToMethod</span><span class="token punctuation">(</span>c <span class="token operator">=></span> MvcApplication<span class="token punctuation">.</span><span class="token function">GetCurrentRequestContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
 <p>That means I can now add a constructor to each of our controllers that accepts an IMusicStoreContext and our controller will always receive a context object that’s built for the active request.</p>
 <p>Neat :) Again, the code’s all on <a href="http://github.com/kmckelvin/NH3-MusicStore">GitHub</a>.</p></section><hr style="margin-bottom:1.75rem"/><footer><div style="display:flex;margin-bottom:4.375rem"><div class=" gatsby-image-wrapper" style="position:relative;overflow:hidden;display:inline-block;width:50px;height:50px;margin-right:0.875rem;margin-bottom:0;min-width:50px;border-radius:100%"><img src="data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAUABQDASIAAhEBAxEB/8QAGgABAAIDAQAAAAAAAAAAAAAAAAMEAQIFBv/EABcBAAMBAAAAAAAAAAAAAAAAAAABAwL/2gAMAwEAAhADEAAAAdLMU869NhuXlbYzsBP/xAAcEAEAAgIDAQAAAAAAAAAAAAABAgMQEQQTIjL/2gAIAQEAAQUC2xIs6seeusMXfXGmqBr/xAAVEQEBAAAAAAAAAAAAAAAAAAARIP/aAAgBAwEBPwEj/8QAFBEBAAAAAAAAAAAAAAAAAAAAIP/aAAgBAgEBPwEf/8QAIBAAAQMCBwAAAAAAAAAAAAAAAAECERASAyEiMUJRof/aAAgBAQAGPwJLefhvc2mHJqbEVz6EP//EABwQAAMBAAMBAQAAAAAAAAAAAAABESExUZFBgf/aAAgBAQABPyHe5XITpsn6VMFr56Gngidino3nEIlXY86fD//aAAwDAQACAAMAAAAQuz+8/8QAFxEBAQEBAAAAAAAAAAAAAAAAAQAREP/aAAgBAwEBPxBGK8Fxi//EABcRAQEBAQAAAAAAAAAAAAAAAAEAEBH/2gAIAQIBAT8QFxDpN//EAB0QAQEAAgMAAwAAAAAAAAAAAAERAEEhMZFRweH/2gAIAQEAAT8Q6ubR2jhfMuNpfkrgDt7ibDQhtt9Yde3BpckKJyuIzUHA0YOcoW82P5kiShhc/9k=" alt="Kevin McKelvin" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:1;transition-delay:500ms;border-radius:50%"/><noscript><picture><source srcset="/static/2825c4a02b8ece4cc82cc1cc0ab894dc/30d3a/profile-pic.jpg 1x,
 /static/2825c4a02b8ece4cc82cc1cc0ab894dc/66c95/profile-pic.jpg 1.5x,

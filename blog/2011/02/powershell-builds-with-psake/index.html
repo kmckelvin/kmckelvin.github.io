@@ -8,8 +8,8 @@
 <p>What I love the most is the clarity of the script, here’s a sample of the compile task in a build script.</p>
 <div class="gatsby-highlight" data-language="ruby"><pre class="language-ruby"><code class="language-ruby">task <span class="token constant">Default</span> <span class="token operator">-</span>depends <span class="token constant">Compile</span>
 task <span class="token constant">Init</span> <span class="token punctuation">{</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">}</span>
-task <span class="token constant">Compile</span> <span class="token operator">-</span>depends <span class="token constant">Init</span> <span class="token punctuation">{</span> 
-  <span class="token operator">&amp;</span> msbuild <span class="token string">"$proj_file"</span> <span class="token string">"/p:OutDir=$build_dir\\"</span> <span class="token operator">/</span>p<span class="token symbol">:Configuration</span><span class="token operator">=</span><span class="token constant">Release</span>   
+task <span class="token constant">Compile</span> <span class="token operator">-</span>depends <span class="token constant">Init</span> <span class="token punctuation">{</span>
+  <span class="token operator">&amp;</span> msbuild <span class="token string">"$proj_file"</span> <span class="token string">"/p:OutDir=$build_dir\\"</span> <span class="token operator">/</span>p<span class="token symbol">:Configuration</span><span class="token operator">=</span><span class="token constant">Release</span>
   <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$lastExitCode</span> <span class="token operator">-</span>ne <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
      <span class="token keyword">throw</span> <span class="token string">"Error: Failed to execute msbuild"</span>
   <span class="token punctuation">}</span>

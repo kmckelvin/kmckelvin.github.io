@@ -7,8 +7,7 @@
 <p><a href="http://www.mcdev.za.net/images/2010/08/screenshot.16.jpg"><img src="http://www.mcdev.za.net/images/2010/08/screenshot.16_thumb.jpg" alt="screenshot.16"></a></p>
 <p>This list will obviously get longer once I’ve created the POCOs for these entities and I have to start implementing the properties.</p>
 <h4>Entities</h4>
-<p>There were three entities in the StoreDB.edmx:
-</p>
+<p>There were three entities in the StoreDB.edmx:</p>
 <ul>
 <li>Artist</li>
 <li>Cart</li>
@@ -18,18 +17,18 @@
 <p>I will also need to build out the Album, Order and AccountModels entities later as at the moment they’re just being used to save metadata for EF4.</p>
 <h4>Replacing the ObjectContext</h4>
 <p>NHibernate is based on the ISession, rather than EF4’s concrete ObjectContexts.  Where the MVC Music Store uses MusicStoreEntities, I’m going to change that out with an interface – IMusicStoreContext.</p>
-<div class="gatsby-highlight" data-language="c#"><pre class="language-c#"><code class="language-c#">namespace MvcMusicStore.Models
-{
-    public interface IMusicStoreContext
-    {
-        ISession Session { get; }
-        IQueryable&lt;Album&gt; Albums { get; }
-        IQueryable&lt;Artist&gt; Artists { get; }
-        IQueryable&lt;Cart&gt; Carts { get; }
-        IQueryable&lt;Genre&gt; Genres { get; }
-        IQueryable&lt;Order&gt; Orders { get; }
-    }
-}</code></pre></div>
+<div class="gatsby-highlight" data-language="csharp"><pre class="language-csharp"><code class="language-csharp"><span class="token keyword">namespace</span> MvcMusicStore<span class="token punctuation">.</span>Models
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">IMusicStoreContext</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name">ISession</span> Session <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+        IQueryable<span class="token operator">&lt;</span>Album<span class="token operator">></span> Albums <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+        IQueryable<span class="token operator">&lt;</span>Artist<span class="token operator">></span> Artists <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+        IQueryable<span class="token operator">&lt;</span>Cart<span class="token operator">></span> Carts <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+        IQueryable<span class="token operator">&lt;</span>Genre<span class="token operator">></span> Genres <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+        IQueryable<span class="token operator">&lt;</span>Order<span class="token operator">></span> Orders <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre></div>
 <p>I don’t believe in locking the ORM behind layers of abstraction, when I build out a concrete implementation of the IMusicStoreContext I want to be able to address my NHibernate ISession directly if needed.  In most scenarios however, just exposing the IQueryable that’s now available in NH3 should suffice.</p></section><hr style="margin-bottom:1.75rem"/><footer><div style="display:flex;margin-bottom:4.375rem"><div class=" gatsby-image-wrapper" style="position:relative;overflow:hidden;display:inline-block;width:50px;height:50px;margin-right:0.875rem;margin-bottom:0;min-width:50px;border-radius:100%"><img src="data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAUABQDASIAAhEBAxEB/8QAGgABAAIDAQAAAAAAAAAAAAAAAAMEAQIFBv/EABcBAAMBAAAAAAAAAAAAAAAAAAABAwL/2gAMAwEAAhADEAAAAdLMU869NhuXlbYzsBP/xAAcEAEAAgIDAQAAAAAAAAAAAAABAgMQEQQTIjL/2gAIAQEAAQUC2xIs6seeusMXfXGmqBr/xAAVEQEBAAAAAAAAAAAAAAAAAAARIP/aAAgBAwEBPwEj/8QAFBEBAAAAAAAAAAAAAAAAAAAAIP/aAAgBAgEBPwEf/8QAIBAAAQMCBwAAAAAAAAAAAAAAAAECERASAyEiMUJRof/aAAgBAQAGPwJLefhvc2mHJqbEVz6EP//EABwQAAMBAAMBAQAAAAAAAAAAAAABESExUZFBgf/aAAgBAQABPyHe5XITpsn6VMFr56Gngidino3nEIlXY86fD//aAAwDAQACAAMAAAAQuz+8/8QAFxEBAQEBAAAAAAAAAAAAAAAAAQAREP/aAAgBAwEBPxBGK8Fxi//EABcRAQEBAQAAAAAAAAAAAAAAAAEAEBH/2gAIAQIBAT8QFxDpN//EAB0QAQEAAgMAAwAAAAAAAAAAAAERAEEhMZFRweH/2gAIAQEAAT8Q6ubR2jhfMuNpfkrgDt7ibDQhtt9Yde3BpckKJyuIzUHA0YOcoW82P5kiShhc/9k=" alt="Kevin McKelvin" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:1;transition-delay:500ms;border-radius:50%"/><noscript><picture><source srcset="/static/2825c4a02b8ece4cc82cc1cc0ab894dc/30d3a/profile-pic.jpg 1x,
 /static/2825c4a02b8ece4cc82cc1cc0ab894dc/66c95/profile-pic.jpg 1.5x,
 /static/2825c4a02b8ece4cc82cc1cc0ab894dc/aacbd/profile-pic.jpg 2x" /><img loading="lazy" width="50" height="50" srcset="/static/2825c4a02b8ece4cc82cc1cc0ab894dc/30d3a/profile-pic.jpg 1x,
