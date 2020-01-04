@@ -36,11 +36,18 @@
     <span class="token punctuation">.</span><span class="token function">ToList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre></div>
 <p>I know this isn’t ideal, unbounded result sets everywhere, however I’m more interested in getting the system to work in the first place than performance at this point. That aside, the query that EF4 generates here is just as bad. If there are any suggestions, I’d love to see how you’d write this query.</p>
 <p>So, holding thumbs I hit F5 again, and here’s what we get:</p>
-<p><a href="image.png"><span
+<p><span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 582px;"
     >
-      <span
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/0bc1ed5b2aa90a948a3c640a969fbed0/f47f4/image.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
     class="gatsby-resp-image-background-image"
     style="padding-bottom: 82.47422680412372%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAACXBIWXMAAA7DAAAOwwHHb6hkAAADw0lEQVQ4y3WT+1OUZRTH9x9ypqlhhix/c3SqsXFoLBqroRxRBEsFNJBMu8wQXRhAZLqQM0WToRBgSZhCCOUAuS4XcVkXkL2+u/ve9sLeYPl03heKn/rhzHmeM8/zec45z/c4Joa6mb3ZxfiEk5F7Xm5PzNP2wxCnm7tpuNhHfVuPrH+i+tMfaWjv48Ovb3Du0gDvtf/MhS9/ob61h487b9B17RbfdVzGsRhU8UdNbv0xxvDICD7fCkpEIRxViRlxMRPVjBPVDTFZS8wXCuEPh9DjcSKazrz3MctBhcm5BRxmPEos7KWkZD/FTxdztbsLWCOX0VjL6f9r6VRk25IKFOLMeLw4dDOGofm4M3qTkduDTE6Momt+1vMm+awuptlwy/+7/2+9Bc/JnkKC+4+WcMQlw7gR5MHs3ywtztne1CMCTJBNGxTySdjIsJ5NCNi0/XouKfFVNnJp8pm4bWykmfEu41C1MIU1k2Q8bEPyuQAxdRjD/JNU6i98wUHuui5LnwcxzVGWleusBAdYDPQxG/wef2yYqHqH1eRdnG7pYVRV5DUDJbxIwoySSswzfr+DofFu3O4h2tpr2fvSM3z7WysTU71cGW6ntfMENeefp/HKfn4d66Dlq5MsdFfjmnZZwLANjCpLNjCTddPRUck7VVWcP1dP3ZkaaqtPUFlRTkX5W5w8XskrB0p48YXneLa4iL17drOr6AmcnfXMuN3bwIhkmE5Ks9cXab/0Ng119TQ1fkRL8+c0f/YJFUfLOVN3lsamJg4fKuN4VQVvlr3OAYEXPbmDmWvNTC94tkuOKsvyOQIvqPT2f8HZd4/wwfvV1J4+yqmaY9RUHeTUazupLN3NkcOlHCp7mYOv7mPnUzso3bMLv2uEuWXfVobyKdm0SiYdExnI7+bcZFanSMQf4g2N416ZZC0yhnF1Hw+/OcbMdD+u6y24fr9IfcUbeAdEu5kITuuXo7FNYD5r2NpLJRTppUIqacFNNtaTIhNdzogX7RUkZkkpr7hZM/xyT+5mNFvYzoVFCxjaAloiNUT5MjmRB1L+Y5IJv/gFyTYm3sNqKigPBe11Rs6aplfkEhB96qJDEbZHgDEtYvdwE2hK2VFCgQGZnntoqovASg9xc4WQvx81OiWPOVGCfRLzEfT1osYmbcFbk+L0yKSoMhUbVoZSllWy1cuAfwEt5pNsIracrNEzdL9kExFQiFDwEVmJWd7QAnZlVobuJQGGlKDdg8yqKjBNSo6hqwH7x619ZlUja1la29qrckbd9qlNbyXj8bj5B/6RShza/ZyTAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
   ></span>
@@ -55,7 +62,8 @@
         sizes="(max-width: 582px) 100vw, 582px"
         loading="lazy"
       />
-    </span></a></p>
+  </a>
+    </span></p>
 <p><strong>Tada! :D</strong> In my brief explorations I haven’t found anything that is <strong>not</strong> working. I still have to do quite a bit of work to know for sure.</p>
 <p>But for now (at least until I get more time to test this) that’s the NHibernate 3 ASP.NET MVC Music Store! There are still a few issues to iron out with the NHibernate implementation. I’ve had a lot of fun and learnt a heck of a lot in the last bit while working on this and writing about it.</p>
 <p>All of the code is available on GitHub at <a href="http://github.com/kmckelvin/NH3-MusicStore">http://github.com/kmckelvin/NH3-MusicStore</a>. Please go check it out, any feedback and constructive criticism is most welcome.</p></section><hr style="margin-bottom:1.75rem"/><footer><div style="display:flex;margin-bottom:4.375rem"><div class=" gatsby-image-wrapper" style="position:relative;overflow:hidden;display:inline-block;width:50px;height:50px;margin-right:0.875rem;margin-bottom:0;min-width:50px;border-radius:100%"><img src="data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wgARCAAUABQDASIAAhEBAxEB/8QAGgABAAIDAQAAAAAAAAAAAAAAAAMEAQIFBv/EABcBAAMBAAAAAAAAAAAAAAAAAAABAwL/2gAMAwEAAhADEAAAAdLMU869NhuXlbYzsBP/xAAcEAEAAgIDAQAAAAAAAAAAAAABAgMQEQQTIjL/2gAIAQEAAQUC2xIs6seeusMXfXGmqBr/xAAVEQEBAAAAAAAAAAAAAAAAAAARIP/aAAgBAwEBPwEj/8QAFBEBAAAAAAAAAAAAAAAAAAAAIP/aAAgBAgEBPwEf/8QAIBAAAQMCBwAAAAAAAAAAAAAAAAECERASAyEiMUJRof/aAAgBAQAGPwJLefhvc2mHJqbEVz6EP//EABwQAAMBAAMBAQAAAAAAAAAAAAABESExUZFBgf/aAAgBAQABPyHe5XITpsn6VMFr56Gngidino3nEIlXY86fD//aAAwDAQACAAMAAAAQuz+8/8QAFxEBAQEBAAAAAAAAAAAAAAAAAQAREP/aAAgBAwEBPxBGK8Fxi//EABcRAQEBAQAAAAAAAAAAAAAAAAEAEBH/2gAIAQIBAT8QFxDpN//EAB0QAQEAAgMAAwAAAAAAAAAAAAERAEEhMZFRweH/2gAIAQEAAT8Q6ubR2jhfMuNpfkrgDt7ibDQhtt9Yde3BpckKJyuIzUHA0YOcoW82P5kiShhc/9k=" alt="Kevin McKelvin" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:1;transition-delay:500ms;border-radius:50%"/><noscript><picture><source srcset="/static/2825c4a02b8ece4cc82cc1cc0ab894dc/30d3a/profile-pic.jpg 1x,

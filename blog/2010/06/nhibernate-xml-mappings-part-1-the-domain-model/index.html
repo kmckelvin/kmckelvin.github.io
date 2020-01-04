@@ -6,11 +6,18 @@
 <p>In these posts I’ll go through the basics of mapping out a basic data schema in NHibernate. I don’t intend to cover all the advanced details of mapping, just enough to get you going.</p>
 <h3>The Schema</h3>
 <p>Let’s take our classic customers – products – orders environment and map them out using NHibernate.</p>
-<p><a href="./image.png"><span
+<p><span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 495px;"
     >
-      <span
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/614745df50f3329c4f5f566bd9770c32/12c96/image_thumb.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
     class="gatsby-resp-image-background-image"
     style="padding-bottom: 72.72727272727273%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAACXBIWXMAAA7DAAAOwwHHb6hkAAACDUlEQVQ4y4VUa5OaQBDk//+sVPTuDOHbXaXMBRR5gzwEFhB1Mj26ZC+XqmzVFOj29HbPzmDRf9btdpPn+XymojhSkqQUxzGVZUl931PXddS2LY3jSKfTiaw4iulwCGi/31Oe59Q0DdV1LQGQXkh+fv5KT09r+m7b9P7+SwiqqqLj8Sh5COvl5QttNt/IcRza7XZyIoBQoNQfwnGcOLlgdRENw/3/6/W6qEeOKGzbhpI4YXDNgNtCME0T29syqGJLndhsmhP5/oGiKBIylAMBQqh7EHYUhqFYAkifOgwDg0q6XGaOi4BRhiAIGKsWMqx5nmVfLAOkBiVWUQts4P1ew2lRrJSShKqsRCkOhjKQ4XDgRSE2oABRFIUAtFJTBUqABE2cJLG4wg3j/7sjVmgmdZ1aLJtto/f1wuFt239qMdy4ZaRSlrms8ExatUlkvo9jz1jvQX6vMXJg27LtDa3Xa3p9faM0jdh2LtazLBNLZh86jk2r1Yo8z+P9SHAau1yK6/6QpkYN5vkitUKxcTEmoVIDN/MbYz3en6XWGqvrKpfSdT1ttz9lrMzJAPgjoeKElqIw4qavxKZeIF8mRcaHAXmWSwPjRARuDypNy3XdUBiEjyG4fpjzhRAnQxkUwTZ+I0BgXgT2cQDGDuqgyuxD4BEWPgj/ioIDxU7TVJ4YPd/3+UNykOffgXF0XZd+A31TgdHDmZeMAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
   ></span>
@@ -25,7 +32,8 @@
         sizes="(max-width: 495px) 100vw, 495px"
         loading="lazy"
       />
-    </span></a></p>
+  </a>
+    </span></p>
 <p>In our diagram above we’ve got 4 tables with 3 relationships defined:</p>
 <ul>
 <li>1 Customer to Many OrderMasters</li>
@@ -35,11 +43,18 @@
 <p>Now lets go map these into C# POCOs. In Visual Studio, add a Class Library to your solution and call it DomainModel.</p>
 <h3>The Domain</h3>
 <p>First step is to define some POCOs to hold our data in our domain model. Create four classes as defined below:</p>
-<p><a href="./image1.png"><span
+<p><span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 374px;"
     >
-      <span
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/ba4b719c88843c48b853cdd2675bbbf6/66c55/image_thumb1.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
     class="gatsby-resp-image-background-image"
     style="padding-bottom: 27.272727272727277%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAYAAABFA8wzAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAA90lEQVQY02WQ4W6DMAyE+/4vt02bCoN2MCjQAoUCgRQC+WZA2o8tkuW75HQX+xB9z5xP0LWWOIbivlDpgbjpaJ4j/4/902FZdlyWJQelFNbuhsNgmSYQP8Gw+vW9dD2jVIcxZuOrZn2fhNtl/jXP85zDCh6V5ePNEoaWvLA4R0vwJT9OLK4DrqvwfYc0vfH6UnC53IgiTRD2tK2mbSRAQrMs3Q2bBxzf2UYu73DyIAwgEu59SnlGeMBZdpNlsdxVEtzjiy5JFEWhGcdlN1SqRYt7XRm6zsgoRhKl2r3qeu2zjP2U91U7UlWL4HHTKjXICoZt5Gt25QekC39aERP7gQAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
   ></span>
@@ -54,12 +69,20 @@
         sizes="(max-width: 374px) 100vw, 374px"
         loading="lazy"
       />
-    </span></a>
-<a href="./image2.png"><span
+  </a>
+    </span>
+<span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 504px;"
     >
-      <span
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/1aa9770cadaf4cd2de231362b5876d76/929d9/image_thumb2.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
     class="gatsby-resp-image-background-image"
     style="padding-bottom: 21.03174603174603%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAYAAACOXx+WAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAwElEQVQY04WP226DMBBE+f9frJpCDTVgfMVYkASfbpCiPnal1Yz2MpppvrsHMYJdIK5P/FH4vyq1/vV51mtqraU5zztmgnmueFcZe1jSzpA25pAYeoX+0Xi706sH1j3Ztvsl+hZ/c2MMzYu0N+kWtIbPDxj8Thsyyka+lKLTkVaL4Hgwjos4cQTvKaWIOOStchwwTSNNCEGWBe83krjyrkj0TEjrhTHLTNCtSXiSWydpZnmerojGZMyyEkKh6zp+AfJdM4xATe7mAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
   ></span>
@@ -74,12 +97,20 @@
         sizes="(max-width: 504px) 100vw, 504px"
         loading="lazy"
       />
-    </span></a>
-<a href="./image3.png"><span
+  </a>
+    </span>
+<span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 359px;"
     >
-      <span
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/efc9c40757bdcc6ad2f7ad7e2d3af8be/d8185/image_thumb3.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
     class="gatsby-resp-image-background-image"
     style="padding-bottom: 34.261838440111426%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAA7DAAAOwwHHb6hkAAABTElEQVQoz02Ri3KCMBBF/f+/a6etio8KKoY3BpBHSE436Ixl5k6WzXL27rJSsWP94yhLSBPH8QBlN3KuG8KqIapalH5gneP9uJf4d0okNau6bumHmXmGcXAMI0yTY5wso7EMZsbMltkYjMh/ZC0Se5RbTmvnN9CnjQAOe9jvIM8d16vjV5xeYsv5rol1j0oStpuAsirYBQ2n8CG1ltNpIsvrxYRvuAC9s12AyJGmLMCjNIjOlls98JsW3GQnYRhJTcD1EhPfOvZ7h7r1Ap8oSpm07zzwOepm/ZRSjiiSBluBHh2nIwIv+Pw4sF5vuFwiojDj67sVhz3BdiZWd6pqEJcjK2OmZQ9pAlkGbQtay+gS+x/lc4mCovDvheQzcaVkx81yl2Uz+u7vHY9HyyrPc6q6ouu0wO40zVM+fqt+qX2qa6Vp87rTr3otOc0fYAUXkPswCAQAAAAASUVORK5CYII='); background-size: cover; display: block;"
   ></span>
@@ -94,12 +125,20 @@
         sizes="(max-width: 359px) 100vw, 359px"
         loading="lazy"
       />
-    </span></a>
-<a href="./image4.png"><span
+  </a>
+    </span>
+<span
       class="gatsby-resp-image-wrapper"
       style="position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 374px;"
     >
-      <span
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/99659f713ab8390669ca9bd0143abd73/66c55/image_thumb4.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
     class="gatsby-resp-image-background-image"
     style="padding-bottom: 28.07486631016043%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAGCAYAAADDl76dAAAACXBIWXMAAA7DAAAOwwHHb6hkAAABFElEQVQY02WQiW7CMBBE8/9fh0pV0lAoIbEDBHIQyGXs13WIUNVaWml2PDs7dhBFcDk7tHLEe6jbgbS+sS8bhseD/8f9qplxT2ytJTAyY0bH0EsNgo2jHy2jsRP2nl5ojJkGBeLnn7wTbF/m/j4YR4g+HF8bKCuHSqUP4XiETDuiT9hsLsTxljwvWSxaLsUVlRgSdeV2v2PFfBieS4Ous7wvHKuVI5enxzvp3yxJYklTjyEMC9brFd/brehCWaA4nUqWSzFNW1nco/SdpqkJfHydIAJoO/nDyieTtCWcz5DKXVHArakkYU7Xd2jtdXbSVLVP1r3+M1BKczioqTItlc04+4szwQcx0zOnZ15PnFJKXpTyAw0PygLaT87wAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
   ></span>
@@ -114,7 +153,8 @@
         sizes="(max-width: 374px) 100vw, 374px"
         loading="lazy"
       />
-    </span></a></p>
+  </a>
+    </span></p>
 <p>Three key points about these POCOs.</p>
 <ul>
 <li>All properties must be virtual for NHibernate’s lazy loading to work.</li>
