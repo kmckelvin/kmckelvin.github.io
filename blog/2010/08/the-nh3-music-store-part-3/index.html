@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>The NHibernate 3 Music Store – Part 3 | Kevin McKelvin</title>
+
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="/_bridgetown/static/index.NAKFUDFN.css" />
+<script src="/_bridgetown/static/index.KN36LEOD.js" defer></script>
+<script type="module">let lastmod = 0
+function startReloadConnection() {
+  const evtSource = new EventSource("/_bridgetown/live_reload")
+  evtSource.onmessage = event => {
+    if (document.querySelector("#bridgetown-build-error")) document.querySelector("#bridgetown-build-error").close()
+    if (event.data == "reloaded!") {
+      location.reload()
+    } else {
+      const newmod = Number(event.data)
+      if (lastmod > 0 && newmod > 0 && lastmod < newmod) {
+        location.reload()
+      } else {
+        lastmod = newmod
+      }
+    }
+  }
+  evtSource.addEventListener("builderror", event => {
+    let dialog = document.querySelector("#bridgetown-build-error")
+    if (!dialog) {
+      dialog = document.createElement("dialog")
+      dialog.id = "bridgetown-build-error"
+      dialog.style.borderColor = "red"
+      dialog.style.fontSize = "110%"
+      dialog.innerHTML = `
+        <p style="color:red">There was an error when building the site:</p>
+        <output><pre></pre></output>
+        <p><small>Check your Bridgetown logs for further details.</small></p>
+      `
+      document.body.appendChild(dialog)
+      dialog.showModal()
+    }
+    dialog.querySelector("pre").textContent = JSON.parse(event.data)
+  })
+  evtSource.onerror = event => {
+    if (evtSource.readyState === 2) {
+      // reconnect with new object
+      evtSource.close()
+      console.warn("Live reload: attempting to reconnect in 3 seconds...")
+
+      setTimeout(() => startReloadConnection(), 3000)
+    }
+  }
+}
+setTimeout(() => {
+  startReloadConnection()
+}, 500)
+</script>
+<!-- Begin Bridgetown SEO tag v6.0.0 -->
+<title>The NHibernate 3 Music Store – Part 3 | Kevin McKelvin</title>
+<meta property="og:title" content="The NHibernate 3 Music Store – Part 3" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://kmckelvin.com/blog/2010/08/the-nh3-music-store-part-3/" />
+<meta property="og:url" content="https://kmckelvin.com/blog/2010/08/the-nh3-music-store-part-3/" />
+<meta property="og:site_name" content="Kevin McKelvin" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2010-08-28T10:21:37+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="The NHibernate 3 Music Store – Part 3" />
+<!-- End Bridgetown SEO tag -->
+
+
+  </head>
+  <body class="post ">
+    <div class="page-content">
+      <header class="site-header">
+  <a href="/">
+    <div class="site-header-content">
+      <img src="/images/profile.jpg" class="site-header-content__avatar">
+      <div>
+        <div class="site-header-content__title">Kevin McKelvin</div>
+        <div class="site-header-content__subtitle">Software developer, blogger, speaker, CTO</div>
+      </div>
+    </div>
+  </a>
+</header>
+
+<nav class="site-nav">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/posts">Posts</a></li>
+  </ul>
+</nav>
+
+
+
+      <main>
+        <h1>The NHibernate 3 Music Store – Part 3</h1>
+<p class="published-at">28 August 2010</p>
+
+
+<p>The time’s come to start swapping out EF4 for NHibernate 3 query code. I’ve chosen to tackle the ShoppingCart class first before heading to the controllers.</p>
+
+<p>There are a couple of key differences between NHibernate and Entity Framework. One that popped up immediately here is that NHibernate requires transactions to be controlled explicitly, while EF4 controls them implicitly. Each approach has its benefit, but in general I like the control that NHibernate provides.</p>
+
+<p>I’m going to use the same LINQ queries where possible to query NHibernate as were used to query EF4 in the original code.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="kt">int</span> <span class="nf">CreateOrder</span><span class="p">(</span><span class="n">Order</span> <span class="n">order</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">using</span> <span class="p">(</span><span class="kt">var</span> <span class="n">tx</span> <span class="p">=</span> <span class="n">storeDB</span><span class="p">.</span><span class="n">Session</span><span class="p">.</span><span class="nf">BeginTransaction</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="kt">var</span> <span class="n">cartItems</span> <span class="p">=</span> <span class="nf">GetCartItems</span><span class="p">();</span>
+
+        <span class="c1">//Iterate the items in the cart, adding Order Details for each</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">cartItem</span> <span class="k">in</span> <span class="n">cartItems</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">var</span> <span class="n">orderDetail</span> <span class="p">=</span> <span class="k">new</span> <span class="n">OrderDetail</span>
+            <span class="p">{</span>
+                <span class="n">Album</span> <span class="p">=</span> <span class="n">cartItem</span><span class="p">.</span><span class="n">Album</span><span class="p">,</span>
+                <span class="n">Order</span> <span class="p">=</span> <span class="n">order</span><span class="p">,</span>
+                <span class="n">UnitPrice</span> <span class="p">=</span> <span class="n">cartItem</span><span class="p">.</span><span class="n">Album</span><span class="p">.</span><span class="n">Price</span>
+            <span class="p">};</span>
+
+            <span class="n">order</span><span class="p">.</span><span class="n">OrderDetails</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="n">orderDetail</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">//Save the order</span>
+        <span class="n">storeDB</span><span class="p">.</span><span class="n">Session</span><span class="p">.</span><span class="nf">Save</span><span class="p">(</span><span class="n">order</span><span class="p">);</span>
+        <span class="n">tx</span><span class="p">.</span><span class="nf">Commit</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">//Empty the shopping cart</span>
+    <span class="nf">EmptyCart</span><span class="p">();</span>
+
+    <span class="c1">//Return the OrderId as a confirmation number</span>
+    <span class="k">return</span> <span class="n">order</span><span class="p">.</span><span class="n">OrderId</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>That’s the CreateOrder(Order) method on the ShoppingCart now with the NHibernate 3 changes I’ve made.</p>
+
+<p>A few cleanups were possible here over the old EF4-based code. NHibernate 3 can do cascading saves, so I don’t need to expose OrderDetails as an entity on the IMusicStoreContext anymore, I can simply add the details to the Order and persist the Order – and NHibernate will handle the rest for me.</p>
+
+<p>Code’s up on the <a href="http://github.com/kmckelvin/NH3-MusicStore">GitHub Repo</a>, only 12 more compiler errors now :) Progress!</p>
+
+
+      </main>
+
+      <footer class="site-footer">Copyright <span class="copyright">&copy;</span> Kevin McKelvin 2024</footer>
+
+    </div>
+
+  </body>
+</html>

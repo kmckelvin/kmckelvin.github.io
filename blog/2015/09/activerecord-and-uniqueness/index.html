@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>ActiveRecord and Uniqueness | Kevin McKelvin</title>
+
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="/_bridgetown/static/index.NAKFUDFN.css" />
+<script src="/_bridgetown/static/index.KN36LEOD.js" defer></script>
+<script type="module">let lastmod = 0
+function startReloadConnection() {
+  const evtSource = new EventSource("/_bridgetown/live_reload")
+  evtSource.onmessage = event => {
+    if (document.querySelector("#bridgetown-build-error")) document.querySelector("#bridgetown-build-error").close()
+    if (event.data == "reloaded!") {
+      location.reload()
+    } else {
+      const newmod = Number(event.data)
+      if (lastmod > 0 && newmod > 0 && lastmod < newmod) {
+        location.reload()
+      } else {
+        lastmod = newmod
+      }
+    }
+  }
+  evtSource.addEventListener("builderror", event => {
+    let dialog = document.querySelector("#bridgetown-build-error")
+    if (!dialog) {
+      dialog = document.createElement("dialog")
+      dialog.id = "bridgetown-build-error"
+      dialog.style.borderColor = "red"
+      dialog.style.fontSize = "110%"
+      dialog.innerHTML = `
+        <p style="color:red">There was an error when building the site:</p>
+        <output><pre></pre></output>
+        <p><small>Check your Bridgetown logs for further details.</small></p>
+      `
+      document.body.appendChild(dialog)
+      dialog.showModal()
+    }
+    dialog.querySelector("pre").textContent = JSON.parse(event.data)
+  })
+  evtSource.onerror = event => {
+    if (evtSource.readyState === 2) {
+      // reconnect with new object
+      evtSource.close()
+      console.warn("Live reload: attempting to reconnect in 3 seconds...")
+
+      setTimeout(() => startReloadConnection(), 3000)
+    }
+  }
+}
+setTimeout(() => {
+  startReloadConnection()
+}, 500)
+</script>
+<!-- Begin Bridgetown SEO tag v6.0.0 -->
+<title>ActiveRecord and Uniqueness | Kevin McKelvin</title>
+<meta property="og:title" content="ActiveRecord and Uniqueness" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://kmckelvin.com/blog/2015/09/activerecord-and-uniqueness/" />
+<meta property="og:url" content="https://kmckelvin.com/blog/2015/09/activerecord-and-uniqueness/" />
+<meta property="og:site_name" content="Kevin McKelvin" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2015-09-21T00:00:00+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="ActiveRecord and Uniqueness" />
+<!-- End Bridgetown SEO tag -->
+
+
+  </head>
+  <body class="post ">
+    <div class="page-content">
+      <header class="site-header">
+  <a href="/">
+    <div class="site-header-content">
+      <img src="/images/profile.jpg" class="site-header-content__avatar">
+      <div>
+        <div class="site-header-content__title">Kevin McKelvin</div>
+        <div class="site-header-content__subtitle">Software developer, blogger, speaker, CTO</div>
+      </div>
+    </div>
+  </a>
+</header>
+
+<nav class="site-nav">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/posts">Posts</a></li>
+  </ul>
+</nav>
+
+
+
+      <main>
+        <h1>ActiveRecord and Uniqueness</h1>
+<p class="published-at">21 September 2015</p>
+
+
+<p>The uniqueness validation in ActiveRecord is a lie as soon as you have more than one app server process (or thread) running.</p>
+
+<p>It performs a SQL select to ensure that no other records with the same value appear in the database before marking the record as valid. However if two processes happen to check for the same value at the same time before saving, both records are going to appear valid in Rails and will then be saved.</p>
+
+<p>If you have any <code class="highlighter-rouge">validates_uniqueness_of</code> or <code class="highlighter-rouge">has_one</code> relationships in your ActiveRecord models, it’s wise to also back those up with a unique index in the database. That way if the Rails uniqueness validation allows a duplicate record to slip past, you’ll still guarantee the integrity of your data.</p>
+
+<p>You can do this when creating a table using the <code class="highlighter-rouge">create_table</code> method in a migration</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">create_table</span> <span class="ss">:users</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+  <span class="n">t</span><span class="p">.</span><span class="nf">email</span>
+  <span class="n">t</span><span class="p">.</span><span class="nf">index</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">unique: </span><span class="kp">true</span>
+  <span class="c1"># Use an array of columns for a compound index</span>
+  <span class="c1"># t.index [:email, :other_column], unique: true</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>Alternatively you can add a unique index later by using the <code class="highlighter-rouge">add_index</code> method in a migration</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># add_index :table, :column, unique: true</span>
+<span class="n">add_index</span> <span class="ss">:users</span><span class="p">,</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">unique: </span><span class="kp">true</span>
+</code></pre></div></div>
+
+<h2 id="prevention-rather-than-treatment-consistency_fail">Prevention rather than treatment: consistency_fail</h2>
+
+<p>You should use the <a href="https://github.com/trptcolin/consistency_fail">consistency_fail</a> gem to verify that all of your indexes are in place. It scans your ActiveRecord models for uniqueness validations and <code class="highlighter-rouge">has_one</code> relationships and will warn you if any of these are missing indexes at the database level. I recommend running consistency_fail as part of your CI build. The CLI runner will return a failure exit code if indexes are missing so it’s easy to add this to your build by just executing <code class="highlighter-rouge">consistency_fail</code>.</p>
+
+<p>Data integrity matters!</p>
+
+
+      </main>
+
+      <footer class="site-footer">Copyright <span class="copyright">&copy;</span> Kevin McKelvin 2024</footer>
+
+    </div>
+
+  </body>
+</html>

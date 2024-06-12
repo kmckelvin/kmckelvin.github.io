@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Presentation: Docker at Golang North East April 2020 | Kevin McKelvin</title>
+
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="/_bridgetown/static/index.NAKFUDFN.css" />
+<script src="/_bridgetown/static/index.KN36LEOD.js" defer></script>
+<script type="module">let lastmod = 0
+function startReloadConnection() {
+  const evtSource = new EventSource("/_bridgetown/live_reload")
+  evtSource.onmessage = event => {
+    if (document.querySelector("#bridgetown-build-error")) document.querySelector("#bridgetown-build-error").close()
+    if (event.data == "reloaded!") {
+      location.reload()
+    } else {
+      const newmod = Number(event.data)
+      if (lastmod > 0 && newmod > 0 && lastmod < newmod) {
+        location.reload()
+      } else {
+        lastmod = newmod
+      }
+    }
+  }
+  evtSource.addEventListener("builderror", event => {
+    let dialog = document.querySelector("#bridgetown-build-error")
+    if (!dialog) {
+      dialog = document.createElement("dialog")
+      dialog.id = "bridgetown-build-error"
+      dialog.style.borderColor = "red"
+      dialog.style.fontSize = "110%"
+      dialog.innerHTML = `
+        <p style="color:red">There was an error when building the site:</p>
+        <output><pre></pre></output>
+        <p><small>Check your Bridgetown logs for further details.</small></p>
+      `
+      document.body.appendChild(dialog)
+      dialog.showModal()
+    }
+    dialog.querySelector("pre").textContent = JSON.parse(event.data)
+  })
+  evtSource.onerror = event => {
+    if (evtSource.readyState === 2) {
+      // reconnect with new object
+      evtSource.close()
+      console.warn("Live reload: attempting to reconnect in 3 seconds...")
+
+      setTimeout(() => startReloadConnection(), 3000)
+    }
+  }
+}
+setTimeout(() => {
+  startReloadConnection()
+}, 500)
+</script>
+<!-- Begin Bridgetown SEO tag v6.0.0 -->
+<title>Presentation: Docker at Golang North East April 2020 | Kevin McKelvin</title>
+<meta property="og:title" content="Presentation: Docker at Golang North East April 2020" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://kmckelvin.com/blog/2020/05/golang-north-east-docker-presentation/" />
+<meta property="og:url" content="https://kmckelvin.com/blog/2020/05/golang-north-east-docker-presentation/" />
+<meta property="og:site_name" content="Kevin McKelvin" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-09T00:00:00+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Presentation: Docker at Golang North East April 2020" />
+<!-- End Bridgetown SEO tag -->
+
+
+  </head>
+  <body class="post ">
+    <div class="page-content">
+      <header class="site-header">
+  <a href="/">
+    <div class="site-header-content">
+      <img src="/images/profile.jpg" class="site-header-content__avatar">
+      <div>
+        <div class="site-header-content__title">Kevin McKelvin</div>
+        <div class="site-header-content__subtitle">Software developer, blogger, speaker, CTO</div>
+      </div>
+    </div>
+  </a>
+</header>
+
+<nav class="site-nav">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/posts">Posts</a></li>
+  </ul>
+</nav>
+
+
+
+      <main>
+        <h1>Presentation: Docker at Golang North East April 2020</h1>
+<p class="published-at"> 9 May 2020</p>
+
+
+<p>I had the privilege to speak for the first <strong>online</strong> <a href="https://www.meetup.com/Golang-North-East/events/qtpnmqybcgblc/">Golang North East</a> meetup on 28 April 2020.</p>
+
+<p>After a short introduction to Docker Images and Containers, I spoke about using Docker in development workflows and spent most of the time live coding and demonstrating how to build a simple Go web application that connected to Redis and ran together using <code class="highlighter-rouge">docker-compose</code>.</p>
+
+<p>You can see the code from the talk can <a href="https://github.com/kmckelvin/2020-04-golang-ne-docker-presentation">on Github</a>.</p>
+
+<p>I enjoyed that we were able to still have a fairly informal presentation setting, where a lot of questions and answers could be voiced and conversations could be had. With the meetup being online, it was a bonus to be joined by Gophers from further afield in the UK, Europe and America. I hope to keep meeting other amazing developers and hearing their inspiring stories through these meetups for as long as social distancing is in place.</p>
+
+<p>Thanks Roger Peppe and Nathan Davies for organising the meetup and for adapting to running the meetup online. If you’re interested in all things Go, we’ll be meeting online until social distancing restrictions are lifted to allow us to meet in person again. Join the <a href="https://www.meetup.com/Golang-North-East">group on meetup</a>, or follow <a href="https://twitter.com/golangnortheast">@golangnortheast</a> on twitter to get announcements.</p>
+
+
+      </main>
+
+      <footer class="site-footer">Copyright <span class="copyright">&copy;</span> Kevin McKelvin 2024</footer>
+
+    </div>
+
+  </body>
+</html>

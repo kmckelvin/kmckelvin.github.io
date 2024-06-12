@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Rubyfuza 2016 | Kevin McKelvin</title>
+
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="/_bridgetown/static/index.NAKFUDFN.css" />
+<script src="/_bridgetown/static/index.KN36LEOD.js" defer></script>
+<script type="module">let lastmod = 0
+function startReloadConnection() {
+  const evtSource = new EventSource("/_bridgetown/live_reload")
+  evtSource.onmessage = event => {
+    if (document.querySelector("#bridgetown-build-error")) document.querySelector("#bridgetown-build-error").close()
+    if (event.data == "reloaded!") {
+      location.reload()
+    } else {
+      const newmod = Number(event.data)
+      if (lastmod > 0 && newmod > 0 && lastmod < newmod) {
+        location.reload()
+      } else {
+        lastmod = newmod
+      }
+    }
+  }
+  evtSource.addEventListener("builderror", event => {
+    let dialog = document.querySelector("#bridgetown-build-error")
+    if (!dialog) {
+      dialog = document.createElement("dialog")
+      dialog.id = "bridgetown-build-error"
+      dialog.style.borderColor = "red"
+      dialog.style.fontSize = "110%"
+      dialog.innerHTML = `
+        <p style="color:red">There was an error when building the site:</p>
+        <output><pre></pre></output>
+        <p><small>Check your Bridgetown logs for further details.</small></p>
+      `
+      document.body.appendChild(dialog)
+      dialog.showModal()
+    }
+    dialog.querySelector("pre").textContent = JSON.parse(event.data)
+  })
+  evtSource.onerror = event => {
+    if (evtSource.readyState === 2) {
+      // reconnect with new object
+      evtSource.close()
+      console.warn("Live reload: attempting to reconnect in 3 seconds...")
+
+      setTimeout(() => startReloadConnection(), 3000)
+    }
+  }
+}
+setTimeout(() => {
+  startReloadConnection()
+}, 500)
+</script>
+<!-- Begin Bridgetown SEO tag v6.0.0 -->
+<title>Rubyfuza 2016 | Kevin McKelvin</title>
+<meta property="og:title" content="Rubyfuza 2016" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://kmckelvin.com/blog/2016/02/rubyfuza-2016/" />
+<meta property="og:url" content="https://kmckelvin.com/blog/2016/02/rubyfuza-2016/" />
+<meta property="og:site_name" content="Kevin McKelvin" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2016-02-17T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Rubyfuza 2016" />
+<!-- End Bridgetown SEO tag -->
+
+
+  </head>
+  <body class="post ">
+    <div class="page-content">
+      <header class="site-header">
+  <a href="/">
+    <div class="site-header-content">
+      <img src="/images/profile.jpg" class="site-header-content__avatar">
+      <div>
+        <div class="site-header-content__title">Kevin McKelvin</div>
+        <div class="site-header-content__subtitle">Software developer, blogger, speaker, CTO</div>
+      </div>
+    </div>
+  </a>
+</header>
+
+<nav class="site-nav">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/posts">Posts</a></li>
+  </ul>
+</nav>
+
+
+
+      <main>
+        <h1>Rubyfuza 2016</h1>
+<p class="published-at">17 February 2016</p>
+
+
+<p>The 2016 installation of the <a href="http://www.rubyfuza.org">Rubyfuza</a> conference ran over 4-5 February 2016 at the President Hotel in Cape Town. Rubyfuza is Africa’s premier Ruby conference and is always one of the highlights of my year.</p>
+
+<p>The President Hotel is the second venue change in as many years. It was a fantastic venue for a conference with the Truth Coffee stand (thanks Hetzner!) and hotel restaurant &amp; pool being in really close proximity. It’s also the first year I’ve booked in at the conference hotel and it really makes logistics a heck of a lot easier. There’s a pro-tip in there!</p>
+
+<p><img src="/images/rubyfuza_truth_coffee_barista.jpg" alt="Truth Coffee" /></p>
+
+<p>The keynote on the first day set an excellent tone for the rest of the conference. Sarah Mei’s exploration of metaphors for software teams in terms of the “factory”, the “workshop” and the “stage” provided a stimulus for many conversations about how software teams can improve their methods of working together. As Kent Beck explains in Extreme Programming Explained - all problems in software are actually people problems. The theatrical stage model helps frame why individuals can’t merely be replaced by someone with similar skills without having far broader effects on the team as a whole.</p>
+
+<p>2016 marks the third year I’ve spoken at Rubyfuza. I’m getting quite used to being given the second slot after lunch on the second day now. This year I spoke specifically about using Ruby in an ecosystem that includes other languages, and particularly interoperating with C through native extensions and with Rust through FFI. A substantial part of my presentation was a live demo of building a native extension and using FFI with a Rust library, my slides covering my intro can be downloaded <a href="/presentations/Going%20Native.pdf">here</a>, or you can <a href="https://www.youtube.com/watch?v=IeMw_G69Hv4">watch the video</a>.</p>
+
+<p>Friday evening’s dinner is always a highlight of the conference. The organisers treated us to a stunning sunset in Camps Bay at The Bungalow restaurant.</p>
+
+<p><img src="/images/rubyfuza2016_sunset.jpg" alt="Sunset" /></p>
+
+<p>It was a fantastic way to end off the conference. Lance, Mike, Dominic, Kenneth, Michelle, Simon and Rishal - specifically to you guys, thanks for the epic time there! I’ll see you all at (or before) Rubyfuza 2017!</p>
+
+
+      </main>
+
+      <footer class="site-footer">Copyright <span class="copyright">&copy;</span> Kevin McKelvin 2024</footer>
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Entity Framework 4.1 Hooks – DRYing it up with EFHooks | Kevin McKelvin</title>
+
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="/_bridgetown/static/index.NAKFUDFN.css" />
+<script src="/_bridgetown/static/index.KN36LEOD.js" defer></script>
+<script type="module">let lastmod = 0
+function startReloadConnection() {
+  const evtSource = new EventSource("/_bridgetown/live_reload")
+  evtSource.onmessage = event => {
+    if (document.querySelector("#bridgetown-build-error")) document.querySelector("#bridgetown-build-error").close()
+    if (event.data == "reloaded!") {
+      location.reload()
+    } else {
+      const newmod = Number(event.data)
+      if (lastmod > 0 && newmod > 0 && lastmod < newmod) {
+        location.reload()
+      } else {
+        lastmod = newmod
+      }
+    }
+  }
+  evtSource.addEventListener("builderror", event => {
+    let dialog = document.querySelector("#bridgetown-build-error")
+    if (!dialog) {
+      dialog = document.createElement("dialog")
+      dialog.id = "bridgetown-build-error"
+      dialog.style.borderColor = "red"
+      dialog.style.fontSize = "110%"
+      dialog.innerHTML = `
+        <p style="color:red">There was an error when building the site:</p>
+        <output><pre></pre></output>
+        <p><small>Check your Bridgetown logs for further details.</small></p>
+      `
+      document.body.appendChild(dialog)
+      dialog.showModal()
+    }
+    dialog.querySelector("pre").textContent = JSON.parse(event.data)
+  })
+  evtSource.onerror = event => {
+    if (evtSource.readyState === 2) {
+      // reconnect with new object
+      evtSource.close()
+      console.warn("Live reload: attempting to reconnect in 3 seconds...")
+
+      setTimeout(() => startReloadConnection(), 3000)
+    }
+  }
+}
+setTimeout(() => {
+  startReloadConnection()
+}, 500)
+</script>
+<!-- Begin Bridgetown SEO tag v6.0.0 -->
+<title>Entity Framework 4.1 Hooks – DRYing it up with EFHooks | Kevin McKelvin</title>
+<meta property="og:title" content="Entity Framework 4.1 Hooks – DRYing it up with EFHooks" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://kmckelvin.com/blog/2011/06/entity-framework-4-1-hooks-drying-it-up-efhooks/" />
+<meta property="og:url" content="https://kmckelvin.com/blog/2011/06/entity-framework-4-1-hooks-drying-it-up-efhooks/" />
+<meta property="og:site_name" content="Kevin McKelvin" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-06-21T19:05:38+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Entity Framework 4.1 Hooks – DRYing it up with EFHooks" />
+<!-- End Bridgetown SEO tag -->
+
+
+  </head>
+  <body class="post ">
+    <div class="page-content">
+      <header class="site-header">
+  <a href="/">
+    <div class="site-header-content">
+      <img src="/images/profile.jpg" class="site-header-content__avatar">
+      <div>
+        <div class="site-header-content__title">Kevin McKelvin</div>
+        <div class="site-header-content__subtitle">Software developer, blogger, speaker, CTO</div>
+      </div>
+    </div>
+  </a>
+</header>
+
+<nav class="site-nav">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/posts">Posts</a></li>
+  </ul>
+</nav>
+
+
+
+      <main>
+        <h1>Entity Framework 4.1 Hooks – DRYing it up with EFHooks</h1>
+<p class="published-at">21 June 2011</p>
+
+
+<p>One of the things I fell in love with about Rails is its automatic management of timestamps on data.  When you create a new entity, it sets the created_at field.  When you Update it, it sets the modified_at timestamp.</p>
+
+<p>For a long time I’ve used NHibernate as my ORM of choice for .NET and registered listeners for the pre-insert and pre-update events in NHibernate to handle this for me.  Now that Entity Framework 4.1 is out and becoming more useful I was interested in seeing how similar things could be done.</p>
+
+<p>Entity Framework’s extension points are very limited compared to what NHibernate is capable of, but there is enough there to get you through most borderline scenarios you’ll hit while working with Entity Framework.</p>
+
+<p>The problem I have with using the extension points is that you have to embed code inside your DbContext class to hook into the inserts, updates and deletes.  This means you’re mixing concerns of hooking into the extension point and the logic of what the hook must actually do.  This means it becomes difficult to test your hooks in isolation and that your DbContext class can become exceptionally long.</p>
+
+<p>In comes <strong>EFHooks</strong>.  It’s a project I’ve just started to make it easier to hook into Entity Framework.  Check the code out on <a href="https://github.com/kmckelvin/EFHooks">GitHub here</a>.</p>
+
+<p>EFHooks allows you to separate the concerns of writing pre-action hook code from accessing the extension points and registering your hooked code for execution.  This means unit testing your hook without using a DbContext becomes easy.</p>
+
+<p>Here’s an example of a hook to run before any entity that inherits from ITimeStamped gets inserted.  Everything is strongly typed, so only ITimeStamped entities will be passed into this hook.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// TimestampPreInsertHook.cs</span>
+<span class="k">public</span> <span class="k">class</span> <span class="nc">TimestampPreInsertHook</span> <span class="p">:</span> <span class="n">PreInsertHook</span><span class="p">&lt;</span><span class="n">ITimeStamped</span><span class="p">&gt;</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">Hook</span><span class="p">(</span><span class="n">ITimeStamped</span> <span class="n">entity</span><span class="p">,</span> <span class="n">HookEntityMetadata</span> <span class="n">metadata</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">entity</span><span class="p">.</span><span class="n">CreatedAt</span> <span class="p">=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This means you don’t need to write code to set your CreatedAt date every time you create an entity that implements ITimeStamped.  By the same pattern you could use .NET reflection on System.Object and not even have to use an interface.</p>
+
+<p>Note I said “pre-action” – This handles 99% of the use cases I’ve ever hit.  I’m working on a way to handle post-action hooks as well and I’ll have it all in a Nuget package as soon as it’s stable.</p>
+
+<p>Check the code out, build it, play with it and please let me know if you have any problems with it.</p>
+
+<p>(Update: Post-actions are also implemented and the package is available on NuGet <a href="http://nuget.org/List/Packages/EFHooks">here</a>)</p>
+
+<p>Links:</p>
+
+<p><a href="http://github.com/kmckelvin/EFHooks">EFHooks on Github</a></p>
+
+
+      </main>
+
+      <footer class="site-footer">Copyright <span class="copyright">&copy;</span> Kevin McKelvin 2024</footer>
+
+    </div>
+
+  </body>
+</html>

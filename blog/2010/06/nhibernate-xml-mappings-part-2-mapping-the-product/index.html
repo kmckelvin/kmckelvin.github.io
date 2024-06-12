@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>NHibernate XML Mappings – Part 2 – Mapping the Product | Kevin McKelvin</title>
+
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="/_bridgetown/static/index.NAKFUDFN.css" />
+<script src="/_bridgetown/static/index.KN36LEOD.js" defer></script>
+<script type="module">let lastmod = 0
+function startReloadConnection() {
+  const evtSource = new EventSource("/_bridgetown/live_reload")
+  evtSource.onmessage = event => {
+    if (document.querySelector("#bridgetown-build-error")) document.querySelector("#bridgetown-build-error").close()
+    if (event.data == "reloaded!") {
+      location.reload()
+    } else {
+      const newmod = Number(event.data)
+      if (lastmod > 0 && newmod > 0 && lastmod < newmod) {
+        location.reload()
+      } else {
+        lastmod = newmod
+      }
+    }
+  }
+  evtSource.addEventListener("builderror", event => {
+    let dialog = document.querySelector("#bridgetown-build-error")
+    if (!dialog) {
+      dialog = document.createElement("dialog")
+      dialog.id = "bridgetown-build-error"
+      dialog.style.borderColor = "red"
+      dialog.style.fontSize = "110%"
+      dialog.innerHTML = `
+        <p style="color:red">There was an error when building the site:</p>
+        <output><pre></pre></output>
+        <p><small>Check your Bridgetown logs for further details.</small></p>
+      `
+      document.body.appendChild(dialog)
+      dialog.showModal()
+    }
+    dialog.querySelector("pre").textContent = JSON.parse(event.data)
+  })
+  evtSource.onerror = event => {
+    if (evtSource.readyState === 2) {
+      // reconnect with new object
+      evtSource.close()
+      console.warn("Live reload: attempting to reconnect in 3 seconds...")
+
+      setTimeout(() => startReloadConnection(), 3000)
+    }
+  }
+}
+setTimeout(() => {
+  startReloadConnection()
+}, 500)
+</script>
+<!-- Begin Bridgetown SEO tag v6.0.0 -->
+<title>NHibernate XML Mappings – Part 2 – Mapping the Product | Kevin McKelvin</title>
+<meta property="og:title" content="NHibernate XML Mappings – Part 2 – Mapping the Product" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://kmckelvin.com/blog/2010/06/nhibernate-xml-mappings-part-2-mapping-the-product/" />
+<meta property="og:url" content="https://kmckelvin.com/blog/2010/06/nhibernate-xml-mappings-part-2-mapping-the-product/" />
+<meta property="og:site_name" content="Kevin McKelvin" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2010-06-15T00:01:00+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="NHibernate XML Mappings – Part 2 – Mapping the Product" />
+<!-- End Bridgetown SEO tag -->
+
+
+  </head>
+  <body class="post ">
+    <div class="page-content">
+      <header class="site-header">
+  <a href="/">
+    <div class="site-header-content">
+      <img src="/images/profile.jpg" class="site-header-content__avatar">
+      <div>
+        <div class="site-header-content__title">Kevin McKelvin</div>
+        <div class="site-header-content__subtitle">Software developer, blogger, speaker, CTO</div>
+      </div>
+    </div>
+  </a>
+</header>
+
+<nav class="site-nav">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/posts">Posts</a></li>
+  </ul>
+</nav>
+
+
+
+      <main>
+        <h1>NHibernate XML Mappings – Part 2 – Mapping the Product</h1>
+<p class="published-at">15 June 2010</p>
+
+
+<p>Continuing where we left off from <a href="/blog/2010/06/nhibernate-xml-mappings-part-1-the-domain-model">part 1</a>, we had created a class library called DomainModel and created four classes to act as data transfer objects.</p>
+
+<p>In this part we’ll create our first NHibernate mapping for the Product entity.</p>
+
+<p>Lets revisit what our Product class looks like first.</p>
+
+<p><img src="/images/nhibernate-xml-mappings/image_thumb5.png" alt="image" /></p>
+
+<p>We have three properties which we want to map to our columns in the database. NHibernate does this using XML files.</p>
+
+<p>Quick tip: Make sure you’ve brought the nhibernate-configuration.xsd and nhibernate-mapping.xsd files into your solution. They are in the NHibernate redistributable you would have downloaded from nhforge. This will give you IntelliSense when editing the NHibernate xml mapping and configuration files.</p>
+
+<h3 id="create-the-mapping-file">Create the Mapping File</h3>
+
+<p>Create a new folder in your DomainModel project called Mappings and inside it create an xml file called Product.hbm.xml.</p>
+
+<p><img src="/images/nhibernate-xml-mappings/image_thumb6.png" alt="image" /></p>
+
+<p><img src="/images/nhibernate-xml-mappings/image_thumb7.png" alt="image" /> For NHibernate to read your configuration at run-time, this file needs to be made an embedded resource. Select the file in your solution explorer, then go to properties and set Build Action to Embedded Resource.</p>
+
+<p>NHibernate’s convention is to name your mapping with a .hbm.xml extension. This can be overridden if needed, but would defeat the objective of convention over configuration ;)</p>
+
+<h3 id="build-the-mapping">Build the Mapping</h3>
+
+<p>For NHibernate to map your entity to the database, it needs to know</p>
+
+<ul>
+  <li>The assembly and namespace of the class being mapped.</li>
+  <li>The name of the class being mapped.</li>
+  <li>The name of the table the class is being mapped to.</li>
+  <li>What the unique identifier of the class is.</li>
+  <li>What column each property must be mapped to.</li>
+</ul>
+
+<p>Open your Product.hbm.xml file and add your root element.</p>
+
+<p><img src="/images/nhibernate-xml-mappings/image_thumb8.png" alt="image" /></p>
+
+<p>The hibernate-mapping element defines three attributes here.</p>
+
+<ul>
+  <li>The xmlns attribute sets your namespace and lets Visual Studio give you IntelliSense</li>
+  <li>The assembly attribute tells NHibernate what the default assembly is for types that don’t have fully qualified type names.</li>
+  <li>The namespace attribute tells NHibernate which namespace to look in for types that don’t have fully qualified type names.</li>
+</ul>
+
+<p>The next thing NHibernate needs to know is the detail about the class being mapped, so add a class element.</p>
+
+<p><img src="/images/nhibernate-xml-mappings/image_thumb9.png" alt="image" /></p>
+
+<p>Based on the assembly and namespace in the hibernate-mapping element, this tells NHibernate to map the DomainModel.Product class from the DomainModel assembly to the table called Product. Note that we could have omitted the table attribute here and NHibernate would have used the class name as the table name. However, I find using the table attribute makes the mapping file easier to understand when reading it.</p>
+
+<p>NHibernate needs to know two more things about our entity now. It needs a unique identifier for the entity. This is done with the Id element under the class element.</p>
+
+<p><img src="/images/nhibernate-xml-mappings/image_thumb10.png" alt="image" /></p>
+
+<p>From this, NHibernate will use the Id column on the table as the unique identifier for each record and knows that the database will generate new identity values for new records. Note that no property on our class maps to the Id column and therefore we need to explicitly tell it that it is of type System.Int32.</p>
+
+<p>The last thing NHibernate needs to know about our Product is the properties that it must map. These are added using the property tag after the id tag.</p>
+
+<p><img src="/images/nhibernate-xml-mappings/image_thumb11.png" alt="image" /></p>
+
+<p>After adding these three lines, here’s our complete mapping file.</p>
+
+<p><img src="/images/nhibernate-xml-mappings/image_thumb12.png" alt="image" /></p>
+
+<p>And that’s it! We could now open a new NHibernate.ISession and get a list of all of our products from the database.</p>
+
+<p>In the next part of this series we’ll map our Order and OrderDetail classes and handle the one-to-many and many-to-one elements in the NHibernate configuration. We’ll also look at the different types of collections NHibernate uses and when each is appropriate.</p>
+
+
+      </main>
+
+      <footer class="site-footer">Copyright <span class="copyright">&copy;</span> Kevin McKelvin 2024</footer>
+
+    </div>
+
+  </body>
+</html>

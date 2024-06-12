@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Can Linux or Windows replace my macOS setup? | Kevin McKelvin</title>
+
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="/_bridgetown/static/index.NAKFUDFN.css" />
+<script src="/_bridgetown/static/index.KN36LEOD.js" defer></script>
+<script type="module">let lastmod = 0
+function startReloadConnection() {
+  const evtSource = new EventSource("/_bridgetown/live_reload")
+  evtSource.onmessage = event => {
+    if (document.querySelector("#bridgetown-build-error")) document.querySelector("#bridgetown-build-error").close()
+    if (event.data == "reloaded!") {
+      location.reload()
+    } else {
+      const newmod = Number(event.data)
+      if (lastmod > 0 && newmod > 0 && lastmod < newmod) {
+        location.reload()
+      } else {
+        lastmod = newmod
+      }
+    }
+  }
+  evtSource.addEventListener("builderror", event => {
+    let dialog = document.querySelector("#bridgetown-build-error")
+    if (!dialog) {
+      dialog = document.createElement("dialog")
+      dialog.id = "bridgetown-build-error"
+      dialog.style.borderColor = "red"
+      dialog.style.fontSize = "110%"
+      dialog.innerHTML = `
+        <p style="color:red">There was an error when building the site:</p>
+        <output><pre></pre></output>
+        <p><small>Check your Bridgetown logs for further details.</small></p>
+      `
+      document.body.appendChild(dialog)
+      dialog.showModal()
+    }
+    dialog.querySelector("pre").textContent = JSON.parse(event.data)
+  })
+  evtSource.onerror = event => {
+    if (evtSource.readyState === 2) {
+      // reconnect with new object
+      evtSource.close()
+      console.warn("Live reload: attempting to reconnect in 3 seconds...")
+
+      setTimeout(() => startReloadConnection(), 3000)
+    }
+  }
+}
+setTimeout(() => {
+  startReloadConnection()
+}, 500)
+</script>
+<!-- Begin Bridgetown SEO tag v6.0.0 -->
+<title>Can Linux or Windows replace my macOS setup? | Kevin McKelvin</title>
+<meta property="og:title" content="Can Linux or Windows replace my macOS setup?" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://kmckelvin.com/blog/2020/01/can-windows-or-linux-replace-my-macos-setup/" />
+<meta property="og:url" content="https://kmckelvin.com/blog/2020/01/can-windows-or-linux-replace-my-macos-setup/" />
+<meta property="og:site_name" content="Kevin McKelvin" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-01-05T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Can Linux or Windows replace my macOS setup?" />
+<!-- End Bridgetown SEO tag -->
+
+
+  </head>
+  <body class="post ">
+    <div class="page-content">
+      <header class="site-header">
+  <a href="/">
+    <div class="site-header-content">
+      <img src="/images/profile.jpg" class="site-header-content__avatar">
+      <div>
+        <div class="site-header-content__title">Kevin McKelvin</div>
+        <div class="site-header-content__subtitle">Software developer, blogger, speaker, CTO</div>
+      </div>
+    </div>
+  </a>
+</header>
+
+<nav class="site-nav">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/posts">Posts</a></li>
+  </ul>
+</nav>
+
+
+
+      <main>
+        <h1>Can Linux or Windows replace my macOS setup?</h1>
+<p class="published-at"> 5 January 2020</p>
+
+
+<p>Late in 2018 I bought a Dell XPS15 laptop to run Ubuntu. My mid-2015 mid-range MacBook Pro was struggling to keep up with my workload. Apple’s line of MacBook Pro devices hadn’t appealed to me since the butterfly switch keyboard and the touch bar was incorporated in late 2015. The butterfly switch mechanism had such poor tactile feedback that you might as well have been typing on a solid piece of wood. The reported defect rate on the early models scared me away from the whole lineup.</p>
+
+<p>The 2018 Dell XPS15 appeared to be a good option to run Linux. Many reviewers on YouTube called it the best Linux laptop of the year and given Dell sells a version of the laptop running Ubuntu, it seemed logical that it would be well supported. I used the Dell as my main laptop for over a year and here’s what I found:</p>
+
+<h2 id="linux">Linux</h2>
+
+<p>My first step was to install Ubuntu on the Dell. After flipping some UEFI settings in the system setup I had it up and running fairly quickly.</p>
+
+<p>The development tooling for Rails, JavaScript and Go worked very well on Ubuntu. I pretty much just installed <a href="https://github.com/rbenv/rbenv">rbenv</a> and <a href="https://github.com/nvm-sh/nvm">nvm</a> and installed the latest versions of Ruby and Node. VS Code and the whole JetBrains suite of IDEs worked flawlessly. The 8th Gen i9 CPU left my old MacBook’s performance trailing a long way behind.</p>
+
+<p>My problems came in the shape of missing software and “unpolished” edges.</p>
+
+<p>I work with a fully remote team. We collaborate daily using screensharing. Linux’s screensharing options are very limited. Chrome and Firefox have a limitation that they can only share the entire desktop, not a single screen. This limitation extends to Electron apps too. Popular tools like Slack, Hangouts or Talky all have the same limitation. Given that I work on a multi-screen setup, I had to find workarounds, none of which were ever as good as just using Slack on macOS, or even better - using <a href="https://tuple.app">Tuple</a>. While Skype on Linux could share a single screen, it didn’t have any annotation tools or ability for another person to control your computer.</p>
+
+<p>Secondly, I use a full size Apple Magic Keyboard 2 with the XPS15. I love the feeling of Apple’s keyboards. I couldn’t find another full size chiclet keyboard out there that could compete with the Apple keyboards. I’m not a fan of mechanical keyboards, so my options were limited. The Apple keyboards are wireless (bluetooth), but work equally well plugged in using a lightning to USB cable on non-Mac PCs. The problem, however, is that the Super/Alt keys are ordered the opposite way around to the built in keyboard. To get around that on Linux I remapped the keys using the GNOME tweak tool, but couldn’t find a one-click/keystroke method of switching back when using the built in keyboard.</p>
+
+<h2 id="windows-10">Windows 10</h2>
+
+<p>In late October I decided Linux wasn’t working for me and decided to try Windows 10. Microsoft had done some interesting work with the <a href="https://docs.microsoft.com/en-us/windows/wsl/about">Windows Subsystem for Linux</a>, and <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl">VS Code’s support for WSL</a> meant you could run it on Windows and access the WSL file system as seamlessly as if you were running it as a Linux application. Windows solved my screensharing issue - it allowed me to share a single display without requiring any workarounds.</p>
+
+<p>On Windows I could more easily remap my Super/Alt key when using an external keyboard by running a script in AutoHotKey, and disable it from the system tray.</p>
+
+<p>The Dell XPS15’s battery life was noticeably better on Windows! I could comfortably work for 6 hours on battery alone, where I’d battle to get 3 hours on Linux even with several power management tweaks applied.</p>
+
+<p>In general Windows was a marked improvement over Ubuntu.</p>
+
+<p>Once again though, I ran into annoying, unpolished edges. Initially I used the Fast Ring of Windows Insiders to get WSL2 (it’s now available on the Slow Ring). One fateful morning Windows restarted to install updates, and never started up again. I couldn’t even get the Windows 10 Recovery tools to get it to boot, and had to reinstall.</p>
+
+<p><img src="/images/no_bootable_devices.jpg" alt="No bootable devices were found" /></p>
+
+<p>When the operating system was booting, I had similarly annoying issues:</p>
+
+<p><img src="/images/excel-error.png" alt="Excel error" /></p>
+
+<p>The disk IO performance when accessing the Linux disk from a Windows application was a deal breaker. VS Code supported WSL2 via an extension that got around the issue, but Windows GUI applications like SourceTree were extremely slow when accessing repositories in WSL as they would go through a network share. This meant JetBrains’ IDEs weren’t an option either.</p>
+
+<p>Compared to macOS, the operating system just didn’t feel consistent. Even GNOME on Linux seemed to be more coherent than Windows 10. It was a disappointing experience seeing Windows Forms applications with their grey backgrounds and buttons that hadn’t been given any attention since Windows XP. Some 256 colour icons made me think they had been overlooked since Windows 95!</p>
+
+<p>The final issue was advertising. I can’t believe that after paying for a Windows 10 Pro licence, they still put adverts everywhere from the login screen to the start menu.</p>
+
+<h2 id="the-return-to-macos">The return to macOS</h2>
+
+<p>In November 2019, the state of play changed again when Apple released a new 16” MacBook Pro. For the first time in 3 years I feel Apple has produced a genuinely pro-level product. The thermal issues are solved with improved airflow, the keyboard has a physical escape key again, and the screen bezel is smaller than ever with the 16” monitor. I tried a demo model at the Apple Store and loved the machine immediately. Mine should arrive in the next couple of weeks.</p>
+
+<p>Living on Linux and Windows highlighted things I missed from macOS.</p>
+
+<ul>
+  <li><a href="https://kapeli.com/dash">Dash</a> for quick access to developer documentation</li>
+  <li><a href="https://www.alfredapp.com/">Alfred</a> with the power pack
+    <ul>
+      <li><a href="https://github.com/Kapeli/Dash-Alfred-Workflow">Dash integration</a></li>
+      <li><a href="https://www.alfredapp.com/help/features/clipboard/">Clipboard history</a> – it’s better than anything on either Linux or Windows</li>
+      <li><a href="https://www.alfredapp.com/help/features/snippets/">Snippets and Text Expansion</a> – AutoHotKey on Windows and AutoKey on Linux offered similar functionality, but neither were as reliable</li>
+    </ul>
+  </li>
+  <li><a href="https://iterm2.com/">iTerm</a> – Linux’s terminal was just as good, but things in Windows still left much to be desired</li>
+  <li><a href="https://tuple.app/">Tuple</a> – A macOS-only screensharing tool with really low latency and high quality</li>
+  <li><a href="https://support.apple.com/en-us/HT209460">Universal clipboard between devices</a></li>
+  <li><a href="https://support.apple.com/en-us/HT203106">Airdrop</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Preview_(macOS)">Preview</a> – the image/document viewer that ships with macOS that can do basic PDF editing (slicing, signing forms, etc)</li>
+  <li><a href="https://en.wikipedia.org/wiki/Homebrew_(package_management_software)">Homebrew</a> – although apt was pretty good, homebrew seems be more up to date with new releases without requiring 3rd party repositories</li>
+</ul>
+
+<p>On the hardware side, I missed the quality of the MacBook Pro’s screen. The 500 nit retina display in the MacBook Pro is a thing of beauty. The quality of the speakers on the MacBook Pro gives it the versatility to be used as a speaker for the room. I always relied on headphones or a bluetooth speaker when using the Dell.</p>
+
+<p>I subjectively found both Linux and Windows to require reboots more frequently than macOS, though none of the three are flawless in this area.</p>
+
+<p>I believe I’ve given Linux and Windows a fair shot at replacing macOS as my daily driver in the last year, but with Apple upping their game with the 16” model I’m excited about getting back to macOS full time.</p>
+
+
+      </main>
+
+      <footer class="site-footer">Copyright <span class="copyright">&copy;</span> Kevin McKelvin 2024</footer>
+
+    </div>
+
+  </body>
+</html>

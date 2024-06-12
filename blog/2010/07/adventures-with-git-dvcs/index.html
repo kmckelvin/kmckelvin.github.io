@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Adventures with Git DVCS | Kevin McKelvin</title>
+
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="/_bridgetown/static/index.NAKFUDFN.css" />
+<script src="/_bridgetown/static/index.KN36LEOD.js" defer></script>
+<script type="module">let lastmod = 0
+function startReloadConnection() {
+  const evtSource = new EventSource("/_bridgetown/live_reload")
+  evtSource.onmessage = event => {
+    if (document.querySelector("#bridgetown-build-error")) document.querySelector("#bridgetown-build-error").close()
+    if (event.data == "reloaded!") {
+      location.reload()
+    } else {
+      const newmod = Number(event.data)
+      if (lastmod > 0 && newmod > 0 && lastmod < newmod) {
+        location.reload()
+      } else {
+        lastmod = newmod
+      }
+    }
+  }
+  evtSource.addEventListener("builderror", event => {
+    let dialog = document.querySelector("#bridgetown-build-error")
+    if (!dialog) {
+      dialog = document.createElement("dialog")
+      dialog.id = "bridgetown-build-error"
+      dialog.style.borderColor = "red"
+      dialog.style.fontSize = "110%"
+      dialog.innerHTML = `
+        <p style="color:red">There was an error when building the site:</p>
+        <output><pre></pre></output>
+        <p><small>Check your Bridgetown logs for further details.</small></p>
+      `
+      document.body.appendChild(dialog)
+      dialog.showModal()
+    }
+    dialog.querySelector("pre").textContent = JSON.parse(event.data)
+  })
+  evtSource.onerror = event => {
+    if (evtSource.readyState === 2) {
+      // reconnect with new object
+      evtSource.close()
+      console.warn("Live reload: attempting to reconnect in 3 seconds...")
+
+      setTimeout(() => startReloadConnection(), 3000)
+    }
+  }
+}
+setTimeout(() => {
+  startReloadConnection()
+}, 500)
+</script>
+<!-- Begin Bridgetown SEO tag v6.0.0 -->
+<title>Adventures with Git DVCS | Kevin McKelvin</title>
+<meta property="og:title" content="Adventures with Git DVCS" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://kmckelvin.com/blog/2010/07/adventures-with-git-dvcs/" />
+<meta property="og:url" content="https://kmckelvin.com/blog/2010/07/adventures-with-git-dvcs/" />
+<meta property="og:site_name" content="Kevin McKelvin" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2010-07-26T09:04:41+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Adventures with Git DVCS" />
+<!-- End Bridgetown SEO tag -->
+
+
+  </head>
+  <body class="post ">
+    <div class="page-content">
+      <header class="site-header">
+  <a href="/">
+    <div class="site-header-content">
+      <img src="/images/profile.jpg" class="site-header-content__avatar">
+      <div>
+        <div class="site-header-content__title">Kevin McKelvin</div>
+        <div class="site-header-content__subtitle">Software developer, blogger, speaker, CTO</div>
+      </div>
+    </div>
+  </a>
+</header>
+
+<nav class="site-nav">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/posts">Posts</a></li>
+  </ul>
+</nav>
+
+
+
+      <main>
+        <h1>Adventures with Git DVCS</h1>
+<p class="published-at">26 July 2010</p>
+
+
+<p>Over the last while I’ve been playing a lot with a distributed version control system (DVCS) called Git. In the last while, particularly with the presence of sites such as the excellent <a href="http://www.github.com">GitHub</a>, Git has gained a lot of popularity and support among developers. Before anyone accuses me of “jumping on the Git bandwagon” – the bandwagon’s got a lot of momentum, and there’s good reasoning for that.</p>
+
+<p>I’m not going to bore you with the detail of how Git and its distributed model works, there are plenty of excellent articles littering the web you can find with a quick search on Google. Instead I’m going to explain why I believe Git provides the best source control for teams.</p>
+
+<p>With Git, every developer has the full repository available to them locally on their hard disk. While this means the initial clone of a large repository takes longer than an SVN checkout, it’s just about instant to perform any local operation – such as diff your entire tree (or any part thereof) or to add a new commit with no network connectivity needed. This makes it great to work in a totally disconnected environment, since the only operations that need network access are pushing and pulling code in other repositories.</p>
+
+<p>The side effect of this incredible disconnected environment is that everyone is effectively on their own branch of the repository. As soon as I start writing a single line of code that diverges from the repository I cloned from, I’m able to commit on my local repository without anyone else ever seeing it. This means I can commit more often and in smaller chunks without breaking the rest of the codebase for the other developers on the project and getting flamed afterwards. Also once you realise you’re on a branch anyway, the mental barrier of branching out breaks down. In the last couple of weeks I’ve had up to 7 branches in my local repository.</p>
+
+<p>Of course the other half of branching is merging and the Git developers have paid careful attention to the merge model. Even on medium size code bases (2000 files or so) it takes less than a second to merge a set of changes into a branch on my laptop.</p>
+
+<p>Overall this freedom of branching and merging means that developers know they can do more with their code without the risk of stepping on someone else’s toes. If it works, great, merge the changes in. If it doesn’t work, just delete the branch.</p>
+
+<p>I really like the freedom of workflow Git provides and the speed and robustness of it. I’m pretty sure that more and more enterprise users will take up on Git over the next year or so, particularly with the power provided by providers such as GitHub.</p>
+
+
+      </main>
+
+      <footer class="site-footer">Copyright <span class="copyright">&copy;</span> Kevin McKelvin 2024</footer>
+
+    </div>
+
+  </body>
+</html>

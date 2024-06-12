@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>DevDays 2010 South Africa - JHB (Overview) | Kevin McKelvin</title>
+
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="/_bridgetown/static/index.NAKFUDFN.css" />
+<script src="/_bridgetown/static/index.KN36LEOD.js" defer></script>
+<script type="module">let lastmod = 0
+function startReloadConnection() {
+  const evtSource = new EventSource("/_bridgetown/live_reload")
+  evtSource.onmessage = event => {
+    if (document.querySelector("#bridgetown-build-error")) document.querySelector("#bridgetown-build-error").close()
+    if (event.data == "reloaded!") {
+      location.reload()
+    } else {
+      const newmod = Number(event.data)
+      if (lastmod > 0 && newmod > 0 && lastmod < newmod) {
+        location.reload()
+      } else {
+        lastmod = newmod
+      }
+    }
+  }
+  evtSource.addEventListener("builderror", event => {
+    let dialog = document.querySelector("#bridgetown-build-error")
+    if (!dialog) {
+      dialog = document.createElement("dialog")
+      dialog.id = "bridgetown-build-error"
+      dialog.style.borderColor = "red"
+      dialog.style.fontSize = "110%"
+      dialog.innerHTML = `
+        <p style="color:red">There was an error when building the site:</p>
+        <output><pre></pre></output>
+        <p><small>Check your Bridgetown logs for further details.</small></p>
+      `
+      document.body.appendChild(dialog)
+      dialog.showModal()
+    }
+    dialog.querySelector("pre").textContent = JSON.parse(event.data)
+  })
+  evtSource.onerror = event => {
+    if (evtSource.readyState === 2) {
+      // reconnect with new object
+      evtSource.close()
+      console.warn("Live reload: attempting to reconnect in 3 seconds...")
+
+      setTimeout(() => startReloadConnection(), 3000)
+    }
+  }
+}
+setTimeout(() => {
+  startReloadConnection()
+}, 500)
+</script>
+<!-- Begin Bridgetown SEO tag v6.0.0 -->
+<title>DevDays 2010 South Africa - JHB (Overview) | Kevin McKelvin</title>
+<meta property="og:title" content="DevDays 2010 South Africa - JHB (Overview)" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://kmckelvin.com/blog/2010/03/devdays-2010-south-africa-jhb-overview/" />
+<meta property="og:url" content="https://kmckelvin.com/blog/2010/03/devdays-2010-south-africa-jhb-overview/" />
+<meta property="og:site_name" content="Kevin McKelvin" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2010-03-24T17:31:41+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="DevDays 2010 South Africa - JHB (Overview)" />
+<!-- End Bridgetown SEO tag -->
+
+
+  </head>
+  <body class="post ">
+    <div class="page-content">
+      <header class="site-header">
+  <a href="/">
+    <div class="site-header-content">
+      <img src="/images/profile.jpg" class="site-header-content__avatar">
+      <div>
+        <div class="site-header-content__title">Kevin McKelvin</div>
+        <div class="site-header-content__subtitle">Software developer, blogger, speaker, CTO</div>
+      </div>
+    </div>
+  </a>
+</header>
+
+<nav class="site-nav">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/posts">Posts</a></li>
+  </ul>
+</nav>
+
+
+
+      <main>
+        <h1>DevDays 2010 South Africa - JHB (Overview)</h1>
+<p class="published-at">24 March 2010</p>
+
+
+<p>Yesterday I was privileged enough to attend the Microsoft DevDays 2010 conference at the Sandton Convention Centre. The schedule was lined with top local and international speakers bringing forth the latest iteration of Microsoft’s developer systems.</p>
+
+<p>The focus of the show was the new .NET 4.0 &amp; VS2010 release coming in April this year. This is the first new update to the CLR we’ll be seeing since the .NET 2.0 stack was released (3.0 and 3.5 just extended 2.0).</p>
+
+<p>WPF and Silverlight 4 got a lot of attention in the opening keynote and in sessions throughout the day with <a href="http://www.rudigrobler.net">Rudi Grobler</a>, <a href="http://timk.co.za">Tim Keller</a> and Kath Roderick showing off the latest and greatest features of both worlds.</p>
+
+<p>WPF and Silverlight have both taken major strides forward under the hood in their latest release with a completely new text rendering stack that can align fonts on pixel boundaries and bitmap caching for complex vector scenes.</p>
+
+<p>Silverlight has made a massive leap forward as well. There is now full support for Commanding (Say YAY for MVVM!), printing, webcam, microphone, mouse wheel and right clicking just to name a few. Silverlight 4 has firmly established itself as a RIA technology that can scale from basic vector based web animations, through to rich, highly interactive LOB systems. It’s definitely one technology I’m going to be adopting in this next release cycle.</p>
+
+<p>WCF has a few new quirks as well, particularly with the WCF RIA Services that Nicholas Goossens demonstrated in his session. Any data access technology – ADO.NET Entity Framework, LINQ-To-SQL or even non-Microsoft ORMs such as NHibernate can be used to easily exchange entities between Silverlight and a database using the WCF RIA Services. Validation and security support seem to be first class in this product as well with live validation occurring in the Silverlight client. It’s a great complementing platform to the Silverlight platform, although it is by no means restricted to Silverlight.</p>
+
+<p><a href="http://bartdesmet.net/blogs/">Bart De Smet</a> presented the Reactive Extensions for .NET (Rx) in the last session of the day. Rx, as Bart explains, is IEnumerable<T> turned upside down. Instead of the pull architecture of MoveNext() and Current that IEnumerable provides, Rx implements an IObservable<T> pattern that **pushes** to an IObserver<T>.OnNext(T). They’ve even got some adapters in place to transform an IEnumerable<T> pattern into an IObservable<T> pattern. There are some fantastic things in Rx that simplify asynchronous programming and multi-threaded composition. I’m going to be learning more about these in the next while so expect a blog post or two along the way ;).</T></T></T></T></T></p>
+
+<p>Looking back, it was a fantastic event to attend. The speakers were all well prepared and very knowledgeable of their subjects. The day’s content was focused enough to get the message across, yet broad enough to keep everyone interested. Oh and the greatest plea of the developers was covered, thanks Microsoft for catering better coffee than at Tech Ed last year!</p>
+
+<p>I would have liked to see a larger sponsor’s presence, there were a few stands up but there wasn’t really a focused attempt from any of the sponsors to get their name out to the developers. It’s a place where some of Microsoft’s Partner ISVs can get some great exposure.</p>
+
+<p>That said, I did pick up a couple of great books from InterSoft with their on-show discount :)</p>
+
+<p>Many thanks to all who made this year’s show possible. It’s really encouraged me to get more involved with the thriving developer community in South Africa. I’m already looking forward to next year’s one.</p>
+
+
+      </main>
+
+      <footer class="site-footer">Copyright <span class="copyright">&copy;</span> Kevin McKelvin 2024</footer>
+
+    </div>
+
+  </body>
+</html>

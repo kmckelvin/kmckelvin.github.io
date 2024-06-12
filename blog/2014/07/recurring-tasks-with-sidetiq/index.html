@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Recurring Tasks With Sidetiq | Kevin McKelvin</title>
+
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="/_bridgetown/static/index.NAKFUDFN.css" />
+<script src="/_bridgetown/static/index.KN36LEOD.js" defer></script>
+<script type="module">let lastmod = 0
+function startReloadConnection() {
+  const evtSource = new EventSource("/_bridgetown/live_reload")
+  evtSource.onmessage = event => {
+    if (document.querySelector("#bridgetown-build-error")) document.querySelector("#bridgetown-build-error").close()
+    if (event.data == "reloaded!") {
+      location.reload()
+    } else {
+      const newmod = Number(event.data)
+      if (lastmod > 0 && newmod > 0 && lastmod < newmod) {
+        location.reload()
+      } else {
+        lastmod = newmod
+      }
+    }
+  }
+  evtSource.addEventListener("builderror", event => {
+    let dialog = document.querySelector("#bridgetown-build-error")
+    if (!dialog) {
+      dialog = document.createElement("dialog")
+      dialog.id = "bridgetown-build-error"
+      dialog.style.borderColor = "red"
+      dialog.style.fontSize = "110%"
+      dialog.innerHTML = `
+        <p style="color:red">There was an error when building the site:</p>
+        <output><pre></pre></output>
+        <p><small>Check your Bridgetown logs for further details.</small></p>
+      `
+      document.body.appendChild(dialog)
+      dialog.showModal()
+    }
+    dialog.querySelector("pre").textContent = JSON.parse(event.data)
+  })
+  evtSource.onerror = event => {
+    if (evtSource.readyState === 2) {
+      // reconnect with new object
+      evtSource.close()
+      console.warn("Live reload: attempting to reconnect in 3 seconds...")
+
+      setTimeout(() => startReloadConnection(), 3000)
+    }
+  }
+}
+setTimeout(() => {
+  startReloadConnection()
+}, 500)
+</script>
+<!-- Begin Bridgetown SEO tag v6.0.0 -->
+<title>Recurring Tasks With Sidetiq | Kevin McKelvin</title>
+<meta property="og:title" content="Recurring Tasks With Sidetiq" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://kmckelvin.com/blog/2014/07/recurring-tasks-with-sidetiq/" />
+<meta property="og:url" content="https://kmckelvin.com/blog/2014/07/recurring-tasks-with-sidetiq/" />
+<meta property="og:site_name" content="Kevin McKelvin" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2014-07-07T00:00:00+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Recurring Tasks With Sidetiq" />
+<!-- End Bridgetown SEO tag -->
+
+
+  </head>
+  <body class="post ">
+    <div class="page-content">
+      <header class="site-header">
+  <a href="/">
+    <div class="site-header-content">
+      <img src="/images/profile.jpg" class="site-header-content__avatar">
+      <div>
+        <div class="site-header-content__title">Kevin McKelvin</div>
+        <div class="site-header-content__subtitle">Software developer, blogger, speaker, CTO</div>
+      </div>
+    </div>
+  </a>
+</header>
+
+<nav class="site-nav">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/posts">Posts</a></li>
+  </ul>
+</nav>
+
+
+
+      <main>
+        <h1>Recurring Tasks With Sidetiq</h1>
+<p class="published-at"> 7 July 2014</p>
+
+
+<p><strong>Update: Sidetiq is no longer maintained. I have used <a href="https://github.com/moove-it/sidekiq-scheduler">sidekiq-scheduler</a> in its place.</strong></p>
+
+<p>Software often relies on recurring scheduled tasks in order to function. From status checks, to billing runs, the UNIX cron daemon has regularly been trusted with this responsibility for decades now. Cron has performed the job admirably and we’ve managed to build some really interesting tools to manage our crontabs. <a href="https://github.com/javan/whenever">Whenever</a> is a really good example of building a Ruby DSL over cron.</p>
+
+<p>There’s an alternative approach however. If your application has a background worker - which in my experience is pretty much all Ruby web apps - you’ve got the opportunity to use your worker to run scheduled tasks. It’s a really good fit to the problem since it divorces your application’s execution from the server it’s running on. It becomes scalable across multiple servers by pulling scheduled jobs off a queue rather than having a single machine dedicated to running the scheduled tasks.</p>
+
+<p>The <a href="http://mperham.github.io/sidekiq/">Sidekiq</a> gem makes it easy to run a background job queue in Ruby. It’s as easy as adding the gem to your <code class="highlighter-rouge">Gemfile</code> and running the <code class="highlighter-rouge">sidekiq</code> executable.</p>
+
+<p>Sidekiq has a useful trick up its sleeve for running scheduled tasks. Given that you have a worker called <code class="highlighter-rouge">BillingWorker</code> you can queue it up to run at a given time using Sidekiq’s <code class="highlighter-rouge">perform_at</code> method.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">BillingWorker</span><span class="p">.</span><span class="nf">perform_at</span><span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="nf">day</span><span class="p">.</span><span class="nf">from_now</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>However this will only execute the job once.</p>
+
+<p><a href="https://github.com/tobiassvn/sidetiq">Sidetiq</a> is an addon to Sidekiq that allows for recurring jobs to be declared. I first came across it when reading the source code for Discourse, so it has earned its trust in the Ruby community.</p>
+
+<p>An example <code class="highlighter-rouge">BillingWorker</code> that runs daily in Sidetiq can be declared as follows</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">BillingWorker</span>
+  <span class="kp">include</span> <span class="no">Sidekiq</span><span class="o">::</span><span class="no">Worker</span>
+  <span class="kp">include</span> <span class="no">Sidetiq</span><span class="o">::</span><span class="no">Schedulable</span>
+
+  <span class="n">recurrence</span> <span class="p">{</span> <span class="n">daily</span> <span class="p">}</span>
+
+  <span class="k">def</span> <span class="nf">perform</span>
+  	<span class="c1"># implementation details...</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>Sidetiq will manage the schedule to run this task daily on one of your Sidekiq workers.</p>
+
+<p>There are a couple of gotchas with Sidetiq at the moment. Its dependency on <code class="highlighter-rouge">ice_cube</code> is known to cause a bit of a slow down in generating the recurrence schedule for a worker. Be sure to read up the wiki article on <a href="https://github.com/tobiassvn/sidetiq/wiki/Known-Issues">Known Issues</a> to avoid these pitfalls.</p>
+
+<p>Sidetiq also hooks into Sidekiq’s web dashboard. Installing it is as easy as adding <code class="highlighter-rouge">require 'sidetiq/web'</code> to the file that you’ve used to mount the Sidekiq::Web Rack app. It’s pretty useful to have this hooked in since it also lets you manually trigger the jobs if needed.</p>
+
+<p><strong>Sidetiq’s Web UI</strong>
+<img src="/images/sidekiq-web.jpg" alt="Sidetiq Web" /></p>
+
+<p>To make this work in Rails’ development mode you’ll need to set <code class="highlighter-rouge">config.eager_load = true</code> in your <code class="highlighter-rouge">development.rb</code>. It’s usually not an issue though.</p>
+
+<p>In my experience so far Sidetiq has been a far more elegant solution to the problem of recurring scheduled tasks than managing crontabs on cloud VMs, or using Heroku’s Scheduler addon.</p>
+
+
+      </main>
+
+      <footer class="site-footer">Copyright <span class="copyright">&copy;</span> Kevin McKelvin 2024</footer>
+
+    </div>
+
+  </body>
+</html>

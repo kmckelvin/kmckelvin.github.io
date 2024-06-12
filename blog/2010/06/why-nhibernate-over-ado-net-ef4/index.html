@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Why NHibernate over ADO.NET EF4? | Kevin McKelvin</title>
+
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="/_bridgetown/static/index.NAKFUDFN.css" />
+<script src="/_bridgetown/static/index.KN36LEOD.js" defer></script>
+<script type="module">let lastmod = 0
+function startReloadConnection() {
+  const evtSource = new EventSource("/_bridgetown/live_reload")
+  evtSource.onmessage = event => {
+    if (document.querySelector("#bridgetown-build-error")) document.querySelector("#bridgetown-build-error").close()
+    if (event.data == "reloaded!") {
+      location.reload()
+    } else {
+      const newmod = Number(event.data)
+      if (lastmod > 0 && newmod > 0 && lastmod < newmod) {
+        location.reload()
+      } else {
+        lastmod = newmod
+      }
+    }
+  }
+  evtSource.addEventListener("builderror", event => {
+    let dialog = document.querySelector("#bridgetown-build-error")
+    if (!dialog) {
+      dialog = document.createElement("dialog")
+      dialog.id = "bridgetown-build-error"
+      dialog.style.borderColor = "red"
+      dialog.style.fontSize = "110%"
+      dialog.innerHTML = `
+        <p style="color:red">There was an error when building the site:</p>
+        <output><pre></pre></output>
+        <p><small>Check your Bridgetown logs for further details.</small></p>
+      `
+      document.body.appendChild(dialog)
+      dialog.showModal()
+    }
+    dialog.querySelector("pre").textContent = JSON.parse(event.data)
+  })
+  evtSource.onerror = event => {
+    if (evtSource.readyState === 2) {
+      // reconnect with new object
+      evtSource.close()
+      console.warn("Live reload: attempting to reconnect in 3 seconds...")
+
+      setTimeout(() => startReloadConnection(), 3000)
+    }
+  }
+}
+setTimeout(() => {
+  startReloadConnection()
+}, 500)
+</script>
+<!-- Begin Bridgetown SEO tag v6.0.0 -->
+<title>Why NHibernate over ADO.NET EF4? | Kevin McKelvin</title>
+<meta property="og:title" content="Why NHibernate over ADO.NET EF4?" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://kmckelvin.com/blog/2010/06/why-nhibernate-over-ado-net-ef4/" />
+<meta property="og:url" content="https://kmckelvin.com/blog/2010/06/why-nhibernate-over-ado-net-ef4/" />
+<meta property="og:site_name" content="Kevin McKelvin" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2010-06-09T23:27:27+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Why NHibernate over ADO.NET EF4?" />
+<!-- End Bridgetown SEO tag -->
+
+
+  </head>
+  <body class="post ">
+    <div class="page-content">
+      <header class="site-header">
+  <a href="/">
+    <div class="site-header-content">
+      <img src="/images/profile.jpg" class="site-header-content__avatar">
+      <div>
+        <div class="site-header-content__title">Kevin McKelvin</div>
+        <div class="site-header-content__subtitle">Software developer, blogger, speaker, CTO</div>
+      </div>
+    </div>
+  </a>
+</header>
+
+<nav class="site-nav">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/posts">Posts</a></li>
+  </ul>
+</nav>
+
+
+
+      <main>
+        <h1>Why NHibernate over ADO.NET EF4?</h1>
+<p class="published-at"> 9 June 2010</p>
+
+
+<p>Recently we’ve accepted the notion that in all our future projects at Modelware, we’ll be using the NHibernate Object/Relational-Mapper for our data access and persistence.</p>
+
+<p>I had a few tweets asking what my reasons were for pushing NHibernate over ADO.NET EF4 (and I expect other ORMs like OpenAccess).</p>
+
+<p>Before we really look at my choice of NHibernate over ADO.NET EF4, lets just look at EF4’s strengths over NHibernate:</p>
+
+<ul>
+  <li>ADO.NET EF has a gentler learning curve.</li>
+  <li>Visual designer helps you to get rolling right “out-of-the-box.”</li>
+  <li>T4 Code generation for all entities.</li>
+  <li>A complete LINQ provider.</li>
+  <li>More complete and structured documentation in the MSDN Libraries.</li>
+</ul>
+
+<p>There’s no denying that NHibernate has a steeper learning curve than ADO.NET EF4. Mastering NHibernate is going to mean spending some disciplined hours reading documentation, watching screencasts and doing some practice projects.</p>
+
+<p>The visual designer for ADO.NET EF is great too, and the T4 code generation that comes bundled with it does a great job of getting the initial work done.</p>
+
+<p>However this is where my problem with ADO.NET EF4 comes in. Looking at all the points above, none of those give me an advantage over any other ORM while actually writing the code that will be handling persistent data. (Except perhaps the LINQ provider, but NHibernate’s LINQ provider is pretty decent these days too)</p>
+
+<p>My biggest gripe with ADO.NET EF4 is that your object context is a concrete type. Tightly coupling code to a concrete data layer isn’t my idea of fun, particularly when it comes to unit testing code independently from the database.</p>
+
+<p>If you want to unit test your code independently from the object context, you need to implement some kind of IRepository<T> pattern and mock your IRepositories where applicable in your tests.</T></p>
+
+<p>The argument for keeping your DAL separate from your application is usually along the lines of “what if I want to change my ORM one day?” - If you’re asking those kinds of questions then I suggest you go back to the project planning stage and define what technology will best suit your application up front. Locking your ORM up in the backroom behind layers of abstraction means losing a lot of the power available. With EF4, creating an abstraction layer is important for unit testing, but in NHibernateLand we have a fully abstracted query API right out of the box that’s a breeze to unit test and hold in an IoC container if you just follow the standard practices.</p>
+
+<p>The XML mappings are undeniably one of the less-loved features of NHibernate, however the developers have gone through a lot of effort to make them as easy to write as possible. Once you’ve done it a few times and you have the XSD files in your project for IntelliSense, they’re really a breeze to write and understand. The XML mappings expose a lot of nuts and bolts in the engine that EF4 doesn’t have available.</p>
+
+<p>NHibernate has a lot more options for reducing the number of remote calls we make to our database. Besides the options to do optional eager loading which are present in both NHibernate and ADO.NET EF4, NHibernate can batch multiple queries together for a single round trip to the database. This is easy to do using Futures or using the MultiCriteria/MultiQuery methods on the ISession and provides a great way of dealing with the SELECT N + 1 anti-pattern if eager loading the whole set is overkill.</p>
+
+<p>Whenever there’s something that needs to go beyond what the framework provides with ADO.NET EF4, you find yourself backed into a corner and finding workarounds because there simply is no extensibility model. NHibernate has more extension points than you could dare to shake a stick at and there are already open source extensions for most use cases. NHibernate.Search provides full text search indexing with Lucene.Net, NHibernate.Validator brings in attribute-based validation, NHibernate.Spatial lets you link the NetTopologySuite directly to your data with some simple xml mappings and NHibernate.Shards lets you query against multiple shards of your database.</p>
+
+<p>When NHibernate lacks a certain operation, it almost always has a way of letting us get into the engine and walk it through what it needs to do. A classic example I found is implementing an IUserType in NHibernate to let us hook up a polymorphic state pattern in our code and have our instantiation code in one unit-tested location.</p>
+
+<p>As an open-source ORM, any bugs that we do find in NH usually get resolved and implemented into the trunk very quickly. With EF any change would have to be included as part of a service pack or new release altogether which could mean anything from 6 months to 2 years before a change gets implemented in production code.</p>
+
+<p>NHibernate is also fully compliant with Mono and will work equally well under the .NET CLR or under the Mono framework on UNIX-based operating systems. ADO.NET EF4 will only work on the Microsoft implementation.</p>
+
+<p>Ayende Rahien’s NHProf is an invaluable tool for NHibernate users. While there is an EFProf, the alerts and warnings it gives and the options available to correct them are still limited by comparison to NHProf &amp; NHibernate. The quality of SQL code that gets built by NHibernate is top quality, and when I find something I’m not happy with it’s usually my own error.</p>
+
+<p>NHibernate has been around for a long time – a lot longer than EF has. As it has matured, some great developers have joined the community and the technology has proven itself over and over again in production code.</p>
+
+<p>Above those though, the one biggest reason that I will keep using and pushing NHibernate is that I really enjoy using the tool! Having broken through the initial learning curve and seeing the options opening up, I find it easier to get into the ‘groove’ when coding against NHibernate than any other ORM or DAL that I’ve used. I absolutely love it :)</p>
+
+
+      </main>
+
+      <footer class="site-footer">Copyright <span class="copyright">&copy;</span> Kevin McKelvin 2024</footer>
+
+    </div>
+
+  </body>
+</html>

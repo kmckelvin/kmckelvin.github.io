@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Enumerators in Ruby 1.9 | Kevin McKelvin</title>
+
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="/_bridgetown/static/index.NAKFUDFN.css" />
+<script src="/_bridgetown/static/index.KN36LEOD.js" defer></script>
+<script type="module">let lastmod = 0
+function startReloadConnection() {
+  const evtSource = new EventSource("/_bridgetown/live_reload")
+  evtSource.onmessage = event => {
+    if (document.querySelector("#bridgetown-build-error")) document.querySelector("#bridgetown-build-error").close()
+    if (event.data == "reloaded!") {
+      location.reload()
+    } else {
+      const newmod = Number(event.data)
+      if (lastmod > 0 && newmod > 0 && lastmod < newmod) {
+        location.reload()
+      } else {
+        lastmod = newmod
+      }
+    }
+  }
+  evtSource.addEventListener("builderror", event => {
+    let dialog = document.querySelector("#bridgetown-build-error")
+    if (!dialog) {
+      dialog = document.createElement("dialog")
+      dialog.id = "bridgetown-build-error"
+      dialog.style.borderColor = "red"
+      dialog.style.fontSize = "110%"
+      dialog.innerHTML = `
+        <p style="color:red">There was an error when building the site:</p>
+        <output><pre></pre></output>
+        <p><small>Check your Bridgetown logs for further details.</small></p>
+      `
+      document.body.appendChild(dialog)
+      dialog.showModal()
+    }
+    dialog.querySelector("pre").textContent = JSON.parse(event.data)
+  })
+  evtSource.onerror = event => {
+    if (evtSource.readyState === 2) {
+      // reconnect with new object
+      evtSource.close()
+      console.warn("Live reload: attempting to reconnect in 3 seconds...")
+
+      setTimeout(() => startReloadConnection(), 3000)
+    }
+  }
+}
+setTimeout(() => {
+  startReloadConnection()
+}, 500)
+</script>
+<!-- Begin Bridgetown SEO tag v6.0.0 -->
+<title>Enumerators in Ruby 1.9 | Kevin McKelvin</title>
+<meta property="og:title" content="Enumerators in Ruby 1.9" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://kmckelvin.com/blog/2013/08/lazy-enumeration-in-ruby-1-dot-9/" />
+<meta property="og:url" content="https://kmckelvin.com/blog/2013/08/lazy-enumeration-in-ruby-1-dot-9/" />
+<meta property="og:site_name" content="Kevin McKelvin" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2013-08-18T00:00:00+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Enumerators in Ruby 1.9" />
+<!-- End Bridgetown SEO tag -->
+
+
+  </head>
+  <body class="post ">
+    <div class="page-content">
+      <header class="site-header">
+  <a href="/">
+    <div class="site-header-content">
+      <img src="/images/profile.jpg" class="site-header-content__avatar">
+      <div>
+        <div class="site-header-content__title">Kevin McKelvin</div>
+        <div class="site-header-content__subtitle">Software developer, blogger, speaker, CTO</div>
+      </div>
+    </div>
+  </a>
+</header>
+
+<nav class="site-nav">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/posts">Posts</a></li>
+  </ul>
+</nav>
+
+
+
+      <main>
+        <h1>Enumerators in Ruby 1.9</h1>
+<p class="published-at">18 August 2013</p>
+
+
+<p>Lazy evaluation of enumerables is one of the most exciting new features in Ruby 2.0’s standard library. Changing the execution sequence of an enumeration pipeline to yield item by item is as easy as starting the enumeration chain with <code class="highlighter-rouge">lazy</code>.</p>
+
+<p>This type of lazy evaluation is the standard when working with <code class="highlighter-rouge">IEnumerable&lt;T&gt;</code> in the .NET space. It allows you to create a pipeline that can project from one data structure into another without needing to evaluate an entire stack of objects at a time. This is really useful when dealing with ETL tasks as you can work with one entry at a time instead of projecting an array of all entries at each step of the process. This gives tremendous efficiency when reading hundreds of thousands of entries in on one side of the pipeline, doing a few map/reduce transformations and saving the result of the transformation.</p>
+
+<p>While the Ruby 2.0 <code class="highlighter-rouge">Enumerable::Lazy</code> really brings Ruby up to that level of efficiency, there are ways of getting that behaviour in Ruby 1.9 using the Enumerator class.</p>
+
+<p>Consider this example:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">puts</span> <span class="no">RUBY_VERSION</span>
+
+<span class="n">en</span> <span class="o">=</span> <span class="no">Enumerator</span><span class="p">.</span><span class="nf">new</span> <span class="k">do</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span>
+  <span class="nb">puts</span> <span class="s2">"yielding a"</span>
+  <span class="n">e</span><span class="p">.</span><span class="nf">yield</span> <span class="s1">'a'</span>
+  <span class="nb">puts</span> <span class="s2">"yielding b"</span>
+  <span class="n">e</span><span class="p">.</span><span class="nf">yield</span> <span class="s1">'b'</span>
+  <span class="nb">puts</span> <span class="s2">"yielding c"</span>
+  <span class="n">e</span><span class="p">.</span><span class="nf">yield</span> <span class="s1">'c'</span>
+<span class="k">end</span>
+
+<span class="n">en</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span>
+  <span class="nb">puts</span> <span class="s2">"received </span><span class="si">#{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+<span class="c1"># &gt;&gt; 1.9.3</span>
+<span class="c1"># &gt;&gt; yielding a</span>
+<span class="c1"># &gt;&gt; received a</span>
+<span class="c1"># &gt;&gt; yielding b</span>
+<span class="c1"># &gt;&gt; received b</span>
+<span class="c1"># &gt;&gt; yielding c</span>
+<span class="c1"># &gt;&gt; received c</span>
+</code></pre></div></div>
+
+<p>Yielding from the Enumerator will release execution to the consuming code for each entry, where as if you project the enumerator into an array first, you get a different execution order:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">puts</span> <span class="no">RUBY_VERSION</span>
+
+<span class="n">en</span> <span class="o">=</span> <span class="no">Enumerator</span><span class="p">.</span><span class="nf">new</span> <span class="k">do</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span>
+  <span class="nb">puts</span> <span class="s2">"yielding a"</span>
+  <span class="n">e</span><span class="p">.</span><span class="nf">yield</span> <span class="s1">'a'</span>
+  <span class="nb">puts</span> <span class="s2">"yielding b"</span>
+  <span class="n">e</span><span class="p">.</span><span class="nf">yield</span> <span class="s1">'b'</span>
+  <span class="nb">puts</span> <span class="s2">"yielding c"</span>
+  <span class="n">e</span><span class="p">.</span><span class="nf">yield</span> <span class="s1">'c'</span>
+<span class="k">end</span>
+
+<span class="n">en</span><span class="p">.</span><span class="nf">to_a</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">e</span><span class="o">|</span>
+  <span class="nb">puts</span> <span class="s2">"received </span><span class="si">#{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+<span class="c1"># &gt;&gt; 1.9.3</span>
+<span class="c1"># &gt;&gt; yielding a</span>
+<span class="c1"># &gt;&gt; yielding b</span>
+<span class="c1"># &gt;&gt; yielding c</span>
+<span class="c1"># &gt;&gt; received a</span>
+<span class="c1"># &gt;&gt; received b</span>
+<span class="c1"># &gt;&gt; received c</span>
+</code></pre></div></div>
+
+<p>It’s a subtle difference, but yields extreme power (pun intended ;)).</p>
+
+
+      </main>
+
+      <footer class="site-footer">Copyright <span class="copyright">&copy;</span> Kevin McKelvin 2024</footer>
+
+    </div>
+
+  </body>
+</html>

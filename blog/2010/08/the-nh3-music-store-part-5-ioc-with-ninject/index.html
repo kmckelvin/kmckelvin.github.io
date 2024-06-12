@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>The NHibernate 3 Music Store – IoC with Ninject – Part 5 | Kevin McKelvin</title>
+
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="/_bridgetown/static/index.NAKFUDFN.css" />
+<script src="/_bridgetown/static/index.KN36LEOD.js" defer></script>
+<script type="module">let lastmod = 0
+function startReloadConnection() {
+  const evtSource = new EventSource("/_bridgetown/live_reload")
+  evtSource.onmessage = event => {
+    if (document.querySelector("#bridgetown-build-error")) document.querySelector("#bridgetown-build-error").close()
+    if (event.data == "reloaded!") {
+      location.reload()
+    } else {
+      const newmod = Number(event.data)
+      if (lastmod > 0 && newmod > 0 && lastmod < newmod) {
+        location.reload()
+      } else {
+        lastmod = newmod
+      }
+    }
+  }
+  evtSource.addEventListener("builderror", event => {
+    let dialog = document.querySelector("#bridgetown-build-error")
+    if (!dialog) {
+      dialog = document.createElement("dialog")
+      dialog.id = "bridgetown-build-error"
+      dialog.style.borderColor = "red"
+      dialog.style.fontSize = "110%"
+      dialog.innerHTML = `
+        <p style="color:red">There was an error when building the site:</p>
+        <output><pre></pre></output>
+        <p><small>Check your Bridgetown logs for further details.</small></p>
+      `
+      document.body.appendChild(dialog)
+      dialog.showModal()
+    }
+    dialog.querySelector("pre").textContent = JSON.parse(event.data)
+  })
+  evtSource.onerror = event => {
+    if (evtSource.readyState === 2) {
+      // reconnect with new object
+      evtSource.close()
+      console.warn("Live reload: attempting to reconnect in 3 seconds...")
+
+      setTimeout(() => startReloadConnection(), 3000)
+    }
+  }
+}
+setTimeout(() => {
+  startReloadConnection()
+}, 500)
+</script>
+<!-- Begin Bridgetown SEO tag v6.0.0 -->
+<title>The NHibernate 3 Music Store – IoC with Ninject – Part 5 | Kevin McKelvin</title>
+<meta property="og:title" content="The NHibernate 3 Music Store – IoC with Ninject – Part 5" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://kmckelvin.com/blog/2010/08/the-nh3-music-store-part-5-ioc-with-ninject/" />
+<meta property="og:url" content="https://kmckelvin.com/blog/2010/08/the-nh3-music-store-part-5-ioc-with-ninject/" />
+<meta property="og:site_name" content="Kevin McKelvin" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2010-08-28T16:40:55+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="The NHibernate 3 Music Store – IoC with Ninject – Part 5" />
+<!-- End Bridgetown SEO tag -->
+
+
+  </head>
+  <body class="post ">
+    <div class="page-content">
+      <header class="site-header">
+  <a href="/">
+    <div class="site-header-content">
+      <img src="/images/profile.jpg" class="site-header-content__avatar">
+      <div>
+        <div class="site-header-content__title">Kevin McKelvin</div>
+        <div class="site-header-content__subtitle">Software developer, blogger, speaker, CTO</div>
+      </div>
+    </div>
+  </a>
+</header>
+
+<nav class="site-nav">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/posts">Posts</a></li>
+  </ul>
+</nav>
+
+
+
+      <main>
+        <h1>The NHibernate 3 Music Store – IoC with Ninject – Part 5</h1>
+<p class="published-at">28 August 2010</p>
+
+
+<p>At the end of the last post I was deciding whether to use IoC to manage my new dependency on an IMusicStoreContext. I could have made a call to the static MvcApplication.GetCurrentRequestContext(), but from an architectural point of view, that would be tightly coupling a class to another concrete resource – which is a bad design choice for testability, maintainability and malleability.</p>
+
+<p>To keep the code clean, I’m going to change things around a bit to use an IoC container. I’ve read about the Ninject.Web.Mvc project and I’d like to learn how to use it, so here we go :)</p>
+
+<p>I’ve downloaded and built the Ninject.Web.Mvc project, it’s now part of the lib folder in my project’s <a href="http://github.com/kmckelvin/nh3-musicstore">GitHub repo</a> as well.</p>
+
+<p>The Ninject MVC project provides a NinjectHttpApplication abstract class that we’ll inherit from instead of the System.Web.HttpApplication on our MvcApplication class. We’ll also override the CreateKernel() method on the NinjectHttpApplication.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">MvcApplication</span> <span class="p">:</span> <span class="n">NinjectHttpApplication</span>
+<span class="p">{</span>
+    <span class="p">...</span>
+    <span class="k">protected</span> <span class="k">override</span> <span class="n">IKernel</span> <span class="nf">CreateKernel</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">StandardKernel</span><span class="p">(</span><span class="k">new</span> <span class="nf">MusicStoreNinjectModule</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The Application_Start() method must be renamed to override the OnApplicationStarted method – or you can add an event binding to it in the constructor. The NinjectHttpApplication doesn’t execute the Application_Start method by default as the standard HttpApplication does.</p>
+
+<p>And we’ll create the MusicStoreNinjectModule to resolve our controllers and our IMusicStoreContext like this:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">MusicStoreNinjectModule</span> <span class="p">:</span> <span class="n">NinjectModule</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">Load</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">Bind</span><span class="p">&lt;</span><span class="n">AccountController</span><span class="p">&gt;().</span><span class="nf">ToSelf</span><span class="p">();</span>
+        <span class="n">Bind</span><span class="p">&lt;</span><span class="n">CheckoutController</span><span class="p">&gt;().</span><span class="nf">ToSelf</span><span class="p">();</span>
+        <span class="n">Bind</span><span class="p">&lt;</span><span class="n">HomeController</span><span class="p">&gt;().</span><span class="nf">ToSelf</span><span class="p">();</span>
+        <span class="n">Bind</span><span class="p">&lt;</span><span class="n">ShoppingCartController</span><span class="p">&gt;().</span><span class="nf">ToSelf</span><span class="p">();</span>
+        <span class="n">Bind</span><span class="p">&lt;</span><span class="n">StoreController</span><span class="p">&gt;().</span><span class="nf">ToSelf</span><span class="p">();</span>
+        <span class="n">Bind</span><span class="p">&lt;</span><span class="n">StoreManagerController</span><span class="p">&gt;().</span><span class="nf">ToSelf</span><span class="p">();</span>
+
+        <span class="c1">// This will be injected into our controller to give us access to our context</span>
+        <span class="c1">// without introducing a tight coupling to a static resource.</span>
+        <span class="n">Bind</span><span class="p">&lt;</span><span class="n">IMusicStoreContext</span><span class="p">&gt;().</span><span class="nf">ToMethod</span><span class="p">(</span><span class="n">c</span> <span class="p">=&gt;</span> <span class="n">MvcApplication</span><span class="p">.</span><span class="nf">GetCurrentRequestContext</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>That means I can now add a constructor to each of our controllers that accepts an IMusicStoreContext and our controller will always receive a context object that’s built for the active request.</p>
+
+<p>Neat :) Again, the code’s all on <a href="http://github.com/kmckelvin/NH3-MusicStore">GitHub</a>.</p>
+
+
+      </main>
+
+      <footer class="site-footer">Copyright <span class="copyright">&copy;</span> Kevin McKelvin 2024</footer>
+
+    </div>
+
+  </body>
+</html>

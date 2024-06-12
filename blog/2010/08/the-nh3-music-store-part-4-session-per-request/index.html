@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>The NHibernate 3 Music Store – Session per Request – Part 4 | Kevin McKelvin</title>
+
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="/_bridgetown/static/index.NAKFUDFN.css" />
+<script src="/_bridgetown/static/index.KN36LEOD.js" defer></script>
+<script type="module">let lastmod = 0
+function startReloadConnection() {
+  const evtSource = new EventSource("/_bridgetown/live_reload")
+  evtSource.onmessage = event => {
+    if (document.querySelector("#bridgetown-build-error")) document.querySelector("#bridgetown-build-error").close()
+    if (event.data == "reloaded!") {
+      location.reload()
+    } else {
+      const newmod = Number(event.data)
+      if (lastmod > 0 && newmod > 0 && lastmod < newmod) {
+        location.reload()
+      } else {
+        lastmod = newmod
+      }
+    }
+  }
+  evtSource.addEventListener("builderror", event => {
+    let dialog = document.querySelector("#bridgetown-build-error")
+    if (!dialog) {
+      dialog = document.createElement("dialog")
+      dialog.id = "bridgetown-build-error"
+      dialog.style.borderColor = "red"
+      dialog.style.fontSize = "110%"
+      dialog.innerHTML = `
+        <p style="color:red">There was an error when building the site:</p>
+        <output><pre></pre></output>
+        <p><small>Check your Bridgetown logs for further details.</small></p>
+      `
+      document.body.appendChild(dialog)
+      dialog.showModal()
+    }
+    dialog.querySelector("pre").textContent = JSON.parse(event.data)
+  })
+  evtSource.onerror = event => {
+    if (evtSource.readyState === 2) {
+      // reconnect with new object
+      evtSource.close()
+      console.warn("Live reload: attempting to reconnect in 3 seconds...")
+
+      setTimeout(() => startReloadConnection(), 3000)
+    }
+  }
+}
+setTimeout(() => {
+  startReloadConnection()
+}, 500)
+</script>
+<!-- Begin Bridgetown SEO tag v6.0.0 -->
+<title>The NHibernate 3 Music Store – Session per Request – Part 4 | Kevin McKelvin</title>
+<meta property="og:title" content="The NHibernate 3 Music Store – Session per Request – Part 4" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://kmckelvin.com/blog/2010/08/the-nh3-music-store-part-4-session-per-request/" />
+<meta property="og:url" content="https://kmckelvin.com/blog/2010/08/the-nh3-music-store-part-4-session-per-request/" />
+<meta property="og:site_name" content="Kevin McKelvin" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2010-08-28T14:11:28+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="The NHibernate 3 Music Store – Session per Request – Part 4" />
+<!-- End Bridgetown SEO tag -->
+
+
+  </head>
+  <body class="post ">
+    <div class="page-content">
+      <header class="site-header">
+  <a href="/">
+    <div class="site-header-content">
+      <img src="/images/profile.jpg" class="site-header-content__avatar">
+      <div>
+        <div class="site-header-content__title">Kevin McKelvin</div>
+        <div class="site-header-content__subtitle">Software developer, blogger, speaker, CTO</div>
+      </div>
+    </div>
+  </a>
+</header>
+
+<nav class="site-nav">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/posts">Posts</a></li>
+  </ul>
+</nav>
+
+
+
+      <main>
+        <h1>The NHibernate 3 Music Store – Session per Request – Part 4</h1>
+<p class="published-at">28 August 2010</p>
+
+
+<p>I started looking at the controllers in the Music Store application and pretty quickly realised that before I could really do much there, I needed to have my IMusicStoreContext available. This meant I need an ISession from NHibernate.</p>
+
+<p>The accepted way of using NHibernate is to use a pattern known as “Session per request” – where at the beginning of a request we bind a session to the CurrentSessionContext – then unbind it at the end of the request.</p>
+
+<p>Before we can do that however, we need an ISessionFactory. This is the single entry point to NHibernate. It’s an expensive operation to create an ISessionFactory, but you only do it once.</p>
+
+<p>In keeping with NHibernate 3, I’m going to use the new Loquacious API to configure my ISessionFactory. This goes in the MvcApplication class:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="k">static</span> <span class="n">ISessionFactory</span> <span class="n">SessionFactory</span> <span class="p">=</span> <span class="nf">CreateSessionFactory</span><span class="p">();</span>
+
+<span class="k">private</span> <span class="k">static</span> <span class="n">ISessionFactory</span> <span class="nf">CreateSessionFactory</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">var</span> <span class="n">config</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Configuration</span><span class="p">();</span>
+
+    <span class="n">config</span><span class="p">.</span><span class="nf">DataBaseIntegration</span><span class="p">(</span>
+        <span class="n">db</span> <span class="p">=&gt;</span>
+            <span class="p">{</span>
+                <span class="n">db</span><span class="p">.</span><span class="n">ConnectionStringName</span> <span class="p">=</span> <span class="s">"MusicStoreConnection"</span><span class="p">,</span>
+                <span class="n">db</span><span class="p">.</span><span class="n">Dialect</span><span class="p">&lt;</span><span class="n">MsSql2005Dialect</span><span class="p">&gt;();</span>
+            <span class="p">})</span>
+        <span class="p">.</span><span class="nf">Proxy</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">ProxyFactoryFactory</span><span class="p">&lt;</span><span class="n">ProxyFactoryFactory</span><span class="p">&gt;())</span>
+        <span class="p">.</span><span class="nf">AddAssembly</span><span class="p">(</span><span class="k">typeof</span> <span class="p">(</span><span class="n">Album</span><span class="p">).</span><span class="n">Assembly</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">config</span><span class="p">.</span><span class="nf">BuildSessionFactory</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>I won’t be using the ISession directly in my code, I’ll now implement my IMusicStoreContext and use one of those per session / per request.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">MusicStoreContext</span> <span class="p">:</span> <span class="n">IMusicStoreContext</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">readonly</span> <span class="n">ISession</span> <span class="n">_currentSession</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="nf">MusicStoreContext</span><span class="p">(</span><span class="n">ISession</span> <span class="n">currentSession</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">_currentSession</span> <span class="p">=</span> <span class="n">currentSession</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="n">ISession</span> <span class="n">Session</span>
+    <span class="p">{</span>
+        <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_currentSession</span><span class="p">;</span> <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="n">IQueryable</span><span class="p">&lt;</span><span class="n">Album</span><span class="p">&gt;</span> <span class="n">Albums</span>
+    <span class="p">{</span>
+        <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_currentSession</span><span class="p">.</span><span class="n">Query</span><span class="p">&lt;</span><span class="n">Album</span><span class="p">&gt;();</span> <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="n">IQueryable</span><span class="p">&lt;</span><span class="n">Artist</span><span class="p">&gt;</span> <span class="n">Artists</span>
+    <span class="p">{</span>
+        <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_currentSession</span><span class="p">.</span><span class="n">Query</span><span class="p">&lt;</span><span class="n">Artist</span><span class="p">&gt;();</span> <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="n">IQueryable</span><span class="p">&lt;</span><span class="n">Cart</span><span class="p">&gt;</span> <span class="n">Carts</span>
+    <span class="p">{</span>
+        <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_currentSession</span><span class="p">.</span><span class="n">Query</span><span class="p">&lt;</span><span class="n">Cart</span><span class="p">&gt;();</span> <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="n">IQueryable</span><span class="p">&lt;</span><span class="n">Genre</span><span class="p">&gt;</span> <span class="n">Genres</span>
+    <span class="p">{</span>
+        <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_currentSession</span><span class="p">.</span><span class="n">Query</span><span class="p">&lt;</span><span class="n">Genre</span><span class="p">&gt;();</span> <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="n">IQueryable</span><span class="p">&lt;</span><span class="n">Order</span><span class="p">&gt;</span> <span class="n">Orders</span>
+    <span class="p">{</span>
+        <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_currentSession</span><span class="p">.</span><span class="n">Query</span><span class="p">&lt;</span><span class="n">Order</span><span class="p">&gt;();</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To create one of these per request, I simply create a new MusicStoreContext object that wraps the session for the request and expose it as a public static method on MvcApplication.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="n">IMusicStoreContext</span> <span class="nf">GetCurrentRequestContext</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// get the ISession bound to the current request</span>
+    <span class="kt">var</span> <span class="n">currentSession</span> <span class="p">=</span> <span class="n">SessionFactory</span><span class="p">.</span><span class="nf">GetCurrentSession</span><span class="p">();</span>
+
+    <span class="c1">// build a context object to wrap it</span>
+    <span class="kt">var</span> <span class="n">context</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">MusicStoreContext</span><span class="p">(</span><span class="n">currentSession</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">context</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>And from here I have an NHibernate session available to my controllers, per request! I’m still deciding whether I should change things around to do some IoC or not, StructureMap really makes this kind of stuff easy without referring to a static method and tightly coupling a controller to the MvcApplication. The other way might be to use a custom controller loader – but that’s a discussion for another post.</p>
+
+
+      </main>
+
+      <footer class="site-footer">Copyright <span class="copyright">&copy;</span> Kevin McKelvin 2024</footer>
+
+    </div>
+
+  </body>
+</html>

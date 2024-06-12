@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>NHibernate XML Mappings – Part 1 (The Domain Model) | Kevin McKelvin</title>
+
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="/_bridgetown/static/index.NAKFUDFN.css" />
+<script src="/_bridgetown/static/index.KN36LEOD.js" defer></script>
+<script type="module">let lastmod = 0
+function startReloadConnection() {
+  const evtSource = new EventSource("/_bridgetown/live_reload")
+  evtSource.onmessage = event => {
+    if (document.querySelector("#bridgetown-build-error")) document.querySelector("#bridgetown-build-error").close()
+    if (event.data == "reloaded!") {
+      location.reload()
+    } else {
+      const newmod = Number(event.data)
+      if (lastmod > 0 && newmod > 0 && lastmod < newmod) {
+        location.reload()
+      } else {
+        lastmod = newmod
+      }
+    }
+  }
+  evtSource.addEventListener("builderror", event => {
+    let dialog = document.querySelector("#bridgetown-build-error")
+    if (!dialog) {
+      dialog = document.createElement("dialog")
+      dialog.id = "bridgetown-build-error"
+      dialog.style.borderColor = "red"
+      dialog.style.fontSize = "110%"
+      dialog.innerHTML = `
+        <p style="color:red">There was an error when building the site:</p>
+        <output><pre></pre></output>
+        <p><small>Check your Bridgetown logs for further details.</small></p>
+      `
+      document.body.appendChild(dialog)
+      dialog.showModal()
+    }
+    dialog.querySelector("pre").textContent = JSON.parse(event.data)
+  })
+  evtSource.onerror = event => {
+    if (evtSource.readyState === 2) {
+      // reconnect with new object
+      evtSource.close()
+      console.warn("Live reload: attempting to reconnect in 3 seconds...")
+
+      setTimeout(() => startReloadConnection(), 3000)
+    }
+  }
+}
+setTimeout(() => {
+  startReloadConnection()
+}, 500)
+</script>
+<!-- Begin Bridgetown SEO tag v6.0.0 -->
+<title>NHibernate XML Mappings – Part 1 (The Domain Model) | Kevin McKelvin</title>
+<meta property="og:title" content="NHibernate XML Mappings – Part 1 (The Domain Model)" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://kmckelvin.com/blog/2010/06/nhibernate-xml-mappings-part-1-the-domain-model/" />
+<meta property="og:url" content="https://kmckelvin.com/blog/2010/06/nhibernate-xml-mappings-part-1-the-domain-model/" />
+<meta property="og:site_name" content="Kevin McKelvin" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2010-06-13T15:08:28+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="NHibernate XML Mappings – Part 1 (The Domain Model)" />
+<!-- End Bridgetown SEO tag -->
+
+
+  </head>
+  <body class="post ">
+    <div class="page-content">
+      <header class="site-header">
+  <a href="/">
+    <div class="site-header-content">
+      <img src="/images/profile.jpg" class="site-header-content__avatar">
+      <div>
+        <div class="site-header-content__title">Kevin McKelvin</div>
+        <div class="site-header-content__subtitle">Software developer, blogger, speaker, CTO</div>
+      </div>
+    </div>
+  </a>
+</header>
+
+<nav class="site-nav">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/posts">Posts</a></li>
+  </ul>
+</nav>
+
+
+
+      <main>
+        <h1>NHibernate XML Mappings – Part 1 (The Domain Model)</h1>
+<p class="published-at">13 June 2010</p>
+
+
+<p>XML mappings is one of the first things newcomers to NHibernate struggle with. What’s more I’ve found most of the documentation around goes into far more detail than is typically required to get mappings built.</p>
+
+<p>In these posts I’ll go through the basics of mapping out a basic data schema in NHibernate. I don’t intend to cover all the advanced details of mapping, just enough to get you going.</p>
+
+<h3 id="the-schema">The Schema</h3>
+
+<p>Let’s take our classic customers – products – orders environment and map them out using NHibernate.</p>
+
+<p><img src="/images/nhibernate-xml-mappings/image_thumb.png" alt="image" /></p>
+
+<p>In our diagram above we’ve got 4 tables with 3 relationships defined:</p>
+
+<ul>
+  <li>1 Customer to Many OrderMasters</li>
+  <li>1 OrderMaster to Many OrderDetails</li>
+  <li>1 Product to Many OrderDetails</li>
+</ul>
+
+<p>Now lets go map these into C# POCOs. In Visual Studio, add a Class Library to your solution and call it DomainModel.</p>
+
+<h3 id="the-domain">The Domain</h3>
+
+<p>First step is to define some POCOs to hold our data in our domain model. Create four classes as defined below:</p>
+
+<p><img src="/images/nhibernate-xml-mappings/image_thumb1.png" alt="image" />
+<img src="/images/nhibernate-xml-mappings/image_thumb2.png" alt="image" />
+<img src="/images/nhibernate-xml-mappings/image_thumb3.png" alt="image" />
+<img src="/images/nhibernate-xml-mappings/image_thumb4.png" alt="image" /></p>
+
+<p>Three key points about these POCOs.</p>
+
+<ul>
+  <li>All properties must be virtual for NHibernate’s lazy loading to work.</li>
+  <li>When mapping a 1-to-Many, it’s best to use an ICollection<T> when that collection might be written to in your code. If the collection won’t be changed, rather just use IEnumerable<T>.</T></T></li>
+  <li>I haven’t left any place for the Id columns here, NHibernate can bring them in, but doesn’t need them to be part of your object. When using NHibernate ORM we prefer to pass the actual object around.</li>
+</ul>
+
+<p>That’s it for part 1, our domain model is ready to roll. In part 2 we look at mapping our product class using a simple hbm.xml file.</p>
+
+
+      </main>
+
+      <footer class="site-footer">Copyright <span class="copyright">&copy;</span> Kevin McKelvin 2024</footer>
+
+    </div>
+
+  </body>
+</html>

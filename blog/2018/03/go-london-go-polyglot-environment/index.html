@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Presentation: Go London March 2018 – Go in a Polyglot Environment | Kevin McKelvin</title>
+
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="/_bridgetown/static/index.NAKFUDFN.css" />
+<script src="/_bridgetown/static/index.KN36LEOD.js" defer></script>
+<script type="module">let lastmod = 0
+function startReloadConnection() {
+  const evtSource = new EventSource("/_bridgetown/live_reload")
+  evtSource.onmessage = event => {
+    if (document.querySelector("#bridgetown-build-error")) document.querySelector("#bridgetown-build-error").close()
+    if (event.data == "reloaded!") {
+      location.reload()
+    } else {
+      const newmod = Number(event.data)
+      if (lastmod > 0 && newmod > 0 && lastmod < newmod) {
+        location.reload()
+      } else {
+        lastmod = newmod
+      }
+    }
+  }
+  evtSource.addEventListener("builderror", event => {
+    let dialog = document.querySelector("#bridgetown-build-error")
+    if (!dialog) {
+      dialog = document.createElement("dialog")
+      dialog.id = "bridgetown-build-error"
+      dialog.style.borderColor = "red"
+      dialog.style.fontSize = "110%"
+      dialog.innerHTML = `
+        <p style="color:red">There was an error when building the site:</p>
+        <output><pre></pre></output>
+        <p><small>Check your Bridgetown logs for further details.</small></p>
+      `
+      document.body.appendChild(dialog)
+      dialog.showModal()
+    }
+    dialog.querySelector("pre").textContent = JSON.parse(event.data)
+  })
+  evtSource.onerror = event => {
+    if (evtSource.readyState === 2) {
+      // reconnect with new object
+      evtSource.close()
+      console.warn("Live reload: attempting to reconnect in 3 seconds...")
+
+      setTimeout(() => startReloadConnection(), 3000)
+    }
+  }
+}
+setTimeout(() => {
+  startReloadConnection()
+}, 500)
+</script>
+<!-- Begin Bridgetown SEO tag v6.0.0 -->
+<title>Presentation: Go London March 2018 – Go in a Polyglot Environment | Kevin McKelvin</title>
+<meta property="og:title" content="Presentation: Go London March 2018 – Go in a Polyglot Environment" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://kmckelvin.com/blog/2018/03/go-london-go-polyglot-environment/" />
+<meta property="og:url" content="https://kmckelvin.com/blog/2018/03/go-london-go-polyglot-environment/" />
+<meta property="og:site_name" content="Kevin McKelvin" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-03-24T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Presentation: Go London March 2018 – Go in a Polyglot Environment" />
+<!-- End Bridgetown SEO tag -->
+
+
+  </head>
+  <body class="post ">
+    <div class="page-content">
+      <header class="site-header">
+  <a href="/">
+    <div class="site-header-content">
+      <img src="/images/profile.jpg" class="site-header-content__avatar">
+      <div>
+        <div class="site-header-content__title">Kevin McKelvin</div>
+        <div class="site-header-content__subtitle">Software developer, blogger, speaker, CTO</div>
+      </div>
+    </div>
+  </a>
+</header>
+
+<nav class="site-nav">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/posts">Posts</a></li>
+  </ul>
+</nav>
+
+
+
+      <main>
+        <h1>Presentation: Go London March 2018 – Go in a Polyglot Environment</h1>
+<p class="published-at">24 March 2018</p>
+
+
+<p>Last Wednesday (14 March 2018) I had the opportunity to speak at the <a href="https://www.meetup.com/Go-London-User-Group/">Go London
+User Group</a>. I told the story of
+how <a href="https://resourceguruapp.com">Resource Guru</a> started using Go to solve some severe performance problems we
+encountered while building our time-off management features.</p>
+
+<p>Go was an easy first additional language to add to our stack, and allowed us to
+smoothly transition from a Ruby-only service to a polyglot service oriented
+architecture. It’s been a fun journey!</p>
+
+<p><a href="https://docs.google.com/presentation/d/1RKKo5TxzgSijXeejiHeWlPLWcuBcqGsIvoJ-jg9Q6rY/edit?usp=sharing">Slides</a></p>
+
+<p><a href="https://www.youtube.com/watch?v=kWAxBhsEayk">Video</a></p>
+
+<p>Thanks to the folks at <a href="https://monzo.com">Monzo</a> for hosting the event, and to
+<a href="https://hazelcast.com">Hazelcast</a> for sponsoring food and drinks!</p>
+
+
+      </main>
+
+      <footer class="site-footer">Copyright <span class="copyright">&copy;</span> Kevin McKelvin 2024</footer>
+
+    </div>
+
+  </body>
+</html>

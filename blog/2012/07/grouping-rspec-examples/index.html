@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Executing subgroups of RSpec Examples | Kevin McKelvin</title>
+
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="/_bridgetown/static/index.NAKFUDFN.css" />
+<script src="/_bridgetown/static/index.KN36LEOD.js" defer></script>
+<script type="module">let lastmod = 0
+function startReloadConnection() {
+  const evtSource = new EventSource("/_bridgetown/live_reload")
+  evtSource.onmessage = event => {
+    if (document.querySelector("#bridgetown-build-error")) document.querySelector("#bridgetown-build-error").close()
+    if (event.data == "reloaded!") {
+      location.reload()
+    } else {
+      const newmod = Number(event.data)
+      if (lastmod > 0 && newmod > 0 && lastmod < newmod) {
+        location.reload()
+      } else {
+        lastmod = newmod
+      }
+    }
+  }
+  evtSource.addEventListener("builderror", event => {
+    let dialog = document.querySelector("#bridgetown-build-error")
+    if (!dialog) {
+      dialog = document.createElement("dialog")
+      dialog.id = "bridgetown-build-error"
+      dialog.style.borderColor = "red"
+      dialog.style.fontSize = "110%"
+      dialog.innerHTML = `
+        <p style="color:red">There was an error when building the site:</p>
+        <output><pre></pre></output>
+        <p><small>Check your Bridgetown logs for further details.</small></p>
+      `
+      document.body.appendChild(dialog)
+      dialog.showModal()
+    }
+    dialog.querySelector("pre").textContent = JSON.parse(event.data)
+  })
+  evtSource.onerror = event => {
+    if (evtSource.readyState === 2) {
+      // reconnect with new object
+      evtSource.close()
+      console.warn("Live reload: attempting to reconnect in 3 seconds...")
+
+      setTimeout(() => startReloadConnection(), 3000)
+    }
+  }
+}
+setTimeout(() => {
+  startReloadConnection()
+}, 500)
+</script>
+<!-- Begin Bridgetown SEO tag v6.0.0 -->
+<title>Executing subgroups of RSpec Examples | Kevin McKelvin</title>
+<meta property="og:title" content="Executing subgroups of RSpec Examples" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://kmckelvin.com/blog/2012/07/grouping-rspec-examples/" />
+<meta property="og:url" content="https://kmckelvin.com/blog/2012/07/grouping-rspec-examples/" />
+<meta property="og:site_name" content="Kevin McKelvin" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2012-07-26T00:00:00+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Executing subgroups of RSpec Examples" />
+<!-- End Bridgetown SEO tag -->
+
+
+  </head>
+  <body class="post ">
+    <div class="page-content">
+      <header class="site-header">
+  <a href="/">
+    <div class="site-header-content">
+      <img src="/images/profile.jpg" class="site-header-content__avatar">
+      <div>
+        <div class="site-header-content__title">Kevin McKelvin</div>
+        <div class="site-header-content__subtitle">Software developer, blogger, speaker, CTO</div>
+      </div>
+    </div>
+  </a>
+</header>
+
+<nav class="site-nav">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/posts">Posts</a></li>
+  </ul>
+</nav>
+
+
+
+      <main>
+        <h1>Executing subgroups of RSpec Examples</h1>
+<p class="published-at">26 July 2012</p>
+
+
+<p>When doing TDD it’s important to have a short feedback cycle. Fast tests aren’t just a nice-to-have, they’re an essential part of the cycle. If I have to wait 5 minutes to know whether my tests pass or fail, I’m naturally going to slack off on running them as often as I should. This breaks the red/green/refactor cycle.</p>
+
+<p>Rails integration tests using Capybara and Selenium are painfully slow to run every time your code changes. Thankfully RSpec has a <code class="highlighter-rouge">--tag</code> argument that can alleviate this pain.</p>
+
+<p>Any <code class="highlighter-rouge">describe</code>, <code class="highlighter-rouge">context</code> or <code class="highlighter-rouge">it</code> block can be tagged by passing a hash after the description. For example:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">describe</span> <span class="no">User</span><span class="p">,</span> <span class="ss">group: </span><span class="s1">'user'</span> <span class="k">do</span>
+  <span class="o">...</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>To run only the contents of specs tagged with <code class="highlighter-rouge">group: 'user'</code>, run RSpec with:
+<code class="highlighter-rouge">rspec spec --tag group:user</code></p>
+
+<p>Tags can be inflected to run everything <em>except</em> specs with a given tag by using the <code class="highlighter-rouge">~</code>. For example:
+<code class="highlighter-rouge">rspec spec --tag ~group:user</code></p>
+
+<h4 id="applying-this-to-rails">Applying this to Rails</h4>
+
+<p>Rails &amp; Capybara will automatically tag every spec in the <code class="highlighter-rouge">spec/requests</code> directory with <code class="highlighter-rouge">type: 'request'</code>. Capybara also uses the <code class="highlighter-rouge">js: true</code> tag to determine whether to run a headless test or to run the test through Selenium.</p>
+
+<p>Applying our knowledge about tags and the RSpec runner, you can run everything except the request specs by running:</p>
+
+<p><code class="highlighter-rouge">rspec spec --tag ~type:request</code></p>
+
+<p>Or you can just ignore the JavaScript specs that run inside a browser by running:
+<code class="highlighter-rouge">rspec spec --tag ~js:true</code></p>
+
+<p>Happy testing!</p>
+
+
+      </main>
+
+      <footer class="site-footer">Copyright <span class="copyright">&copy;</span> Kevin McKelvin 2024</footer>
+
+    </div>
+
+  </body>
+</html>

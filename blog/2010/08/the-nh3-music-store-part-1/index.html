@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>The NHibernate 3 Music Store – Part 1 | Kevin McKelvin</title>
+
+<meta name="description" content="" />
+
+<link rel="stylesheet" href="/_bridgetown/static/index.NAKFUDFN.css" />
+<script src="/_bridgetown/static/index.KN36LEOD.js" defer></script>
+<script type="module">let lastmod = 0
+function startReloadConnection() {
+  const evtSource = new EventSource("/_bridgetown/live_reload")
+  evtSource.onmessage = event => {
+    if (document.querySelector("#bridgetown-build-error")) document.querySelector("#bridgetown-build-error").close()
+    if (event.data == "reloaded!") {
+      location.reload()
+    } else {
+      const newmod = Number(event.data)
+      if (lastmod > 0 && newmod > 0 && lastmod < newmod) {
+        location.reload()
+      } else {
+        lastmod = newmod
+      }
+    }
+  }
+  evtSource.addEventListener("builderror", event => {
+    let dialog = document.querySelector("#bridgetown-build-error")
+    if (!dialog) {
+      dialog = document.createElement("dialog")
+      dialog.id = "bridgetown-build-error"
+      dialog.style.borderColor = "red"
+      dialog.style.fontSize = "110%"
+      dialog.innerHTML = `
+        <p style="color:red">There was an error when building the site:</p>
+        <output><pre></pre></output>
+        <p><small>Check your Bridgetown logs for further details.</small></p>
+      `
+      document.body.appendChild(dialog)
+      dialog.showModal()
+    }
+    dialog.querySelector("pre").textContent = JSON.parse(event.data)
+  })
+  evtSource.onerror = event => {
+    if (evtSource.readyState === 2) {
+      // reconnect with new object
+      evtSource.close()
+      console.warn("Live reload: attempting to reconnect in 3 seconds...")
+
+      setTimeout(() => startReloadConnection(), 3000)
+    }
+  }
+}
+setTimeout(() => {
+  startReloadConnection()
+}, 500)
+</script>
+<!-- Begin Bridgetown SEO tag v6.0.0 -->
+<title>The NHibernate 3 Music Store – Part 1 | Kevin McKelvin</title>
+<meta property="og:title" content="The NHibernate 3 Music Store – Part 1" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://kmckelvin.com/blog/2010/08/the-nh3-music-store-part-1/" />
+<meta property="og:url" content="https://kmckelvin.com/blog/2010/08/the-nh3-music-store-part-1/" />
+<meta property="og:site_name" content="Kevin McKelvin" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2010-08-28T01:41:14+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="The NHibernate 3 Music Store – Part 1" />
+<!-- End Bridgetown SEO tag -->
+
+
+  </head>
+  <body class="post ">
+    <div class="page-content">
+      <header class="site-header">
+  <a href="/">
+    <div class="site-header-content">
+      <img src="/images/profile.jpg" class="site-header-content__avatar">
+      <div>
+        <div class="site-header-content__title">Kevin McKelvin</div>
+        <div class="site-header-content__subtitle">Software developer, blogger, speaker, CTO</div>
+      </div>
+    </div>
+  </a>
+</header>
+
+<nav class="site-nav">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/posts">Posts</a></li>
+  </ul>
+</nav>
+
+
+
+      <main>
+        <h1>The NHibernate 3 Music Store – Part 1</h1>
+<p class="published-at">28 August 2010</p>
+
+
+<p>Ok so I’ve got the code up on Git, got the solution running in VS2008 again (I really need to get VS2010 some time…).</p>
+
+<p>First thing I’m going to do is delete the Models/StoreDB.edmx file which houses the ADO.NET EF4 Entities and object contexts.  Obviously this means that just about none of the code will compile, but that’s ok for now :)</p>
+
+<p><img src="/images/nh3-music-store/errors.jpg" alt="Errors" /></p>
+
+<p>This list will obviously get longer once I’ve created the POCOs for these entities and I have to start implementing the properties.</p>
+
+<h4 id="entities">Entities</h4>
+
+<p>There were three entities in the StoreDB.edmx:</p>
+
+<ul>
+  <li>Artist</li>
+  <li>Cart</li>
+  <li>Genre</li>
+</ul>
+
+<p>First up I need to build those out using POCOs.  My first objective is to get this to compile again, so I’m just going to create empty classes for now, the rest will come later.</p>
+
+<p>I will also need to build out the Album, Order and AccountModels entities later as at the moment they’re just being used to save metadata for EF4.</p>
+
+<h4 id="replacing-the-objectcontext">Replacing the ObjectContext</h4>
+
+<p>NHibernate is based on the ISession, rather than EF4’s concrete ObjectContexts.  Where the MVC Music Store uses MusicStoreEntities, I’m going to change that out with an interface – IMusicStoreContext.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">namespace</span> <span class="nn">MvcMusicStore.Models</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">interface</span> <span class="nc">IMusicStoreContext</span>
+    <span class="p">{</span>
+        <span class="n">ISession</span> <span class="n">Session</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+        <span class="n">IQueryable</span><span class="p">&lt;</span><span class="n">Album</span><span class="p">&gt;</span> <span class="n">Albums</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+        <span class="n">IQueryable</span><span class="p">&lt;</span><span class="n">Artist</span><span class="p">&gt;</span> <span class="n">Artists</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+        <span class="n">IQueryable</span><span class="p">&lt;</span><span class="n">Cart</span><span class="p">&gt;</span> <span class="n">Carts</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+        <span class="n">IQueryable</span><span class="p">&lt;</span><span class="n">Genre</span><span class="p">&gt;</span> <span class="n">Genres</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+        <span class="n">IQueryable</span><span class="p">&lt;</span><span class="n">Order</span><span class="p">&gt;</span> <span class="n">Orders</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>I don’t believe in locking the ORM behind layers of abstraction, when I build out a concrete implementation of the IMusicStoreContext I want to be able to address my NHibernate ISession directly if needed.  In most scenarios however, just exposing the IQueryable that’s now available in NH3 should suffice.</p>
+
+
+      </main>
+
+      <footer class="site-footer">Copyright <span class="copyright">&copy;</span> Kevin McKelvin 2024</footer>
+
+    </div>
+
+  </body>
+</html>
