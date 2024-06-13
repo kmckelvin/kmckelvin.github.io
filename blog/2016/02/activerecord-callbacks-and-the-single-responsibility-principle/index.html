@@ -101,7 +101,7 @@ setTimeout(() => {
 <p class="published-at">23 February 2016</p>
 
 
-<h3 id="persistence-models-arent-domain-models">Persistence models aren’t domain models</h3>
+<h2 id="persistence-models-arent-domain-models">Persistence models aren’t domain models</h2>
 
 <p>I’ve often toyed with the idea of writing a post titled “ActiveRecord callbacks considered harmful”, but always catch myself when I consider that the ActiveRecord default that sets the <code class="highlighter-rouge">created_at</code> and <code class="highlighter-rouge">updated_at</code> fields on a row before saving it is incredibly useful. It fascinates me that the same tool that allows us to intuitively trust that our timestamps are correct can also cause some of the most frustrating and time wasting debugging sessions a Ruby developer will ever encounter.</p>
 
@@ -145,7 +145,7 @@ setTimeout(() => {
 
 <p><a href="https://martinfowler.com/bliki/CommandQuerySeparation.html">CQS</a> suggests that we should separate methods that change the state of a system from methods that observe a system and return a result. Using these <code class="highlighter-rouge">before_save</code> callbacks has introduced a side-effect to calling <code class="highlighter-rouge">Post#save</code> that modifies the internal state of the object in place and isn’t immediately obvious in the context of the caller.</p>
 
-<h3 id="a-more-maintainable-alternative">A more maintainable alternative</h3>
+<h2 id="a-more-maintainable-alternative">A more maintainable alternative</h2>
 
 <p>While I’m happy to live with these callbacks for now, I think this could be better factored if we separate the domain logic from the persistence logic. The <code class="highlighter-rouge">Post</code> ActiveRecord model should ideally be devoid of any domain logic.</p>
 
@@ -212,7 +212,7 @@ setTimeout(() => {
 
 <p>In terms of object design we’ve moved the responsibility of Markdown compilation out of the <code class="highlighter-rouge">Post</code> class and given it a name in our domain. This has enabled us to extend the post creation to support other forms of input such as Textile without modifying the <code class="highlighter-rouge">Post</code> class. We can easily add support for as many formats as we’d like to now and the code that consumes Post objects will require no modification to support them.</p>
 
-<h3 id="dont-over-engineer-a-solution">Don’t over-engineer a solution</h3>
+<h2 id="dont-over-engineer-a-solution">Don’t over-engineer a solution</h2>
 
 <p>There’s a good reason the golden path in Rails is called the golden path. If you’re going to stray from it you need a good reason for it. I haven’t implemented things this way in my blog because it would have been completely over-engineered. But when trying to model a more complex domain than a simple blog post, where your presentation might not exclusively be on the web and creating an entity might involve more than just creating one row in a database (for example opening a new account with default settings), then keeping your persistence models as light as possible has clear advantages to me by minimising visible side-effects and following the SOLID principles of OO design more closely.</p>
 
