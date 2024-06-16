@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Neovim with LazyVim | Kevin McKelvin</title>
+<title>LazyVim – A productive Neovim distribution | Kevin McKelvin</title>
 
 <meta name="description" content="" />
 
@@ -59,8 +59,8 @@ setTimeout(() => {
 }, 500)
 </script>
 <!-- Begin Bridgetown SEO tag v6.0.0 -->
-<title>Neovim with LazyVim | Kevin McKelvin</title>
-<meta property="og:title" content="Neovim with LazyVim" />
+<title>LazyVim – A productive Neovim distribution | Kevin McKelvin</title>
+<meta property="og:title" content="LazyVim – A productive Neovim distribution" />
 <meta property="og:locale" content="en_US" />
 <link rel="canonical" href="https://kmckelvin.com/blog/2024/06/neovim-with-lazyvim/" />
 <meta property="og:url" content="https://kmckelvin.com/blog/2024/06/neovim-with-lazyvim/" />
@@ -68,7 +68,7 @@ setTimeout(() => {
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2024-06-16T00:00:00+01:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Neovim with LazyVim" />
+<meta property="twitter:title" content="LazyVim – A productive Neovim distribution" />
 <!-- End Bridgetown SEO tag -->
 
 
@@ -97,7 +97,7 @@ setTimeout(() => {
 
 
       <main>
-        <h1>Neovim with LazyVim</h1>
+        <h1>LazyVim – A productive Neovim distribution</h1>
 <p class="published-at">16 June 2024</p>
 
 
@@ -119,7 +119,7 @@ setTimeout(() => {
 
 <p>Fancy pairing a sauce with your meal? The chef has you covered. LazyVim has “extras” for common configurations that can be enabled separately. These include language specific configurations such as for Ruby, TypeScript or Go, but cohesive configurations for linting, snippets and refactoring. It’s worth enabling the appropriate extras for your workflow and learning their behaviour instead of trying to configure these yourself.</p>
 
-<p><img src="/images/neovim-lazyvim-extras.png" alt="LazyVim Extras" /></p>
+<p><img src="/images/neovim-lazyvim-extras.png" alt="LazyExtras" /></p>
 
 <h2 id="leaving-the-golden-path">Leaving the golden path</h2>
 
@@ -127,7 +127,7 @@ setTimeout(() => {
 
 <ul>
   <li>I’ve been using Tim Pope’s <a href="https://github.com/tpope/vim-fugitive">vim-fugitive</a> plugin with vim for well over a decade, and I often prefer to open vim to use fugitive instead of the git command line. I’ve switched out LazyGit to use Fugitive instead, and added <a href="https://github.com/tpope/vim-rhubarb">vim-rhubarb</a> for better integration with GitHub.</li>
-  <li>I prefer the default behavour of the <code class="highlighter-rouge">s</code> key so I’ve unbound it in folke/flash.nvim.</li>
+  <li>I prefer the default behaviour of the <code class="highlighter-rouge">s</code> key so I’ve unbound it in folke/flash.nvim.</li>
   <li>I like having inline git blame, and added the configuration to the gitsigns plugin.</li>
   <li>The keybindings in <code class="highlighter-rouge">kylechui/nvim-surround</code> work better in my mind than the LazyVim extra has configured</li>
 </ul>
@@ -135,6 +135,8 @@ setTimeout(() => {
 <h2 id="sticking-with-it">Sticking with it</h2>
 
 <p>I’ve been using my new LazyVim-based configuration on Ruby, Go and TypeScript codebases for a week now and I’m going to stick with it going forward. It’s been a long time since I’ve felt this excited about an editor, and for it to still be Neovim having used vim for over a decade is particularly satisfying. If you’ve tried using vim before, but felt the burden of learning vimscript or lua configure it wasn’t worthwhile, have a look at Neovim with LazyVim.</p>
+
+<p>When I’m coding I don’t want to be distracted by issues with my text editor. If Neovim gets in my way, I’d be better off using another tool. LazyVim with its Lazy Extras, show great promise as a stable baseline that I can sprinkle a small amount of custom settings over.</p>
 
 <p>If you’re looking for some inspiration, I’ve <a href="https://github.com/kmckelvin/lazy-nvimrc">pushed my configuration</a> to GitHub. The <code class="highlighter-rouge">lua/config</code> and <code class="highlighter-rouge">lua/plugins</code> contain the most interesting parts.</p>
 
