@@ -1,0 +1,14 @@
+<% posts_by_year = collections.posts.resources.group_by { |post| post.data.date.year } %>
+
+<div class="posts-list">
+  <% posts_by_year.to_a.sort_by { |year, _| -year }.each do |year, posts| %>
+    <h2><%= year %></h2>
+    <ul>
+      <% posts.each do |post| %>
+        <li>
+          <a href="<%= post.relative_url %>"><%= post.data.title %></a>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
