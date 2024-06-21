@@ -1,0 +1,826 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://bridgetownrb.com/" version="1.3.4">Bridgetown</generator><link href="https://kmckelvin.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://kmckelvin.com/" rel="alternate" type="text/html" /><updated>2024-06-21T13:30:31+01:00</updated><id>https://kmckelvin.com/feed.xml</id><title type="html">Kevin McKelvin</title><subtitle></subtitle><entry><title type="html">LazyVim – Stable Productivity with Neovim</title><link href="https://kmckelvin.com/blog/2024/06/lazyvim-stable-productivity-with-neovim/" rel="alternate" type="text/html" title="LazyVim – Stable Productivity with Neovim" /><published>2024-06-16T00:00:00+01:00</published><updated>2024-06-16T00:00:00+01:00</updated><id>repo://posts.collection/_posts/2024-06-16-lazyvim-stable-productivity-with-neovim.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2024/06/lazyvim-stable-productivity-with-neovim/">&lt;p&gt;The Rails community is familiar with the Japanese term Omakase, as used to describe the spirit of the Rails framework. It’s well covered in the &lt;a href=&quot;https://rubyonrails.org/doctrine#omakase&quot;&gt;Rails Doctrine&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;How do you know what to order in a restaurant when you don’t know what’s good? Well, if you let the chef choose, you can probably assume a good meal, even before you know what “good” is. That is omakase. A way to eat well that requires you neither be an expert in the cuisine nor blessed with blind luck at picking in the dark.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;That’s what &lt;a href=&quot;https://www.lazyvim.org/&quot;&gt;LazyVim&lt;/a&gt; brings to Neovim, courtesy of an expert chef. Having spent many hours honing a Neovim configuration to suit my taste, and tiring of the Sisyphean battle that comes with dealing with package updates that break parts of your configuration (that you only notice days or weeks after the breaking change), I was curious to see if this could alleviate some of these pain points.&lt;/p&gt;
+
+&lt;p&gt;LazyVim provides a base configuration of plugins, keymaps, and settings for Neovim that the author, Folke (or the chef to continue the Omakase analogy) has refined to work together cohesively. Folke is one of the stalwards of the Neovim community and has authored &lt;a href=&quot;https://github.com/folke?tab=repositories&amp;amp;q=%23neovim-plugin&quot;&gt;well over a dozen Neovim plugins&lt;/a&gt;. It’s incredibly liberating to pass the setup and maintenance responsibility of my Neovim configuration to someone who knows the ins and outs of it far better than I do, and who can keep that layer up to date over time.&lt;/p&gt;
+
+&lt;p&gt;I’ve &lt;a href=&quot;https://github.com/kmckelvin/nvimrc&quot;&gt;built my own&lt;/a&gt; Neovim configuration from scratch before, but took the plunge to build a new configuration on top of the LazyVim starter last week. After cloning the starter, and investing a little effort in learning some new patterns and migrating some settings, I was able to achieve a more refined, cohesive, and feature rich Neovim experience than my own configuration I crafted from scratch over years. It took a bit of time to rewire my brain around the new keymap mnemonics in LazyVim, but the reward was worth the pain.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/neovim-lazyvim.png&quot; alt=&quot;Neovim configured on top of LazyVim&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;the-optional-extras&quot;&gt;The optional extras&lt;/h2&gt;
+
+&lt;p&gt;Fancy pairing a sauce with your meal? The chef has you covered. LazyVim has “extras” for common configurations that can be enabled separately. These include language specific configurations such as for Ruby, TypeScript or Go, but cohesive configurations for linting, snippets and refactoring. It’s worth enabling the appropriate extras for your workflow and learning their behaviour instead of trying to configure these yourself.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/neovim-lazyvim-extras.png&quot; alt=&quot;LazyExtras&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;leaving-the-golden-path&quot;&gt;Leaving the golden path&lt;/h2&gt;
+
+&lt;p&gt;Not everything the chef prepares will be to the liking of every patron. There are a couple of changes I’ve made to LazyVim’s defaults:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;I’ve been using Tim Pope’s &lt;a href=&quot;https://github.com/tpope/vim-fugitive&quot;&gt;vim-fugitive&lt;/a&gt; plugin with vim for well over a decade, and I often prefer to open vim to use fugitive instead of the git command line. I’ve switched out LazyGit to use Fugitive instead, and added &lt;a href=&quot;https://github.com/tpope/vim-rhubarb&quot;&gt;vim-rhubarb&lt;/a&gt; for better integration with GitHub.&lt;/li&gt;
+  &lt;li&gt;I prefer the default behaviour of the &lt;code class=&quot;highlighter-rouge&quot;&gt;s&lt;/code&gt; key so I’ve unbound it in folke/flash.nvim.&lt;/li&gt;
+  &lt;li&gt;I like having inline git blame, and added the configuration to the gitsigns plugin.&lt;/li&gt;
+  &lt;li&gt;The keybindings in &lt;code class=&quot;highlighter-rouge&quot;&gt;kylechui/nvim-surround&lt;/code&gt; work better in my mind than the LazyVim extra has configured&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;sticking-with-it&quot;&gt;Sticking with it&lt;/h2&gt;
+
+&lt;p&gt;I’ve been using my new LazyVim-based configuration on Ruby, Go and TypeScript codebases for a week now and I’m going to stick with it going forward. It’s been a long time since I’ve felt this excited about an editor, and for it to still be Neovim having used vim for over a decade is particularly satisfying. If you’ve tried using vim before, but felt the burden of learning vimscript or lua configure it wasn’t worthwhile, have a look at Neovim with LazyVim.&lt;/p&gt;
+
+&lt;p&gt;When I’m coding I don’t want to be distracted by issues with my text editor. If Neovim gets in my way, I’d be better off using another tool. LazyVim with its Lazy Extras, show great promise as a stable baseline that I can sprinkle a small amount of custom settings over.&lt;/p&gt;
+
+&lt;p&gt;If you’re looking for some inspiration, I’ve &lt;a href=&quot;https://github.com/kmckelvin/lazy-nvimrc&quot;&gt;pushed my configuration&lt;/a&gt; to GitHub. The &lt;code class=&quot;highlighter-rouge&quot;&gt;lua/config&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;lua/plugins&lt;/code&gt; contain the most interesting parts.&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">Presentation: Docker at Golang North East April 2020</title><link href="https://kmckelvin.com/blog/2020/05/golang-north-east-docker-presentation/" rel="alternate" type="text/html" title="Presentation: Docker at Golang North East April 2020" /><published>2020-05-09T00:00:00+01:00</published><updated>2020-05-09T00:00:00+01:00</updated><id>repo://posts.collection/_posts/2020-05-09-golang-north-east-docker-presentation.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2020/05/golang-north-east-docker-presentation/">&lt;p&gt;I had the privilege to speak for the first &lt;strong&gt;online&lt;/strong&gt; &lt;a href=&quot;https://www.meetup.com/Golang-North-East/events/qtpnmqybcgblc/&quot;&gt;Golang North East&lt;/a&gt; meetup on 28 April 2020.&lt;/p&gt;
+
+&lt;p&gt;After a short introduction to Docker Images and Containers, I spoke about using Docker in development workflows and spent most of the time live coding and demonstrating how to build a simple Go web application that connected to Redis and ran together using &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;You can see the code from the talk can &lt;a href=&quot;https://github.com/kmckelvin/2020-04-golang-ne-docker-presentation&quot;&gt;on Github&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I enjoyed that we were able to still have a fairly informal presentation setting, where a lot of questions and answers could be voiced and conversations could be had. With the meetup being online, it was a bonus to be joined by Gophers from further afield in the UK, Europe and America. I hope to keep meeting other amazing developers and hearing their inspiring stories through these meetups for as long as social distancing is in place.&lt;/p&gt;
+
+&lt;p&gt;Thanks Roger Peppe and Nathan Davies for organising the meetup and for adapting to running the meetup online. If you’re interested in all things Go, we’ll be meeting online until social distancing restrictions are lifted to allow us to meet in person again. Join the &lt;a href=&quot;https://www.meetup.com/Golang-North-East&quot;&gt;group on meetup&lt;/a&gt;, or follow &lt;a href=&quot;https://twitter.com/golangnortheast&quot;&gt;@golangnortheast&lt;/a&gt; on twitter to get announcements.&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">Can Linux or Windows replace my macOS setup?</title><link href="https://kmckelvin.com/blog/2020/01/can-linux-or-windows-replace-my-macos-setup/" rel="alternate" type="text/html" title="Can Linux or Windows replace my macOS setup?" /><published>2020-01-05T00:00:00+00:00</published><updated>2020-01-05T00:00:00+00:00</updated><id>repo://posts.collection/_posts/2020-01-05-can-linux-or-windows-replace-my-macos-setup.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2020/01/can-linux-or-windows-replace-my-macos-setup/">&lt;p&gt;Late in 2018 I bought a Dell XPS15 laptop to run Ubuntu. My mid-2015 mid-range MacBook Pro was struggling to keep up with my workload. Apple’s line of MacBook Pro devices hadn’t appealed to me since the butterfly switch keyboard and the touch bar was incorporated in late 2015. The butterfly switch mechanism had such poor tactile feedback that you might as well have been typing on a solid piece of wood. The reported defect rate on the early models scared me away from the whole lineup.&lt;/p&gt;
+
+&lt;p&gt;The 2018 Dell XPS15 appeared to be a good option to run Linux. Many reviewers on YouTube called it the best Linux laptop of the year and given Dell sells a version of the laptop running Ubuntu, it seemed logical that it would be well supported. I used the Dell as my main laptop for over a year and here’s what I found:&lt;/p&gt;
+
+&lt;h2 id=&quot;linux&quot;&gt;Linux&lt;/h2&gt;
+
+&lt;p&gt;My first step was to install Ubuntu on the Dell. After flipping some UEFI settings in the system setup I had it up and running fairly quickly.&lt;/p&gt;
+
+&lt;p&gt;The development tooling for Rails, JavaScript and Go worked very well on Ubuntu. I pretty much just installed &lt;a href=&quot;https://github.com/rbenv/rbenv&quot;&gt;rbenv&lt;/a&gt; and &lt;a href=&quot;https://github.com/nvm-sh/nvm&quot;&gt;nvm&lt;/a&gt; and installed the latest versions of Ruby and Node. VS Code and the whole JetBrains suite of IDEs worked flawlessly. The 8th Gen i9 CPU left my old MacBook’s performance trailing a long way behind.&lt;/p&gt;
+
+&lt;p&gt;My problems came in the shape of missing software and “unpolished” edges.&lt;/p&gt;
+
+&lt;p&gt;I work with a fully remote team. We collaborate daily using screensharing. Linux’s screensharing options are very limited. Chrome and Firefox have a limitation that they can only share the entire desktop, not a single screen. This limitation extends to Electron apps too. Popular tools like Slack, Hangouts or Talky all have the same limitation. Given that I work on a multi-screen setup, I had to find workarounds, none of which were ever as good as just using Slack on macOS, or even better - using &lt;a href=&quot;https://tuple.app&quot;&gt;Tuple&lt;/a&gt;. While Skype on Linux could share a single screen, it didn’t have any annotation tools or ability for another person to control your computer.&lt;/p&gt;
+
+&lt;p&gt;Secondly, I use a full size Apple Magic Keyboard 2 with the XPS15. I love the feeling of Apple’s keyboards. I couldn’t find another full size chiclet keyboard out there that could compete with the Apple keyboards. I’m not a fan of mechanical keyboards, so my options were limited. The Apple keyboards are wireless (bluetooth), but work equally well plugged in using a lightning to USB cable on non-Mac PCs. The problem, however, is that the Super/Alt keys are ordered the opposite way around to the built in keyboard. To get around that on Linux I remapped the keys using the GNOME tweak tool, but couldn’t find a one-click/keystroke method of switching back when using the built in keyboard.&lt;/p&gt;
+
+&lt;h2 id=&quot;windows-10&quot;&gt;Windows 10&lt;/h2&gt;
+
+&lt;p&gt;In late October I decided Linux wasn’t working for me and decided to try Windows 10. Microsoft had done some interesting work with the &lt;a href=&quot;https://docs.microsoft.com/en-us/windows/wsl/about&quot;&gt;Windows Subsystem for Linux&lt;/a&gt;, and &lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl&quot;&gt;VS Code’s support for WSL&lt;/a&gt; meant you could run it on Windows and access the WSL file system as seamlessly as if you were running it as a Linux application. Windows solved my screensharing issue - it allowed me to share a single display without requiring any workarounds.&lt;/p&gt;
+
+&lt;p&gt;On Windows I could more easily remap my Super/Alt key when using an external keyboard by running a script in AutoHotKey, and disable it from the system tray.&lt;/p&gt;
+
+&lt;p&gt;The Dell XPS15’s battery life was noticeably better on Windows! I could comfortably work for 6 hours on battery alone, where I’d battle to get 3 hours on Linux even with several power management tweaks applied.&lt;/p&gt;
+
+&lt;p&gt;In general Windows was a marked improvement over Ubuntu.&lt;/p&gt;
+
+&lt;p&gt;Once again though, I ran into annoying, unpolished edges. Initially I used the Fast Ring of Windows Insiders to get WSL2 (it’s now available on the Slow Ring). One fateful morning Windows restarted to install updates, and never started up again. I couldn’t even get the Windows 10 Recovery tools to get it to boot, and had to reinstall.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/no_bootable_devices.jpg&quot; alt=&quot;No bootable devices were found&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;When the operating system was booting, I had similarly annoying issues:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/excel-error.png&quot; alt=&quot;Excel error&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The disk IO performance when accessing the Linux disk from a Windows application was a deal breaker. VS Code supported WSL2 via an extension that got around the issue, but Windows GUI applications like SourceTree were extremely slow when accessing repositories in WSL as they would go through a network share. This meant JetBrains’ IDEs weren’t an option either.&lt;/p&gt;
+
+&lt;p&gt;Compared to macOS, the operating system just didn’t feel consistent. Even GNOME on Linux seemed to be more coherent than Windows 10. It was a disappointing experience seeing Windows Forms applications with their grey backgrounds and buttons that hadn’t been given any attention since Windows XP. Some 256 colour icons made me think they had been overlooked since Windows 95!&lt;/p&gt;
+
+&lt;p&gt;The final issue was advertising. I can’t believe that after paying for a Windows 10 Pro licence, they still put adverts everywhere from the login screen to the start menu.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-return-to-macos&quot;&gt;The return to macOS&lt;/h2&gt;
+
+&lt;p&gt;In November 2019, the state of play changed again when Apple released a new 16” MacBook Pro. For the first time in 3 years I feel Apple has produced a genuinely pro-level product. The thermal issues are solved with improved airflow, the keyboard has a physical escape key again, and the screen bezel is smaller than ever with the 16” monitor. I tried a demo model at the Apple Store and loved the machine immediately. Mine should arrive in the next couple of weeks.&lt;/p&gt;
+
+&lt;p&gt;Living on Linux and Windows highlighted things I missed from macOS.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://kapeli.com/dash&quot;&gt;Dash&lt;/a&gt; for quick access to developer documentation&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.alfredapp.com/&quot;&gt;Alfred&lt;/a&gt; with the power pack
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://github.com/Kapeli/Dash-Alfred-Workflow&quot;&gt;Dash integration&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.alfredapp.com/help/features/clipboard/&quot;&gt;Clipboard history&lt;/a&gt; – it’s better than anything on either Linux or Windows&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.alfredapp.com/help/features/snippets/&quot;&gt;Snippets and Text Expansion&lt;/a&gt; – AutoHotKey on Windows and AutoKey on Linux offered similar functionality, but neither were as reliable&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://iterm2.com/&quot;&gt;iTerm&lt;/a&gt; – Linux’s terminal was just as good, but things in Windows still left much to be desired&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tuple.app/&quot;&gt;Tuple&lt;/a&gt; – A macOS-only screensharing tool with really low latency and high quality&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://support.apple.com/en-us/HT209460&quot;&gt;Universal clipboard between devices&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://support.apple.com/en-us/HT203106&quot;&gt;Airdrop&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Preview_(macOS)&quot;&gt;Preview&lt;/a&gt; – the image/document viewer that ships with macOS that can do basic PDF editing (slicing, signing forms, etc)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Homebrew_(package_management_software)&quot;&gt;Homebrew&lt;/a&gt; – although apt was pretty good, homebrew seems be more up to date with new releases without requiring 3rd party repositories&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;On the hardware side, I missed the quality of the MacBook Pro’s screen. The 500 nit retina display in the MacBook Pro is a thing of beauty. The quality of the speakers on the MacBook Pro gives it the versatility to be used as a speaker for the room. I always relied on headphones or a bluetooth speaker when using the Dell.&lt;/p&gt;
+
+&lt;p&gt;I subjectively found both Linux and Windows to require reboots more frequently than macOS, though none of the three are flawless in this area.&lt;/p&gt;
+
+&lt;p&gt;I believe I’ve given Linux and Windows a fair shot at replacing macOS as my daily driver in the last year, but with Apple upping their game with the 16” model I’m excited about getting back to macOS full time.&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">Presentation: Go London March 2018 – Go in a Polyglot Environment</title><link href="https://kmckelvin.com/blog/2018/03/go-london-go-polyglot-environment/" rel="alternate" type="text/html" title="Presentation: Go London March 2018 – Go in a Polyglot Environment" /><published>2018-03-24T00:00:00+00:00</published><updated>2018-03-24T00:00:00+00:00</updated><id>repo://posts.collection/_posts/2018-03-24-go-london-go-polyglot-environment.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2018/03/go-london-go-polyglot-environment/">&lt;p&gt;Last Wednesday (14 March 2018) I had the opportunity to speak at the &lt;a href=&quot;https://www.meetup.com/Go-London-User-Group/&quot;&gt;Go London
+User Group&lt;/a&gt;. I told the story of
+how &lt;a href=&quot;https://resourceguruapp.com&quot;&gt;Resource Guru&lt;/a&gt; started using Go to solve some severe performance problems we
+encountered while building our time-off management features.&lt;/p&gt;
+
+&lt;p&gt;Go was an easy first additional language to add to our stack, and allowed us to
+smoothly transition from a Ruby-only service to a polyglot service oriented
+architecture. It’s been a fun journey!&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.google.com/presentation/d/1RKKo5TxzgSijXeejiHeWlPLWcuBcqGsIvoJ-jg9Q6rY/edit?usp=sharing&quot;&gt;Slides&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=kWAxBhsEayk&quot;&gt;Video&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Thanks to the folks at &lt;a href=&quot;https://monzo.com&quot;&gt;Monzo&lt;/a&gt; for hosting the event, and to
+&lt;a href=&quot;https://hazelcast.com&quot;&gt;Hazelcast&lt;/a&gt; for sponsoring food and drinks!&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">ActiveRecord Callbacks and the Single Responsibility Principle</title><link href="https://kmckelvin.com/blog/2016/02/activerecord-callbacks-and-the-single-responsibility-principle/" rel="alternate" type="text/html" title="ActiveRecord Callbacks and the Single Responsibility Principle" /><published>2016-02-23T00:00:00+00:00</published><updated>2016-02-23T00:00:00+00:00</updated><id>repo://posts.collection/_posts/2016-02-23-activerecord-callbacks-and-the-single-responsibility-principle.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2016/02/activerecord-callbacks-and-the-single-responsibility-principle/">&lt;h2 id=&quot;persistence-models-arent-domain-models&quot;&gt;Persistence models aren’t domain models&lt;/h2&gt;
+
+&lt;p&gt;I’ve often toyed with the idea of writing a post titled “ActiveRecord callbacks considered harmful”, but always catch myself when I consider that the ActiveRecord default that sets the &lt;code class=&quot;highlighter-rouge&quot;&gt;created_at&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;updated_at&lt;/code&gt; fields on a row before saving it is incredibly useful. It fascinates me that the same tool that allows us to intuitively trust that our timestamps are correct can also cause some of the most frustrating and time wasting debugging sessions a Ruby developer will ever encounter.&lt;/p&gt;
+
+&lt;p&gt;Part of the problem with demonstrating why this can be a frustration is that it requires a non-trivial example. A trivial example with one or two callbacks typically doesn’t truly highlight the complexity introduced by callbacks that reach outside the scope of the observed object.&lt;/p&gt;
+
+&lt;p&gt;Martin Fowler &lt;a href=&quot;https://www.martinfowler.com/eaaCatalog/activeRecord.html&quot;&gt;describes an Active Record&lt;/a&gt; as “An object that wraps a row in a database table or view, encapsulates the database access, and adds domain logic on that data.”&lt;/p&gt;
+
+&lt;p&gt;The definition of the pattern directly violates the Single Responsibility Principle. A single object combines database access and domain logic in the same place, usually without any inversion of control. The pattern works very well when you have a simple domain (as we see in the 15 minute blog exercise) but leaves many important questions unanswered. For example, how should we deal with the entire set of rows in a table? What about a specific subset such as ‘activated users’? What about projections where we only deal with reading, but not writing data? Ignore these questions at your own peril when you’re trying to express a complex problem domain in terms of a relational database.&lt;/p&gt;
+
+&lt;p&gt;Fundamentally we have at least two distinct responsibilities here. The responsibility of managing persistence of values to a data store and the responsibility of the domain logic that applies to the data held by the object are completely orthogonal to each other - even if that domain logic results in database reads or writes. Herein lies my gripe with callbacks in Ruby’s ActiveRecord library: they provide a convenient place to do domain-logic processing at the point that data persistence is happening. Good object oriented design principles suggest that these responsibilities should be separated.&lt;/p&gt;
+
+&lt;p&gt;So why does the built-in hook that sets the &lt;code class=&quot;highlighter-rouge&quot;&gt;created_at&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;updated_at&lt;/code&gt; fields on a record on save work so well? I see those columns as stores for metadata specifically related to persistence. The only time these columns should be set is when creating or updating a record in the database and therefore the callback is the perfect place for the logic to sit that avoids duplication.&lt;/p&gt;
+
+&lt;p&gt;Let’s consider something a bit more concrete where callbacks seem to be an appropriate solution. In this blog’s Rails code I use a &lt;code class=&quot;highlighter-rouge&quot;&gt;before_save&lt;/code&gt; callback to generate the slug for a post and to precompile the HTML of the post’s body from Markdown.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;before_save&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:compile_markdown&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;before_save&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:generate_slug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;if: &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;slug&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;blank?&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;# ...&lt;/span&gt;
+
+  &lt;span class=&quot;kp&quot;&gt;private&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;compile_markdown&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compiler&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;MarkdownWithPygmentsCompiler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;processed_body&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;compiler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;generate_slug&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;slug&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;SlugGenerator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;generate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This allows me to write my blog posts in Markdown and have them cached as HTML in the database every time I save the record. Likewise I don’t need to set a specific slug on a post when I create it, as it will automatically be set based on the title if one hasn’t already been set. This is a convenient way of handling this logic but it has a few quirks I’d like to explore.&lt;/p&gt;
+
+&lt;p&gt;Firstly I can’t change the compiled HTML body of a post as any change will always be overwritten by the &lt;code class=&quot;highlighter-rouge&quot;&gt;compile_markdown&lt;/code&gt; call. I have a tight coupling to Markdown that can’t easily be changed to something like Textile without causing compilation errors when I update an old post (even if I don’t change the body at all!).&lt;/p&gt;
+
+&lt;p&gt;Secondly I could never create a post without a slug (perhaps to fall back on a database ID), or use a different algorithm to generate the slug without either overriding the &lt;code class=&quot;highlighter-rouge&quot;&gt;generate_slug&lt;/code&gt; private method or creating the &lt;code class=&quot;highlighter-rouge&quot;&gt;Post&lt;/code&gt; and setting the slug from outside of the object instance.&lt;/p&gt;
+
+&lt;p&gt;These two cases may seem trivial and in my case have worked fairly well, but tradeoffs must be considered. The full &lt;a href=&quot;https://github.com/kmckelvin/mcdev-rails/blob/2f863000c7e88031da19110053dda793cda2314e/app%2Fmodels%2Fpost.rb&quot;&gt;Post&lt;/a&gt; model is barely 30 lines long, neither of the callbacks have a side-effect that can affect the other callback. When a callback only looks at the object being saved without any reference to global state or values held by related objects, it seems to be manageable.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://martinfowler.com/bliki/CommandQuerySeparation.html&quot;&gt;CQS&lt;/a&gt; suggests that we should separate methods that change the state of a system from methods that observe a system and return a result. Using these &lt;code class=&quot;highlighter-rouge&quot;&gt;before_save&lt;/code&gt; callbacks has introduced a side-effect to calling &lt;code class=&quot;highlighter-rouge&quot;&gt;Post#save&lt;/code&gt; that modifies the internal state of the object in place and isn’t immediately obvious in the context of the caller.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-more-maintainable-alternative&quot;&gt;A more maintainable alternative&lt;/h2&gt;
+
+&lt;p&gt;While I’m happy to live with these callbacks for now, I think this could be better factored if we separate the domain logic from the persistence logic. The &lt;code class=&quot;highlighter-rouge&quot;&gt;Post&lt;/code&gt; ActiveRecord model should ideally be devoid of any domain logic.&lt;/p&gt;
+
+&lt;p&gt;Ivar Jacobsen in his book &lt;em&gt;Object Oriented Software Engineering: A Use Case Driven Approach&lt;/em&gt; suggests that we can model all user interactions with the system in terms of Use Cases. I’ve come to call them &lt;code class=&quot;highlighter-rouge&quot;&gt;interactions&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;interactors&lt;/code&gt;. An interaction will accept input in the form of a &lt;code class=&quot;highlighter-rouge&quot;&gt;form object&lt;/code&gt;, handle validations and transformations, and then use simple persistence models to make changes to the database.&lt;/p&gt;
+
+&lt;p&gt;Here’s how I’d restructure the creation of a post from Markdown (using the awesome Virtus gem to handle form objects).&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Forms::CreatePost&lt;/span&gt;
+  &lt;span class=&quot;kp&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Virtus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;model&lt;/span&gt;
+  &lt;span class=&quot;kp&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveModel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Validations&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;values&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;attribute&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:title&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;attribute&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:body&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;attribute&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:slug&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;validate&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:html_body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;presence: &lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Interactions::CreatePost&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;initialize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;form&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@form&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;form&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;raise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;InvalidFormError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;form&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;form&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;valid?&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;post&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;form&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;merge&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;html_body: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;form&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;post&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;block_given?&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;save!&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;kp&quot;&gt;private&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;attr_reader&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:form&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;One way of compiling from Markdown could be to inherit this Interaction and pass a block to the &lt;code class=&quot;highlighter-rouge&quot;&gt;run&lt;/code&gt; method on &lt;code class=&quot;highlighter-rouge&quot;&gt;Interactions::CreatePost&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Interactions::CreatePostFromMarkdown&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Interactions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;CreatePost&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;super&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;html_body&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;compile_markdown&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;form&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;kp&quot;&gt;private&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;compile_markdown&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;markdown&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compiler&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;MarkdownWithPygmentsCompiler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;compiler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;markdown&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;There’s definitely more code involved in doing it this way, but there are several advantages too. The domain logic is now separate from the ActiveRecord model, which can now be reduced to two lines of code:&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If I wanted to use Textile instead of Markdown I could simply implement a new Interaction and call into that for new posts. Both Markdown and Textile logic could safely coexist in the same code base without interfering with each other.&lt;/p&gt;
+
+&lt;p&gt;In terms of object design we’ve moved the responsibility of Markdown compilation out of the &lt;code class=&quot;highlighter-rouge&quot;&gt;Post&lt;/code&gt; class and given it a name in our domain. This has enabled us to extend the post creation to support other forms of input such as Textile without modifying the &lt;code class=&quot;highlighter-rouge&quot;&gt;Post&lt;/code&gt; class. We can easily add support for as many formats as we’d like to now and the code that consumes Post objects will require no modification to support them.&lt;/p&gt;
+
+&lt;h2 id=&quot;dont-over-engineer-a-solution&quot;&gt;Don’t over-engineer a solution&lt;/h2&gt;
+
+&lt;p&gt;There’s a good reason the golden path in Rails is called the golden path. If you’re going to stray from it you need a good reason for it. I haven’t implemented things this way in my blog because it would have been completely over-engineered. But when trying to model a more complex domain than a simple blog post, where your presentation might not exclusively be on the web and creating an entity might involve more than just creating one row in a database (for example opening a new account with default settings), then keeping your persistence models as light as possible has clear advantages to me by minimising visible side-effects and following the SOLID principles of OO design more closely.&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">Rubyfuza 2016</title><link href="https://kmckelvin.com/blog/2016/02/rubyfuza-2016/" rel="alternate" type="text/html" title="Rubyfuza 2016" /><published>2016-02-17T00:00:00+00:00</published><updated>2016-02-17T00:00:00+00:00</updated><id>repo://posts.collection/_posts/2016-02-17-rubyfuza-2016.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2016/02/rubyfuza-2016/">&lt;p&gt;The 2016 installation of the &lt;a href=&quot;http://www.rubyfuza.org&quot;&gt;Rubyfuza&lt;/a&gt; conference ran over 4-5 February 2016 at the President Hotel in Cape Town. Rubyfuza is Africa’s premier Ruby conference and is always one of the highlights of my year.&lt;/p&gt;
+
+&lt;p&gt;The President Hotel is the second venue change in as many years. It was a fantastic venue for a conference with the Truth Coffee stand (thanks Hetzner!) and hotel restaurant &amp;amp; pool being in really close proximity. It’s also the first year I’ve booked in at the conference hotel and it really makes logistics a heck of a lot easier. There’s a pro-tip in there!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/rubyfuza_truth_coffee_barista.jpg&quot; alt=&quot;Truth Coffee&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The keynote on the first day set an excellent tone for the rest of the conference. Sarah Mei’s exploration of metaphors for software teams in terms of the “factory”, the “workshop” and the “stage” provided a stimulus for many conversations about how software teams can improve their methods of working together. As Kent Beck explains in Extreme Programming Explained - all problems in software are actually people problems. The theatrical stage model helps frame why individuals can’t merely be replaced by someone with similar skills without having far broader effects on the team as a whole.&lt;/p&gt;
+
+&lt;p&gt;2016 marks the third year I’ve spoken at Rubyfuza. I’m getting quite used to being given the second slot after lunch on the second day now. This year I spoke specifically about using Ruby in an ecosystem that includes other languages, and particularly interoperating with C through native extensions and with Rust through FFI. A substantial part of my presentation was a live demo of building a native extension and using FFI with a Rust library, my slides covering my intro can be downloaded &lt;a href=&quot;/presentations/Going%20Native.pdf&quot;&gt;here&lt;/a&gt;, or you can &lt;a href=&quot;https://www.youtube.com/watch?v=IeMw_G69Hv4&quot;&gt;watch the video&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Friday evening’s dinner is always a highlight of the conference. The organisers treated us to a stunning sunset in Camps Bay at The Bungalow restaurant.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/rubyfuza2016_sunset.jpg&quot; alt=&quot;Sunset&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It was a fantastic way to end off the conference. Lance, Mike, Dominic, Kenneth, Michelle, Simon and Rishal - specifically to you guys, thanks for the epic time there! I’ll see you all at (or before) Rubyfuza 2017!&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">ActiveRecord and Uniqueness</title><link href="https://kmckelvin.com/blog/2015/09/activerecord-and-uniqueness/" rel="alternate" type="text/html" title="ActiveRecord and Uniqueness" /><published>2015-09-21T00:00:00+01:00</published><updated>2015-09-21T00:00:00+01:00</updated><id>repo://posts.collection/_posts/2015-09-21-activerecord-and-uniqueness.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2015/09/activerecord-and-uniqueness/">&lt;p&gt;The uniqueness validation in ActiveRecord is a lie as soon as you have more than one app server process (or thread) running.&lt;/p&gt;
+
+&lt;p&gt;It performs a SQL select to ensure that no other records with the same value appear in the database before marking the record as valid. However if two processes happen to check for the same value at the same time before saving, both records are going to appear valid in Rails and will then be saved.&lt;/p&gt;
+
+&lt;p&gt;If you have any &lt;code class=&quot;highlighter-rouge&quot;&gt;validates_uniqueness_of&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;has_one&lt;/code&gt; relationships in your ActiveRecord models, it’s wise to also back those up with a unique index in the database. That way if the Rails uniqueness validation allows a duplicate record to slip past, you’ll still guarantee the integrity of your data.&lt;/p&gt;
+
+&lt;p&gt;You can do this when creating a table using the &lt;code class=&quot;highlighter-rouge&quot;&gt;create_table&lt;/code&gt; method in a migration&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;create_table&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:users&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;email&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;unique: &lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# Use an array of columns for a compound index&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# t.index [:email, :other_column], unique: true&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Alternatively you can add a unique index later by using the &lt;code class=&quot;highlighter-rouge&quot;&gt;add_index&lt;/code&gt; method in a migration&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# add_index :table, :column, unique: true&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;add_index&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;unique: &lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;prevention-rather-than-treatment-consistency_fail&quot;&gt;Prevention rather than treatment: consistency_fail&lt;/h2&gt;
+
+&lt;p&gt;You should use the &lt;a href=&quot;https://github.com/trptcolin/consistency_fail&quot;&gt;consistency_fail&lt;/a&gt; gem to verify that all of your indexes are in place. It scans your ActiveRecord models for uniqueness validations and &lt;code class=&quot;highlighter-rouge&quot;&gt;has_one&lt;/code&gt; relationships and will warn you if any of these are missing indexes at the database level. I recommend running consistency_fail as part of your CI build. The CLI runner will return a failure exit code if indexes are missing so it’s easy to add this to your build by just executing &lt;code class=&quot;highlighter-rouge&quot;&gt;consistency_fail&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Data integrity matters!&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">Recurring Tasks With Sidetiq</title><link href="https://kmckelvin.com/blog/2014/07/recurring-tasks-with-sidetiq/" rel="alternate" type="text/html" title="Recurring Tasks With Sidetiq" /><published>2014-07-07T00:00:00+01:00</published><updated>2014-07-07T00:00:00+01:00</updated><id>repo://posts.collection/_posts/2014-07-07-recurring-tasks-with-sidetiq.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2014/07/recurring-tasks-with-sidetiq/">&lt;p&gt;&lt;strong&gt;Update: Sidetiq is no longer maintained. I have used &lt;a href=&quot;https://github.com/moove-it/sidekiq-scheduler&quot;&gt;sidekiq-scheduler&lt;/a&gt; in its place.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Software often relies on recurring scheduled tasks in order to function. From status checks, to billing runs, the UNIX cron daemon has regularly been trusted with this responsibility for decades now. Cron has performed the job admirably and we’ve managed to build some really interesting tools to manage our crontabs. &lt;a href=&quot;https://github.com/javan/whenever&quot;&gt;Whenever&lt;/a&gt; is a really good example of building a Ruby DSL over cron.&lt;/p&gt;
+
+&lt;p&gt;There’s an alternative approach however. If your application has a background worker - which in my experience is pretty much all Ruby web apps - you’ve got the opportunity to use your worker to run scheduled tasks. It’s a really good fit to the problem since it divorces your application’s execution from the server it’s running on. It becomes scalable across multiple servers by pulling scheduled jobs off a queue rather than having a single machine dedicated to running the scheduled tasks.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&quot;http://mperham.github.io/sidekiq/&quot;&gt;Sidekiq&lt;/a&gt; gem makes it easy to run a background job queue in Ruby. It’s as easy as adding the gem to your &lt;code class=&quot;highlighter-rouge&quot;&gt;Gemfile&lt;/code&gt; and running the &lt;code class=&quot;highlighter-rouge&quot;&gt;sidekiq&lt;/code&gt; executable.&lt;/p&gt;
+
+&lt;p&gt;Sidekiq has a useful trick up its sleeve for running scheduled tasks. Given that you have a worker called &lt;code class=&quot;highlighter-rouge&quot;&gt;BillingWorker&lt;/code&gt; you can queue it up to run at a given time using Sidekiq’s &lt;code class=&quot;highlighter-rouge&quot;&gt;perform_at&lt;/code&gt; method.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;BillingWorker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;perform_at&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;day&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;from_now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;However this will only execute the job once.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/tobiassvn/sidetiq&quot;&gt;Sidetiq&lt;/a&gt; is an addon to Sidekiq that allows for recurring jobs to be declared. I first came across it when reading the source code for Discourse, so it has earned its trust in the Ruby community.&lt;/p&gt;
+
+&lt;p&gt;An example &lt;code class=&quot;highlighter-rouge&quot;&gt;BillingWorker&lt;/code&gt; that runs daily in Sidetiq can be declared as follows&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BillingWorker&lt;/span&gt;
+  &lt;span class=&quot;kp&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Sidekiq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Worker&lt;/span&gt;
+  &lt;span class=&quot;kp&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Sidetiq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Schedulable&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;recurrence&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;daily&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;perform&lt;/span&gt;
+  	&lt;span class=&quot;c1&quot;&gt;# implementation details...&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Sidetiq will manage the schedule to run this task daily on one of your Sidekiq workers.&lt;/p&gt;
+
+&lt;p&gt;There are a couple of gotchas with Sidetiq at the moment. Its dependency on &lt;code class=&quot;highlighter-rouge&quot;&gt;ice_cube&lt;/code&gt; is known to cause a bit of a slow down in generating the recurrence schedule for a worker. Be sure to read up the wiki article on &lt;a href=&quot;https://github.com/tobiassvn/sidetiq/wiki/Known-Issues&quot;&gt;Known Issues&lt;/a&gt; to avoid these pitfalls.&lt;/p&gt;
+
+&lt;p&gt;Sidetiq also hooks into Sidekiq’s web dashboard. Installing it is as easy as adding &lt;code class=&quot;highlighter-rouge&quot;&gt;require &apos;sidetiq/web&apos;&lt;/code&gt; to the file that you’ve used to mount the Sidekiq::Web Rack app. It’s pretty useful to have this hooked in since it also lets you manually trigger the jobs if needed.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Sidetiq’s Web UI&lt;/strong&gt;
+&lt;img src=&quot;/images/sidekiq-web.jpg&quot; alt=&quot;Sidetiq Web&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;To make this work in Rails’ development mode you’ll need to set &lt;code class=&quot;highlighter-rouge&quot;&gt;config.eager_load = true&lt;/code&gt; in your &lt;code class=&quot;highlighter-rouge&quot;&gt;development.rb&lt;/code&gt;. It’s usually not an issue though.&lt;/p&gt;
+
+&lt;p&gt;In my experience so far Sidetiq has been a far more elegant solution to the problem of recurring scheduled tasks than managing crontabs on cloud VMs, or using Heroku’s Scheduler addon.&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">Octotree</title><link href="https://kmckelvin.com/blog/2014/07/octotree/" rel="alternate" type="text/html" title="Octotree" /><published>2014-07-03T00:00:00+01:00</published><updated>2014-07-03T00:00:00+01:00</updated><id>repo://posts.collection/_posts/2014-07-03-octotree.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2014/07/octotree/">&lt;p&gt;(Edited on 31 March 2018 to update the keyboard shortcuts)&lt;/p&gt;
+
+&lt;p&gt;I was introduced to a Chrome extension yesterday by Kenneth Kalmer that’s completely changed my GitHub experience. Introducing Octotree, a sidebar for GitHub that shows a repository’s code in a tree structure.&lt;/p&gt;
+
+&lt;p&gt;Take a look-see&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/octotree.jpg&quot; alt=&quot;Octotree&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It’s a mystery that GitHub doesn’t include this by default.&lt;/p&gt;
+
+&lt;p&gt;You can download the extension by going to &lt;a href=&quot;https://chrome.google.com/webstore/detail/octotree/bkhaagjahfmjljalopjnoealnfndnagc&quot;&gt;Octotree on the Chrome Web Store&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;After that, just browse to a GitHub repository and hit Ctrl+Shift+S or Cmd+Shift+S and you’re set! To browse private repositories you’ll have to set up an API token. Instructions will show up in the sidebar when you’re browsing a private repo.&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">Renaming Items in a Ruby Hash</title><link href="https://kmckelvin.com/blog/2014/06/renaming-items-in-a-ruby-hash/" rel="alternate" type="text/html" title="Renaming Items in a Ruby Hash" /><published>2014-06-19T00:00:00+01:00</published><updated>2014-06-19T00:00:00+01:00</updated><id>repo://posts.collection/_posts/2014-06-19-renaming-items-in-a-ruby-hash.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2014/06/renaming-items-in-a-ruby-hash/">&lt;p&gt;This is a pretty neat snippet of Ruby that I found to rename a key in a Ruby hash.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;hash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:new_key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;hash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;delete&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:old_key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;#delete&lt;/code&gt; method on a hash will return the value of the key provided while removing the item from the hash. The resulting hash gets a new key assigned to the old key’s value.&lt;/p&gt;
+
+&lt;p&gt;This &lt;a href=&quot;http://stackoverflow.com/a/19298437/228750&quot;&gt;StackOverflow answer&lt;/a&gt; contains the snippet.&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">Configuration in the environment with dotenv</title><link href="https://kmckelvin.com/blog/2014/01/configuration-in-the-environment-wtih-dotenv/" rel="alternate" type="text/html" title="Configuration in the environment with dotenv" /><published>2014-01-24T00:00:00+00:00</published><updated>2014-01-24T00:00:00+00:00</updated><id>repo://posts.collection/_posts/2014-01-24-configuration-in-the-environment-wtih-dotenv.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2014/01/configuration-in-the-environment-wtih-dotenv/">&lt;p&gt;Security’s one of the most easily overlooked risks when developing software. The Rails community has recently had &lt;em&gt;another&lt;/em&gt; dispute about the best way of storing access credentials to 3rd party services. According to the &lt;a href=&quot;http://12factor.net&quot;&gt;12Factor&lt;/a&gt; app manifesto, configuration should be stored in the environment. This is where the &lt;code class=&quot;highlighter-rouge&quot;&gt;dotenv&lt;/code&gt; gem becomes useful.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;dotenv&lt;/code&gt; is a Ruby gem that lets you configure environment variables in a dotfile in the root of your project rather than setting them in your shell. It’s pretty useful and has made life a heck of a lot easier.&lt;/p&gt;
+
+&lt;p&gt;Here’s how to install &lt;em&gt;dotenv&lt;/em&gt; and configure it to hold a Rails app’s secret token:&lt;/p&gt;
+
+&lt;p&gt;Include it as the first gem in your Gemfile. It must come before other gems that might use environment variables.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;dotenv-rails&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;group: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:development&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then modify your &lt;code class=&quot;highlighter-rouge&quot;&gt;config/initializers/secret_token.rb&lt;/code&gt; to set the token from an environment variable:&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;no&quot;&gt;Your&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Application&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;secret_key_base&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ENV&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;SECRET_TOKEN&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And finally, create a &lt;code class=&quot;highlighter-rouge&quot;&gt;.env&lt;/code&gt; file in your project’s root:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;SECRET_TOKEN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;thisismydevelopmentsecret
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;When running in the development or test environments, those environment variables will be read from the &lt;code class=&quot;highlighter-rouge&quot;&gt;.env&lt;/code&gt; file. When you run in production, just set the secret as part of the environment configuration and it will be read as normal. As an alternative, those settings can be stored in a shared &lt;code class=&quot;highlighter-rouge&quot;&gt;.env&lt;/code&gt; file that’s symlinked as part of a Capistrano deploy. All of this is documented on the &lt;a href=&quot;https://github.com/bkeepers/dotenv&quot;&gt;dotenv Github page&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">Enumerators in Ruby 1.9</title><link href="https://kmckelvin.com/blog/2013/08/lazy-enumeration-in-ruby-1-dot-9/" rel="alternate" type="text/html" title="Enumerators in Ruby 1.9" /><published>2013-08-18T00:00:00+01:00</published><updated>2013-08-18T00:00:00+01:00</updated><id>repo://posts.collection/_posts/2013-08-18-lazy-enumeration-in-ruby-1-dot-9.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2013/08/lazy-enumeration-in-ruby-1-dot-9/">&lt;p&gt;Lazy evaluation of enumerables is one of the most exciting new features in Ruby 2.0’s standard library. Changing the execution sequence of an enumeration pipeline to yield item by item is as easy as starting the enumeration chain with &lt;code class=&quot;highlighter-rouge&quot;&gt;lazy&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;This type of lazy evaluation is the standard when working with &lt;code class=&quot;highlighter-rouge&quot;&gt;IEnumerable&amp;lt;T&amp;gt;&lt;/code&gt; in the .NET space. It allows you to create a pipeline that can project from one data structure into another without needing to evaluate an entire stack of objects at a time. This is really useful when dealing with ETL tasks as you can work with one entry at a time instead of projecting an array of all entries at each step of the process. This gives tremendous efficiency when reading hundreds of thousands of entries in on one side of the pipeline, doing a few map/reduce transformations and saving the result of the transformation.&lt;/p&gt;
+
+&lt;p&gt;While the Ruby 2.0 &lt;code class=&quot;highlighter-rouge&quot;&gt;Enumerable::Lazy&lt;/code&gt; really brings Ruby up to that level of efficiency, there are ways of getting that behaviour in Ruby 1.9 using the Enumerator class.&lt;/p&gt;
+
+&lt;p&gt;Consider this example:&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;RUBY_VERSION&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;en&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Enumerator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;yielding a&quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;a&apos;&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;yielding b&quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;b&apos;&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;yielding c&quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;c&apos;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;en&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;received &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# &amp;gt;&amp;gt; 1.9.3&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# &amp;gt;&amp;gt; yielding a&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# &amp;gt;&amp;gt; received a&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# &amp;gt;&amp;gt; yielding b&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# &amp;gt;&amp;gt; received b&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# &amp;gt;&amp;gt; yielding c&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# &amp;gt;&amp;gt; received c&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Yielding from the Enumerator will release execution to the consuming code for each entry, where as if you project the enumerator into an array first, you get a different execution order:&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;RUBY_VERSION&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;en&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Enumerator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;yielding a&quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;a&apos;&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;yielding b&quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;b&apos;&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;yielding c&quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;c&apos;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;en&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;to_a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;received &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# &amp;gt;&amp;gt; 1.9.3&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# &amp;gt;&amp;gt; yielding a&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# &amp;gt;&amp;gt; yielding b&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# &amp;gt;&amp;gt; yielding c&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# &amp;gt;&amp;gt; received a&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# &amp;gt;&amp;gt; received b&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# &amp;gt;&amp;gt; received c&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;It’s a subtle difference, but yields extreme power (pun intended ;)).&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">Presentation: Resource Guru - Backbone.js Edition at JSinSA 2013</title><link href="https://kmckelvin.com/blog/2013/07/resource-guru-backbone-dot-js-edition/" rel="alternate" type="text/html" title="Presentation: Resource Guru - Backbone.js Edition at JSinSA 2013" /><published>2013-07-01T00:00:00+01:00</published><updated>2013-07-01T00:00:00+01:00</updated><id>repo://posts.collection/_posts/2013-07-01-resource-guru-backbone-dot-js-edition.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2013/07/resource-guru-backbone-dot-js-edition/">&lt;p&gt;I was the lead developer on Resource Guru’s slick new JavaScript calendar, written using Backbone.js. On Saturday 29 June 2013 I gave a presentation at the JSinSA conference in Midrand, South Africa, giving a case study of some of the experiences we found and solutions we found to some pretty complex problems along the way.&lt;/p&gt;
+
+&lt;p&gt;Slides are available for &lt;a href=&quot;/presentations/ResourceGuru.key&quot;&gt;download&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">Groping test tools and their effect on object oriented design</title><link href="https://kmckelvin.com/blog/2013/02/groping-test-tools-vs-object-orientation/" rel="alternate" type="text/html" title="Groping test tools and their effect on object oriented design" /><published>2013-02-17T00:00:00+00:00</published><updated>2013-02-17T00:00:00+00:00</updated><id>repo://posts.collection/_posts/2013-02-17-groping-test-tools-vs-object-orientation.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2013/02/groping-test-tools-vs-object-orientation/">&lt;p&gt;Groping test tools like TypeMock exist in the realm of statically compiled languages to allow you to bypass encapsulation and access private members of the objects you’re testing. In the Ruby world we’ve got metaprogramming and the &lt;code class=&quot;highlighter-rouge&quot;&gt;#send&lt;/code&gt; method which can pretty much do the same thing, but in a deceptively simple way.&lt;/p&gt;
+
+&lt;p&gt;These tools have a place in our arsenal. If I’m testing a codebase that hasn’t considered object oriented best practices, it’s useful to have tools like Timecop that can give control over Ruby’s global date and time, or FakeWeb that intercepts HTTP calls. But if you’re using these tools on a fresh codebase, you’re &lt;strong&gt;violating object oriented best practices.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Just because you have a hammer, doesn’t mean that you should treat every problem as a nail. These ‘groping’ test tools have a tendency to be that hammer. We use encapsulation and information hiding to provide a cleaner API to consumers, but if we need to access private state from tests, then an argument can be made that the information should be available at a different scope, and that there’s a flaw in the design of the API.&lt;/p&gt;
+
+&lt;p&gt;Consider the testability of the following snippet. Notice the hard dependency on Time.zone.now - which is an indeterministic function that accesses a global state.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;publish!&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;update_attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;published_at: &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;zone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;published?&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;published_at&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;published_at&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;zone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;now&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;To test this, we use a groping test tool - Timecop - to modify Ruby’s date and give us control. Timecop does this by using some of Ruby’s metaprogramming features.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;#publish!&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;sets the published at timestamp&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;date&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;2013-01-01&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;to_date&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;Timecop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;freeze&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+      &lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;publish!&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;published_at&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;should&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;date&lt;/span&gt;
+
+      &lt;span class=&quot;no&quot;&gt;Timecop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;return&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;My problem with this style of testing is that there’s no definition of intent. Reading the test, there’s no link between freezing the time and the command to publish the post. It’s implied, but it’s not clear. We’re changing something in a global state that just happens to have an effect on the published_at timestamp. It’s a side-effect. What’s more, if you forget to &lt;code class=&quot;highlighter-rouge&quot;&gt;Timecop.return&lt;/code&gt; afterwards, you’ve infected the global state of DateTime with a trait that will be shared across other tests. If you’ve ever seen ridiculous profiles on run times in RSpec - that’s probably because you’ve forgotten to &lt;code class=&quot;highlighter-rouge&quot;&gt;Timecop.return&lt;/code&gt;, and the Ruby global date is still in an altered state.&lt;/p&gt;
+
+&lt;p&gt;Allowing the dependency on time to be injected from outside of the method call gives us flexibility in testing. It gives us full control of a variable that is otherwise in a global, uncontrolled state.&lt;/p&gt;
+
+&lt;p&gt;Let’s refactor that first example a bit:&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;publish!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;clock&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;zone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;publish_at&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;now&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;publish_at&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;update_attributes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;published_at: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;published?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;clock&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;zone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;published_at&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;published_at&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;now&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now &lt;code class=&quot;highlighter-rouge&quot;&gt;#publish!&lt;/code&gt; depends on any object that responds to &lt;code class=&quot;highlighter-rouge&quot;&gt;#now&lt;/code&gt;. So when we’re working in a test environment we can stub that out with OpenStruct.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;#publish!&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;sets the published at timestamp&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;clock&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;OpenStruct&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;now: &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;zone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;publish!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;clock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;published_at&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;should&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;clock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;now&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In production, thanks to Ruby’s default parameter values, we can still maintain an easily readable API without having to pass Time.zone in everywhere. Just call &lt;code class=&quot;highlighter-rouge&quot;&gt;post.publish!&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;I far prefer this design since we’re keeping a similar level of abstraction at each method. We consider publishing to be the act of setting the &lt;code class=&quot;highlighter-rouge&quot;&gt;published_at&lt;/code&gt; field, but there’s only one place that actually encapsulates that in code - in the &lt;code class=&quot;highlighter-rouge&quot;&gt;publish_at&lt;/code&gt; method. This is evidence of following DRY.&lt;/p&gt;
+
+&lt;p&gt;While I prefer this design, there’s another level refactoring we can do in this code around the dependency on &lt;code class=&quot;highlighter-rouge&quot;&gt;Time.zone.now&lt;/code&gt; and determining whether a post is published or not, but I’m going to leave that for a future post. Stay tuned!&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">Clearing old Rails logs</title><link href="https://kmckelvin.com/blog/2012/09/clearing-old-rails-logs/" rel="alternate" type="text/html" title="Clearing old Rails logs" /><published>2012-09-08T00:00:00+01:00</published><updated>2012-09-08T00:00:00+01:00</updated><id>repo://posts.collection/_posts/2012-09-08-clearing-old-rails-logs.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2012/09/clearing-old-rails-logs/">&lt;p&gt;When developing Rails apps, the logs tend to subtly grow without being checked. On one machine I freed up 10GB of disk space just by clearing old Rails development and test logs.&lt;/p&gt;
+
+&lt;p&gt;If you’re like me, you probably have most of your projects sitting in a Code or Projects directory in your home. You probably &lt;code class=&quot;highlighter-rouge&quot;&gt;tail -f&lt;/code&gt; the log file once every now and again, but don’t really need to keep the entire log file around.&lt;/p&gt;
+
+&lt;p&gt;Here’s a shell command that will go through every project in the &lt;code class=&quot;highlighter-rouge&quot;&gt;~/Code&lt;/code&gt; directory and clear out old log files.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;find ~/Code &lt;span class=&quot;nt&quot;&gt;-type&lt;/span&gt; d &lt;span class=&quot;nt&quot;&gt;-iname&lt;/span&gt; log &lt;span class=&quot;nt&quot;&gt;-maxdepth&lt;/span&gt; 2 | xargs &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;% find % &lt;span class=&quot;nt&quot;&gt;-type&lt;/span&gt; f &lt;span class=&quot;nt&quot;&gt;-iregex&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;.*log$&quot;&lt;/span&gt; | xargs &lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I’ve got this command aliased to &lt;code class=&quot;highlighter-rouge&quot;&gt;rmlogs&lt;/code&gt; in my zshrc as well.&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">Executing subgroups of RSpec Examples</title><link href="https://kmckelvin.com/blog/2012/07/grouping-rspec-examples/" rel="alternate" type="text/html" title="Executing subgroups of RSpec Examples" /><published>2012-07-26T00:00:00+01:00</published><updated>2012-07-26T00:00:00+01:00</updated><id>repo://posts.collection/_posts/2012-07-26-grouping-rspec-examples.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2012/07/grouping-rspec-examples/">&lt;p&gt;When doing TDD it’s important to have a short feedback cycle. Fast tests aren’t just a nice-to-have, they’re an essential part of the cycle. If I have to wait 5 minutes to know whether my tests pass or fail, I’m naturally going to slack off on running them as often as I should. This breaks the red/green/refactor cycle.&lt;/p&gt;
+
+&lt;p&gt;Rails integration tests using Capybara and Selenium are painfully slow to run every time your code changes. Thankfully RSpec has a &lt;code class=&quot;highlighter-rouge&quot;&gt;--tag&lt;/code&gt; argument that can alleviate this pain.&lt;/p&gt;
+
+&lt;p&gt;Any &lt;code class=&quot;highlighter-rouge&quot;&gt;describe&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;context&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;it&lt;/code&gt; block can be tagged by passing a hash after the description. For example:&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;group: &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;user&apos;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;To run only the contents of specs tagged with &lt;code class=&quot;highlighter-rouge&quot;&gt;group: &apos;user&apos;&lt;/code&gt;, run RSpec with:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;rspec spec --tag group:user&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Tags can be inflected to run everything &lt;em&gt;except&lt;/em&gt; specs with a given tag by using the &lt;code class=&quot;highlighter-rouge&quot;&gt;~&lt;/code&gt;. For example:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;rspec spec --tag ~group:user&lt;/code&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;applying-this-to-rails&quot;&gt;Applying this to Rails&lt;/h4&gt;
+
+&lt;p&gt;Rails &amp;amp; Capybara will automatically tag every spec in the &lt;code class=&quot;highlighter-rouge&quot;&gt;spec/requests&lt;/code&gt; directory with &lt;code class=&quot;highlighter-rouge&quot;&gt;type: &apos;request&apos;&lt;/code&gt;. Capybara also uses the &lt;code class=&quot;highlighter-rouge&quot;&gt;js: true&lt;/code&gt; tag to determine whether to run a headless test or to run the test through Selenium.&lt;/p&gt;
+
+&lt;p&gt;Applying our knowledge about tags and the RSpec runner, you can run everything except the request specs by running:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;rspec spec --tag ~type:request&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Or you can just ignore the JavaScript specs that run inside a browser by running:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;rspec spec --tag ~js:true&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Happy testing!&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">OSX Lion Reverse Scrolling</title><link href="https://kmckelvin.com/blog/2011/09/osx-lion-reverse-scrolling/" rel="alternate" type="text/html" title="OSX Lion Reverse Scrolling" /><published>2011-09-21T14:44:29+01:00</published><updated>2011-09-21T14:44:29+01:00</updated><id>repo://posts.collection/_posts/2011-09-21-osx-lion-reverse-scrolling.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2011/09/osx-lion-reverse-scrolling/">&lt;p&gt;The subject of mouse movement in OS X has been debated for years now. Personally I despise the default movement settings in OS X and have a whole array of tweaks in place. But that’s a debate for another day.&lt;/p&gt;
+
+&lt;p&gt;Today I’m looking at the new “natural” reversed scrolling feature in Lion. Having used it for a couple of days now I found that I like having the reverse scrolling on the trackpad, but whenever I reach for my mouse I prefer the classic scrolling method that we’ve been using for years.&lt;/p&gt;
+
+&lt;p&gt;I dug around and couldn’t find any way inside OS X of decoupling them, but I came across a cool app called &lt;a href=&quot;http://pilotmoon.com/scrollreverser/&quot;&gt;Scroll Reverser&lt;/a&gt;. It allows you to customize the reverse scrolling of the track pad and not of the mouse.&lt;/p&gt;
+
+&lt;p&gt;The settings might seem a bit confusing though. I have OSX set up to reverse scrolling so that it works across all applications. I then use Scroll Reverser to reverse the scrolling on the mouse from OSX’s behaviour back to the classic behaviour.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/110921_scrollreverser_settings.png&quot; alt=&quot;Scroll Reverser Settings&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/110921_mouse_pref.png&quot; alt=&quot;Preferences&quot; /&gt;&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">FakeWeb</title><link href="https://kmckelvin.com/blog/2011/09/fakeweb/" rel="alternate" type="text/html" title="FakeWeb" /><published>2011-09-20T02:24:40+01:00</published><updated>2011-09-20T02:24:40+01:00</updated><id>repo://posts.collection/_posts/2011-09-20-fakeweb.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2011/09/fakeweb/">&lt;p&gt;I was testing a client I wrote to a server API recently. Being relatively new to testing with RSpec and Ruby, I initially took the naive approach of building a node.js application to behave as a dummy test server.&lt;/p&gt;
+
+&lt;p&gt;Originally when I wrote the code I knew there had to be a better way, but I only found that better way today.&lt;/p&gt;
+
+&lt;p&gt;I was revisiting some of that code and discovered FakeWeb. It’s a Ruby framework that makes it simple to test code that involves HTTP requests. It intercepts HTTP calls made through &lt;code class=&quot;highlighter-rouge&quot;&gt;Net::HTTP&lt;/code&gt; and makes it dead simple to create predictable responses for those calls.&lt;/p&gt;
+
+&lt;p&gt;This means that tests that would have been regarded as integration tests before can be isolated from the dependency on an external server and can be executed as unit tests. Big win!&lt;/p&gt;
+
+&lt;p&gt;Here’s a sample of how it works in context of RSpec:&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;before&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;no&quot;&gt;FakeWeb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;allow_net_connect&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;register_body&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;ss&quot;&gt;:id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;to_json&lt;/span&gt;
+  &lt;span class=&quot;no&quot;&gt;FakeWeb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;register_uri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;http://localhost/register&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:body&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;register_body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The first line in the before block tells FakeWeb to disallow any real network connections from happening. Every ‘connection’ must be handled inside FakeWeb. An exception is raised if a request can’t be handled by FakeWeb directly.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;register_body&lt;/code&gt; variable simply contains the key-value pairs to be returned in the HTTP response’s body as JSON.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;FakeWeb.register_uri&lt;/code&gt; then registers a verb and URI to be handled by FakeWeb, and sets the body of the response. It’s also possible to set a status code and to handle &lt;code class=&quot;highlighter-rouge&quot;&gt;:any&lt;/code&gt; verb.&lt;/p&gt;
+
+&lt;p&gt;Once the URI has been registered, any call made to that URI from &lt;code class=&quot;highlighter-rouge&quot;&gt;Net::HTTP&lt;/code&gt; will be responded to by FakeWeb.&lt;/p&gt;
+
+&lt;p&gt;My tests are now running marginally faster and are far less flaky since all the external dependencies are now being substituted with a controlled and predictable stub.&lt;/p&gt;
+
+&lt;p&gt;To get going, just add the gem to your Gemfile and run bundler:&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;fakeweb&apos;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Also check out the &lt;a href=&quot;http://fakeweb.rubyforge.org/&quot;&gt;FakeWeb docs at RubyForge&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">Slim Template language in Ruby</title><link href="https://kmckelvin.com/blog/2011/09/slim-templates/" rel="alternate" type="text/html" title="Slim Template language in Ruby" /><published>2011-09-18T19:48:18+01:00</published><updated>2011-09-18T19:48:18+01:00</updated><id>repo://posts.collection/_posts/2011-09-18-slim-templates.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2011/09/slim-templates/">&lt;p&gt;The &lt;a href=&quot;http://slim-lang.com&quot;&gt;Slim&lt;/a&gt; template engine seems to have gained a lot of popularity in the Rails community recently. Their site describes it as ‘A lightweight templating engine.’ For a long time I’ve loved Haml, taking the approach that I’d rather &lt;em&gt;describe&lt;/em&gt; my intent than hard code HTML tags all over the place.&lt;/p&gt;
+
+&lt;p&gt;However, in hindsight having used Slim for a while it appears Haml might have stepped a bit too far away from HTML, including some cryptic syntax like ‘%’ signs to declare tags.  Slim takes a step back towards HTML.  It still uses the significant whitespace element of Haml and removes the annoying &amp;lt;&amp;gt;’s, but keeps you closer to the actual HTML that you’re describing.&lt;/p&gt;
+
+&lt;p&gt;Here’s an example of Slim (taken from a presentation I gave recently)&lt;/p&gt;
+
+&lt;div class=&quot;language-slim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;link_to&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;New Link&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;new_link_path&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@links&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;nc&quot;&gt;.link&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;.title&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;link_to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;link&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;link&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:target&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;_blank&quot;&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;.description&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;link&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;description&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;.manage&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;link_to&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Delete&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;link&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:method&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:delete&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:confirm&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;Are you sure?&apos;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;paginate&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@links&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Nice and clean. The way it should be :)&lt;/p&gt;
+
+&lt;p&gt;To install it in your Rails app, just add it to your &lt;code class=&quot;highlighter-rouge&quot;&gt;Gemfile&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;slim-rails&apos;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then create a view using the .slim file extension to start using Slim.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Resources to check out:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://slim-lang.com/&quot;&gt;Slim Templates&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/stonean/slim&quot;&gt;Slim - Github Repo&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/bbommarito/vim-slim&quot;&gt;vim-slim plugin (syntax highlighting and indent assistance)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://haml-lang.com/&quot;&gt;Haml&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For those using vim and the rails.vim plugin - the most recent version of the plugin supports .slim extensions for templates.&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">Presentation: Dynamic Languages &amp;amp; DLR Presentation - Languages UG</title><link href="https://kmckelvin.com/blog/2011/07/dynamic-languages-dlr-languages-ug/" rel="alternate" type="text/html" title="Presentation: Dynamic Languages &amp; DLR Presentation - Languages UG" /><published>2011-07-14T11:20:39+01:00</published><updated>2011-07-14T11:20:39+01:00</updated><id>repo://posts.collection/_posts/2011-07-14-dynamic-languages-dlr-languages-ug.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2011/07/dynamic-languages-dlr-languages-ug/">&lt;p&gt;Thanks for the great turn-out at the Microsoft Community Night on 12 July, we had a full room for the languages UG!&lt;/p&gt;
+
+&lt;p&gt;For those who weren’t there - I gave a talk on Dynamic Languages and the DLR on Tuesday 12 July.&lt;/p&gt;
+
+&lt;p&gt;Here are the resources from the talk:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;IronPython: &lt;a href=&quot;http://ironpython.codeplex.com&quot;&gt;http://ironpython.codeplex.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Clay: &lt;a href=&quot;http://clay.codeplex.com/&quot;&gt;http://clay.codeplex.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;System.Dynamic: &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.dynamic.aspx&quot;&gt;http://msdn.microsoft.com/en-us/library/system.dynamic.aspx&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And here’s the code used to call a Python script from C#, using the DLR interop and dynamic keyword:&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;engine&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IronPython&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Hosting&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Python&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;CreateEngine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scope&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;engine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Runtime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;UseFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;greeter.py&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;dynamic&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;greeterClass&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scope&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;GetVariable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Greeter&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;dynamic&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;greeter&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;greeterClass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;dynamic&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;greeter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sayHello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Kevin!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;WriteLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author></entry><entry><title type="html">Entity Framework 4.1 Hooks – DRYing it up with EFHooks</title><link href="https://kmckelvin.com/blog/2011/06/entity-framework-4-1-hooks-drying-it-up-efhooks/" rel="alternate" type="text/html" title="Entity Framework 4.1 Hooks – DRYing it up with EFHooks" /><published>2011-06-21T19:05:38+01:00</published><updated>2011-06-21T19:05:38+01:00</updated><id>repo://posts.collection/_posts/2011-06-21-entity-framework-4-1-hooks-drying-it-up-efhooks.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2011/06/entity-framework-4-1-hooks-drying-it-up-efhooks/">&lt;p&gt;One of the things I fell in love with about Rails is its automatic management of timestamps on data.  When you create a new entity, it sets the created_at field.  When you Update it, it sets the modified_at timestamp.&lt;/p&gt;
+
+&lt;p&gt;For a long time I’ve used NHibernate as my ORM of choice for .NET and registered listeners for the pre-insert and pre-update events in NHibernate to handle this for me.  Now that Entity Framework 4.1 is out and becoming more useful I was interested in seeing how similar things could be done.&lt;/p&gt;
+
+&lt;p&gt;Entity Framework’s extension points are very limited compared to what NHibernate is capable of, but there is enough there to get you through most borderline scenarios you’ll hit while working with Entity Framework.&lt;/p&gt;
+
+&lt;p&gt;The problem I have with using the extension points is that you have to embed code inside your DbContext class to hook into the inserts, updates and deletes.  This means you’re mixing concerns of hooking into the extension point and the logic of what the hook must actually do.  This means it becomes difficult to test your hooks in isolation and that your DbContext class can become exceptionally long.&lt;/p&gt;
+
+&lt;p&gt;In comes &lt;strong&gt;EFHooks&lt;/strong&gt;.  It’s a project I’ve just started to make it easier to hook into Entity Framework.  Check the code out on &lt;a href=&quot;https://github.com/kmckelvin/EFHooks&quot;&gt;GitHub here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;EFHooks allows you to separate the concerns of writing pre-action hook code from accessing the extension points and registering your hooked code for execution.  This means unit testing your hook without using a DbContext becomes easy.&lt;/p&gt;
+
+&lt;p&gt;Here’s an example of a hook to run before any entity that inherits from ITimeStamped gets inserted.  Everything is strongly typed, so only ITimeStamped entities will be passed into this hook.&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// TimestampPreInsertHook.cs&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TimestampPreInsertHook&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PreInsertHook&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ITimeStamped&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Hook&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ITimeStamped&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;entity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HookEntityMetadata&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;entity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CreatedAt&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DateTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This means you don’t need to write code to set your CreatedAt date every time you create an entity that implements ITimeStamped.  By the same pattern you could use .NET reflection on System.Object and not even have to use an interface.&lt;/p&gt;
+
+&lt;p&gt;Note I said “pre-action” – This handles 99% of the use cases I’ve ever hit.  I’m working on a way to handle post-action hooks as well and I’ll have it all in a Nuget package as soon as it’s stable.&lt;/p&gt;
+
+&lt;p&gt;Check the code out, build it, play with it and please let me know if you have any problems with it.&lt;/p&gt;
+
+&lt;p&gt;(Update: Post-actions are also implemented and the package is available on NuGet &lt;a href=&quot;http://nuget.org/List/Packages/EFHooks&quot;&gt;here&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;Links:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://github.com/kmckelvin/EFHooks&quot;&gt;EFHooks on Github&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">Introducing NHibernate 3 (Devs4Devs)</title><link href="https://kmckelvin.com/blog/2010/09/introducing-nhibernate-3-devs4devs/" rel="alternate" type="text/html" title="Introducing NHibernate 3 (Devs4Devs)" /><published>2010-09-04T23:43:07+01:00</published><updated>2010-09-04T23:43:07+01:00</updated><id>repo://posts.collection/_posts/2010-09-04-introducing-nhibernate-3-devs4devs.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2010/09/introducing-nhibernate-3-devs4devs/">&lt;p&gt;Thanks to all who attended my 20 minute introduction to NHibernate 3 this morning. Here are my slides from the presentation&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/presentations/Introducing_NHibernate3.pptx&quot;&gt;Introducing_NHibernate3.pptx&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;And the code samples:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Loquacious SessionFactory configuration&lt;/em&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Configuration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;DataBaseIntegration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;db&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ConnectionStringName&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;ConnectionString&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dialect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MsSql2008Dialect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;();&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Proxy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ProxyFactoryFactory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ProxyFactoryFactory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;())&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;SetProperty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NHibernate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Cfg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Environment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CurrentSessionContextClass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;web&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;AddAssembly&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;typeof&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Artist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Assembly&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;HibernatingRhinos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Profiler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Appender&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NHibernate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NHibernateProfiler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Initialize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;BuildSessionFactory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;Querying the Music Store&lt;/em&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;IMusicStoreContext&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MvcApplication&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;GetCurrentRequestSession&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tx&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Session&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;BeginTransaction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IsolationLevel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ReadUncommitted&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;artists&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;artist&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Artists&lt;/span&gt;
+                  &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;artist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;StartsWith&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                  &lt;span class=&quot;k&quot;&gt;orderby&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;artist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Name&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;descending&lt;/span&gt;
+                  &lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;artist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Fetch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Albums&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;tx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Commit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;artists&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;One change I’ve made here is the call to .ToList() when selecting the artists. By enumerating the collection, we’re forcing NHibernate to get the objects from the database - to ensure that the select happens inside the transaction boundary.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;The View code&lt;/em&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;foreach&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;artist&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;Model&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;tr&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;td&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;artist.Name&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/td&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;td&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;string.Join&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;(&quot;,&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;&quot;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;artist.Albums.Select(a =&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;a.Title))&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/td&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/tr&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author></entry><entry><title type="html">Rails 3 - It’s out!</title><link href="https://kmckelvin.com/blog/2010/08/rails-3-its-out/" rel="alternate" type="text/html" title="Rails 3 - It&apos;s out!" /><published>2010-08-31T01:59:35+01:00</published><updated>2010-08-31T01:59:35+01:00</updated><id>repo://posts.collection/_posts/2010-08-31-rails-3-its-out.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2010/08/rails-3-its-out/">&lt;p&gt;Rails 3’s been a work-in-progress for around about two years now - and as of last night it’s ready!&lt;/p&gt;
+
+&lt;p&gt;For a descriptive list of changes, check out David’s blog post here: &lt;a href=&quot;http://weblog.rubyonrails.org/2010/8/29/rails-3-0-it-s-done&quot;&gt;http://weblog.rubyonrails.org/2010/8/29/rails-3-0-it-s-done&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The Rails tutorial has also been updated (for the most part) - and is available at &lt;a href=&quot;http://railstutorial.org/chapters/beginning&quot;&gt;http://railstutorial.org/chapters/beginning&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;To install, just use the gem package manager to install the latest rails gem:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;gem install rails --version 3.0.0&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Enjoy! :)&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">The NHibernate 3 Music Store – Mappings and the first glimpse! – Part 6</title><link href="https://kmckelvin.com/blog/2010/08/the-nh3-music-store-part-6-mappings-and-the-first-glimpse/" rel="alternate" type="text/html" title="The NHibernate 3 Music Store – Mappings and the first glimpse! – Part 6" /><published>2010-08-29T12:12:09+01:00</published><updated>2010-08-29T12:12:09+01:00</updated><id>repo://posts.collection/_posts/2010-08-29-the-nh3-music-store-part-6-mappings-and-the-first-glimpse.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2010/08/the-nh3-music-store-part-6-mappings-and-the-first-glimpse/">&lt;p&gt;Having sorted out the infrastructure issues of changing EF4 out with NHibernate, the last bit of the job is to map all of the entities. There are a few ways I can accomplish this: XML files, Fluent NHibernate or Fabio Maulo’s ConfORM.&lt;/p&gt;
+
+&lt;p&gt;Despite the fact that I really hate writing xml, I still prefer using the .hbm.xml files over the other options. The NHibernate guys have made it really easy to write these xml files – like an XSD to provide IntelliSense and reasonable default values for non-essential properties.&lt;/p&gt;
+
+&lt;p&gt;I’m not going to post all of the XML here (it’s all on &lt;a href=&quot;http://github.com/kmckelvin/NH3-MusicStore&quot;&gt;GitHub&lt;/a&gt;), here’s just one sample that maps the Album class.&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;hibernate-mapping&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;urn:nhibernate-mapping-2.2&quot;&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;assembly=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Mvc Music Store&quot;&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;namespace=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;MvcMusicStore.Models&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;class&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Album&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;AlbumId&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;generator&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;identity&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;many-to-one&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Genre&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;GenreId&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;many-to-one&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Artist&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ArtistId&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Title&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Price&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;AlbumArtUrl&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;bag&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;OrderDetails&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;cascade=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;all&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;AlbumId&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;one-to-many&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;OrderDetail&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/bag&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/class&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/hibernate-mapping&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;So at this point the solution is compiling and runs, I’ve got one last problem to iron out however. NHibernate doesn’t like this LINQ query on the HomeController:&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;storeContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Albums&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;OrderBy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;OrderDetails&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Take&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;To get this to work I’ve changed the query around to use the QueryOver API&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;storeContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Session&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QueryOver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Album&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Fetch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;OrderDetails&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Eager&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Album&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Take&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I know this isn’t ideal, unbounded result sets everywhere, however I’m more interested in getting the system to work in the first place than performance at this point. That aside, the query that EF4 generates here is just as bad. If there are any suggestions, I’d love to see how you’d write this query.&lt;/p&gt;
+
+&lt;p&gt;So, holding thumbs I hit F5 again, and here’s what we get:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/nh3-music-store/first-glimpse.png&quot; alt=&quot;First Glimpse&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Tada! :D&lt;/strong&gt; In my brief explorations I haven’t found anything that is &lt;strong&gt;not&lt;/strong&gt; working. I still have to do quite a bit of work to know for sure.&lt;/p&gt;
+
+&lt;p&gt;But for now (at least until I get more time to test this) that’s the NHibernate 3 ASP.NET MVC Music Store! There are still a few issues to iron out with the NHibernate implementation. I’ve had a lot of fun and learnt a heck of a lot in the last bit while working on this and writing about it.&lt;/p&gt;
+
+&lt;p&gt;All of the code is available on GitHub at &lt;a href=&quot;http://github.com/kmckelvin/NH3-MusicStore&quot;&gt;http://github.com/kmckelvin/NH3-MusicStore&lt;/a&gt;. Please go check it out, any feedback and constructive criticism is most welcome.&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">The NHibernate 3 Music Store – IoC with Ninject – Part 5</title><link href="https://kmckelvin.com/blog/2010/08/the-nh3-music-store-part-5-ioc-with-ninject/" rel="alternate" type="text/html" title="The NHibernate 3 Music Store – IoC with Ninject – Part 5" /><published>2010-08-28T16:40:55+01:00</published><updated>2010-08-28T16:40:55+01:00</updated><id>repo://posts.collection/_posts/2010-08-28-the-nh3-music-store-part-5-ioc-with-ninject.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2010/08/the-nh3-music-store-part-5-ioc-with-ninject/">&lt;p&gt;At the end of the last post I was deciding whether to use IoC to manage my new dependency on an IMusicStoreContext. I could have made a call to the static MvcApplication.GetCurrentRequestContext(), but from an architectural point of view, that would be tightly coupling a class to another concrete resource – which is a bad design choice for testability, maintainability and malleability.&lt;/p&gt;
+
+&lt;p&gt;To keep the code clean, I’m going to change things around a bit to use an IoC container. I’ve read about the Ninject.Web.Mvc project and I’d like to learn how to use it, so here we go :)&lt;/p&gt;
+
+&lt;p&gt;I’ve downloaded and built the Ninject.Web.Mvc project, it’s now part of the lib folder in my project’s &lt;a href=&quot;http://github.com/kmckelvin/nh3-musicstore&quot;&gt;GitHub repo&lt;/a&gt; as well.&lt;/p&gt;
+
+&lt;p&gt;The Ninject MVC project provides a NinjectHttpApplication abstract class that we’ll inherit from instead of the System.Web.HttpApplication on our MvcApplication class. We’ll also override the CreateKernel() method on the NinjectHttpApplication.&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MvcApplication&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NinjectHttpApplication&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IKernel&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;CreateKernel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;StandardKernel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MusicStoreNinjectModule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The Application_Start() method must be renamed to override the OnApplicationStarted method – or you can add an event binding to it in the constructor. The NinjectHttpApplication doesn’t execute the Application_Start method by default as the standard HttpApplication does.&lt;/p&gt;
+
+&lt;p&gt;And we’ll create the MusicStoreNinjectModule to resolve our controllers and our IMusicStoreContext like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MusicStoreNinjectModule&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NinjectModule&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AccountController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToSelf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CheckoutController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToSelf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HomeController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToSelf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ShoppingCartController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToSelf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;StoreController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToSelf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;StoreManagerController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToSelf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;// This will be injected into our controller to give us access to our context&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// without introducing a tight coupling to a static resource.&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IMusicStoreContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToMethod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MvcApplication&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;GetCurrentRequestContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;That means I can now add a constructor to each of our controllers that accepts an IMusicStoreContext and our controller will always receive a context object that’s built for the active request.&lt;/p&gt;
+
+&lt;p&gt;Neat :) Again, the code’s all on &lt;a href=&quot;http://github.com/kmckelvin/NH3-MusicStore&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author></entry></feed>
