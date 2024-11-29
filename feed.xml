@@ -1,4 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://bridgetownrb.com/" version="1.3.4">Bridgetown</generator><link href="https://kmckelvin.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://kmckelvin.com/" rel="alternate" type="text/html" /><updated>2024-07-03T09:59:33+01:00</updated><id>https://kmckelvin.com/feed.xml</id><title type="html">Kevin McKelvin</title><subtitle></subtitle><entry><title type="html">LazyVim – Stable Productivity with Neovim</title><link href="https://kmckelvin.com/blog/2024/06/lazyvim-stable-productivity-with-neovim/" rel="alternate" type="text/html" title="LazyVim – Stable Productivity with Neovim" /><published>2024-06-16T00:00:00+01:00</published><updated>2024-06-16T00:00:00+01:00</updated><id>repo://posts.collection/_posts/2024-06-16-lazyvim-stable-productivity-with-neovim.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2024/06/lazyvim-stable-productivity-with-neovim/">&lt;p&gt;The Rails community is familiar with the Japanese term Omakase, as used to describe the spirit of the Rails framework. It’s well covered in the &lt;a href=&quot;https://rubyonrails.org/doctrine#omakase&quot;&gt;Rails Doctrine&lt;/a&gt;.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://bridgetownrb.com/" version="1.3.4">Bridgetown</generator><link href="https://kmckelvin.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://kmckelvin.com/" rel="alternate" type="text/html" /><updated>2024-11-29T22:02:45+00:00</updated><id>https://kmckelvin.com/feed.xml</id><title type="html">Kevin McKelvin</title><subtitle></subtitle><entry><title type="html">Rails ActiveRecord’s ‘none’ method</title><link href="https://kmckelvin.com/blog/2024/11/activerecord-none-relations/" rel="alternate" type="text/html" title="Rails ActiveRecord&apos;s &apos;none&apos; method" /><published>2024-11-29T00:00:00+00:00</published><updated>2024-11-29T00:00:00+00:00</updated><id>repo://posts.collection/_posts/2024-11-29-activerecord-none-relations.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2024/11/activerecord-none-relations/">&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;none&lt;/code&gt; query method in Rails ActiveRecord is a hidden &lt;em&gt;gem&lt;/em&gt; I hadn’t come
+across until this week.&lt;/p&gt;
+
+&lt;p&gt;It creates a relation that returns no results unless combined with other
+conditions. Without using &lt;code class=&quot;highlighter-rouge&quot;&gt;none&lt;/code&gt; I’d have typically created a relation with a
+&lt;code class=&quot;highlighter-rouge&quot;&gt;where(&quot;1=0&quot;)&lt;/code&gt; condition, and chained &lt;code class=&quot;highlighter-rouge&quot;&gt;.or&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;.merge&lt;/code&gt; calls off it.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;none&lt;/code&gt; method provides a cleaner way to do this. If no other conditions are
+added to the chain it returns an empty result set without querying the database.
+If other conditions are added, it drops the superfluous &lt;code class=&quot;highlighter-rouge&quot;&gt;WHERE 1=0&lt;/code&gt; condition
+from the resulting SQL.&lt;/p&gt;
+
+&lt;p&gt;Here’s an example&lt;/p&gt;
+
+&lt;div class=&quot;language-rb highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;projects&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Project&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;none&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;projects&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;to_sql&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; &quot;SELECT `projects`.* FROM `projects` WHERE (1=0)&quot;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# if iterated, no query would actually execute&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;include_active?&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;projects&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;projects&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;or&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Project&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;active&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;projects&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;to_sql&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# =&amp;gt; &quot;SELECT `projects`.* FROM `projects`&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;#     WHERE `projects`.`deleted` = FALSE&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;#     AND `projects`.`archived` = FALSE&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;include_archived?&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;projects&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;projects&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;or&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Project&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;archived&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;projects&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;to_sql&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# =&amp;gt; &quot;SELECT `projects`.* FROM `projects`&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;#     WHERE (`projects`.`deleted` = FALSE&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;#       AND `projects`.`archived` = FALSE&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;#        OR `projects`.`archived` = TRUE)&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;#     ORDER BY name ASC&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Note on the generated SQL. It may seem at first glance that the two archived
+checks are superfluous, but the operator precedence of the AND means that both
+deleted and archived need to be false to match the first condition.&lt;/p&gt;
+
+&lt;p&gt;When this is executed, the resulting SQL doesn’t include a straggling
+&lt;code class=&quot;highlighter-rouge&quot;&gt;WHERE 1=0&lt;/code&gt; condition, and if no conditions are added to the chain it would just
+return an empty result set without even querying the database.&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">LazyVim – Stable Productivity with Neovim</title><link href="https://kmckelvin.com/blog/2024/06/lazyvim-stable-productivity-with-neovim/" rel="alternate" type="text/html" title="LazyVim – Stable Productivity with Neovim" /><published>2024-06-16T00:00:00+01:00</published><updated>2024-06-16T00:00:00+01:00</updated><id>repo://posts.collection/_posts/2024-06-16-lazyvim-stable-productivity-with-neovim.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2024/06/lazyvim-stable-productivity-with-neovim/">&lt;p&gt;The Rails community is familiar with the Japanese term Omakase, as used to describe the spirit of the Rails framework. It’s well covered in the &lt;a href=&quot;https://rubyonrails.org/doctrine#omakase&quot;&gt;Rails Doctrine&lt;/a&gt;.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;How do you know what to order in a restaurant when you don’t know what’s good? Well, if you let the chef choose, you can probably assume a good meal, even before you know what “good” is. That is omakase. A way to eat well that requires you neither be an expert in the cuisine nor blessed with blind luck at picking in the dark.&lt;/p&gt;
@@ -781,46 +826,4 @@ architecture. It’s been a fun journey!&lt;/p&gt;
 
 &lt;p&gt;But for now (at least until I get more time to test this) that’s the NHibernate 3 ASP.NET MVC Music Store! There are still a few issues to iron out with the NHibernate implementation. I’ve had a lot of fun and learnt a heck of a lot in the last bit while working on this and writing about it.&lt;/p&gt;
 
-&lt;p&gt;All of the code is available on GitHub at &lt;a href=&quot;http://github.com/kmckelvin/NH3-MusicStore&quot;&gt;http://github.com/kmckelvin/NH3-MusicStore&lt;/a&gt;. Please go check it out, any feedback and constructive criticism is most welcome.&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">The NHibernate 3 Music Store – IoC with Ninject – Part 5</title><link href="https://kmckelvin.com/blog/2010/08/the-nh3-music-store-part-5-ioc-with-ninject/" rel="alternate" type="text/html" title="The NHibernate 3 Music Store – IoC with Ninject – Part 5" /><published>2010-08-28T16:40:55+01:00</published><updated>2010-08-28T16:40:55+01:00</updated><id>repo://posts.collection/_posts/2010-08-28-the-nh3-music-store-part-5-ioc-with-ninject.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2010/08/the-nh3-music-store-part-5-ioc-with-ninject/">&lt;p&gt;At the end of the last post I was deciding whether to use IoC to manage my new dependency on an IMusicStoreContext. I could have made a call to the static MvcApplication.GetCurrentRequestContext(), but from an architectural point of view, that would be tightly coupling a class to another concrete resource – which is a bad design choice for testability, maintainability and malleability.&lt;/p&gt;
-
-&lt;p&gt;To keep the code clean, I’m going to change things around a bit to use an IoC container. I’ve read about the Ninject.Web.Mvc project and I’d like to learn how to use it, so here we go :)&lt;/p&gt;
-
-&lt;p&gt;I’ve downloaded and built the Ninject.Web.Mvc project, it’s now part of the lib folder in my project’s &lt;a href=&quot;http://github.com/kmckelvin/nh3-musicstore&quot;&gt;GitHub repo&lt;/a&gt; as well.&lt;/p&gt;
-
-&lt;p&gt;The Ninject MVC project provides a NinjectHttpApplication abstract class that we’ll inherit from instead of the System.Web.HttpApplication on our MvcApplication class. We’ll also override the CreateKernel() method on the NinjectHttpApplication.&lt;/p&gt;
-
-&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MvcApplication&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NinjectHttpApplication&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IKernel&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;CreateKernel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;StandardKernel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;MusicStoreNinjectModule&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The Application_Start() method must be renamed to override the OnApplicationStarted method – or you can add an event binding to it in the constructor. The NinjectHttpApplication doesn’t execute the Application_Start method by default as the standard HttpApplication does.&lt;/p&gt;
-
-&lt;p&gt;And we’ll create the MusicStoreNinjectModule to resolve our controllers and our IMusicStoreContext like this:&lt;/p&gt;
-
-&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MusicStoreNinjectModule&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NinjectModule&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;AccountController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToSelf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CheckoutController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToSelf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HomeController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToSelf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ShoppingCartController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToSelf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;StoreController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToSelf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;StoreManagerController&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToSelf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;// This will be injected into our controller to give us access to our context&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// without introducing a tight coupling to a static resource.&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;Bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IMusicStoreContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;().&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToMethod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MvcApplication&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;GetCurrentRequestContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;That means I can now add a constructor to each of our controllers that accepts an IMusicStoreContext and our controller will always receive a context object that’s built for the active request.&lt;/p&gt;
-
-&lt;p&gt;Neat :) Again, the code’s all on &lt;a href=&quot;http://github.com/kmckelvin/NH3-MusicStore&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author></entry></feed>
+&lt;p&gt;All of the code is available on GitHub at &lt;a href=&quot;http://github.com/kmckelvin/NH3-MusicStore&quot;&gt;http://github.com/kmckelvin/NH3-MusicStore&lt;/a&gt;. Please go check it out, any feedback and constructive criticism is most welcome.&lt;/p&gt;</content><author><name></name></author></entry></feed>
