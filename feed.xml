@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://bridgetownrb.com/" version="1.3.4">Bridgetown</generator><link href="https://kmckelvin.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://kmckelvin.com/" rel="alternate" type="text/html" /><updated>2024-12-10T20:01:33+00:00</updated><id>https://kmckelvin.com/feed.xml</id><title type="html">Kevin McKelvin</title><subtitle></subtitle><entry><title type="html">Rails ActiveRecord’s ‘none’ method</title><link href="https://kmckelvin.com/blog/2024/11/activerecord-none-relations/" rel="alternate" type="text/html" title="Rails ActiveRecord&apos;s &apos;none&apos; method" /><published>2024-11-29T00:00:00+00:00</published><updated>2024-11-29T00:00:00+00:00</updated><id>repo://posts.collection/_posts/2024-11-29-activerecord-none-relations.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2024/11/activerecord-none-relations/">&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;none&lt;/code&gt; query method in Rails ActiveRecord is a hidden &lt;em&gt;gem&lt;/em&gt; I hadn’t come
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://bridgetownrb.com/" version="1.3.4">Bridgetown</generator><link href="https://kmckelvin.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://kmckelvin.com/" rel="alternate" type="text/html" /><updated>2025-03-05T14:11:25+00:00</updated><id>https://kmckelvin.com/feed.xml</id><title type="html">Kevin McKelvin</title><subtitle></subtitle><entry><title type="html">Rails ActiveRecord’s ‘none’ method</title><link href="https://kmckelvin.com/blog/2024/11/activerecord-none-relations/" rel="alternate" type="text/html" title="Rails ActiveRecord&apos;s &apos;none&apos; method" /><published>2024-11-29T00:00:00+00:00</published><updated>2024-11-29T00:00:00+00:00</updated><id>repo://posts.collection/_posts/2024-11-29-activerecord-none-relations.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2024/11/activerecord-none-relations/">&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;none&lt;/code&gt; query method in Rails ActiveRecord is a hidden &lt;em&gt;gem&lt;/em&gt; I hadn’t come
 across until this week.&lt;/p&gt;
 
 &lt;p&gt;It creates a relation that returns no results unless combined with other
@@ -43,44 +43,95 @@ deleted and archived need to be false to match the first condition.&lt;/p&gt;
 
 &lt;p&gt;When this is executed, the resulting SQL doesn’t include a straggling
 &lt;code class=&quot;highlighter-rouge&quot;&gt;WHERE 1=0&lt;/code&gt; condition, and if no conditions are added to the chain it would just
-return an empty result set without even querying the database.&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">LazyVim – Stable Productivity with Neovim</title><link href="https://kmckelvin.com/blog/2024/06/lazyvim-stable-productivity-with-neovim/" rel="alternate" type="text/html" title="LazyVim – Stable Productivity with Neovim" /><published>2024-06-16T00:00:00+01:00</published><updated>2024-06-16T00:00:00+01:00</updated><id>repo://posts.collection/_posts/2024-06-16-lazyvim-stable-productivity-with-neovim.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2024/06/lazyvim-stable-productivity-with-neovim/">&lt;p&gt;The Rails community is familiar with the Japanese term Omakase, as used to describe the spirit of the Rails framework. It’s well covered in the &lt;a href=&quot;https://rubyonrails.org/doctrine#omakase&quot;&gt;Rails Doctrine&lt;/a&gt;.&lt;/p&gt;
+return an empty result set without even querying the database.&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">LazyVim – Stable Productivity with Neovim</title><link href="https://kmckelvin.com/blog/2024/06/lazyvim-stable-productivity-with-neovim/" rel="alternate" type="text/html" title="LazyVim – Stable Productivity with Neovim" /><published>2024-06-16T00:00:00+01:00</published><updated>2024-06-16T00:00:00+01:00</updated><id>repo://posts.collection/_posts/2024-06-16-lazyvim-stable-productivity-with-neovim.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2024/06/lazyvim-stable-productivity-with-neovim/">&lt;p&gt;The Rails community is familiar with the Japanese term Omakase, as used to
+describe the spirit of the Rails framework. It’s well covered in the
+&lt;a href=&quot;https://rubyonrails.org/doctrine#omakase&quot;&gt;Rails Doctrine&lt;/a&gt;.&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;How do you know what to order in a restaurant when you don’t know what’s good? Well, if you let the chef choose, you can probably assume a good meal, even before you know what “good” is. That is omakase. A way to eat well that requires you neither be an expert in the cuisine nor blessed with blind luck at picking in the dark.&lt;/p&gt;
+  &lt;p&gt;How do you know what to order in a restaurant when you don’t know what’s good?
+Well, if you let the chef choose, you can probably assume a good meal, even
+before you know what “good” is. That is omakase. A way to eat well that
+requires you neither be an expert in the cuisine nor blessed with blind luck
+at picking in the dark.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;That’s what &lt;a href=&quot;https://www.lazyvim.org/&quot;&gt;LazyVim&lt;/a&gt; brings to Neovim, courtesy of an expert chef. Having spent many hours honing a Neovim configuration to suit my taste, and tiring of the Sisyphean battle that comes with dealing with package updates that break parts of your configuration (that you only notice days or weeks after the breaking change), I was curious to see if this could alleviate some of these pain points.&lt;/p&gt;
+&lt;p&gt;That’s what &lt;a href=&quot;https://www.lazyvim.org/&quot;&gt;LazyVim&lt;/a&gt; brings to Neovim, courtesy of an
+expert chef. Having spent many hours honing a Neovim configuration to suit my
+taste, and tiring of the Sisyphean battle that comes with dealing with package
+updates that break parts of your configuration (that you only notice days or
+weeks after the breaking change), I was curious to see if this could alleviate
+some of these pain points.&lt;/p&gt;
 
-&lt;p&gt;LazyVim provides a base configuration of plugins, keymaps, and settings for Neovim that the author, Folke (or the chef to continue the Omakase analogy) has refined to work together cohesively. Folke is one of the stalwards of the Neovim community and has authored &lt;a href=&quot;https://github.com/folke?tab=repositories&amp;amp;q=%23neovim-plugin&quot;&gt;well over a dozen Neovim plugins&lt;/a&gt;. It’s incredibly liberating to pass the setup and maintenance responsibility of my Neovim configuration to someone who knows the ins and outs of it far better than I do, and who can keep that layer up to date over time.&lt;/p&gt;
+&lt;p&gt;LazyVim provides a base configuration of plugins, keymaps, and settings for
+Neovim that the author, Folke (or the chef to continue the Omakase analogy) has
+refined to work together cohesively. Folke is one of the stalwards of the Neovim
+community and has authored
+&lt;a href=&quot;https://github.com/folke?tab=repositories&amp;amp;q=%23neovim-plugin&quot;&gt;well over a dozen Neovim plugins&lt;/a&gt;.
+It’s incredibly liberating to pass the setup and maintenance responsibility of
+my Neovim configuration to someone who knows the ins and outs of it far better
+than I do, and who can keep that layer up to date over time.&lt;/p&gt;
 
-&lt;p&gt;I’ve &lt;a href=&quot;https://github.com/kmckelvin/nvimrc&quot;&gt;built my own&lt;/a&gt; Neovim configuration from scratch before, but took the plunge to build a new configuration on top of the LazyVim starter last week. After cloning the starter, and investing a little effort in learning some new patterns and migrating some settings, I was able to achieve a more refined, cohesive, and feature rich Neovim experience than my own configuration I crafted from scratch over years. It took a bit of time to rewire my brain around the new keymap mnemonics in LazyVim, but the reward was worth the pain.&lt;/p&gt;
+&lt;p&gt;I’ve &lt;a href=&quot;https://github.com/kmckelvin/nvimrc&quot;&gt;built my own&lt;/a&gt; Neovim configuration
+from scratch before, but took the plunge to build a new configuration on top of
+the LazyVim starter last week. After cloning the starter, and investing a little
+effort in learning some new patterns and migrating some settings, I was able to
+achieve a more refined, cohesive, and feature rich Neovim experience than my own
+configuration I crafted from scratch over years. It took a bit of time to rewire
+my brain around the new keymap mnemonics in LazyVim, but the reward was worth
+the pain.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/neovim-lazyvim.png&quot; alt=&quot;Neovim configured on top of LazyVim&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;the-optional-extras&quot;&gt;The optional extras&lt;/h2&gt;
 
-&lt;p&gt;Fancy pairing a sauce with your meal? The chef has you covered. LazyVim has “extras” for common configurations that can be enabled separately. These include language specific configurations such as for Ruby, TypeScript or Go, but cohesive configurations for linting, snippets and refactoring. It’s worth enabling the appropriate extras for your workflow and learning their behaviour instead of trying to configure these yourself.&lt;/p&gt;
+&lt;p&gt;Fancy pairing a sauce with your meal? The chef has you covered. LazyVim has
+“extras” for common configurations that can be enabled separately. These include
+language specific configurations such as for Ruby, TypeScript or Go, but
+cohesive configurations for linting, snippets and refactoring. It’s worth
+enabling the appropriate extras for your workflow and learning their behaviour
+instead of trying to configure these yourself.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/neovim-lazyvim-extras.png&quot; alt=&quot;LazyExtras&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;leaving-the-golden-path&quot;&gt;Leaving the golden path&lt;/h2&gt;
 
-&lt;p&gt;Not everything the chef prepares will be to the liking of every patron. There are a couple of changes I’ve made to LazyVim’s defaults:&lt;/p&gt;
+&lt;p&gt;Not everything the chef prepares will be to the liking of every patron. There
+are a couple of changes I’ve made to LazyVim’s defaults:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;I’ve been using Tim Pope’s &lt;a href=&quot;https://github.com/tpope/vim-fugitive&quot;&gt;vim-fugitive&lt;/a&gt; plugin with vim for well over a decade, and I often prefer to open vim to use fugitive instead of the git command line. I’ve switched out LazyGit to use Fugitive instead, and added &lt;a href=&quot;https://github.com/tpope/vim-rhubarb&quot;&gt;vim-rhubarb&lt;/a&gt; for better integration with GitHub.&lt;/li&gt;
-  &lt;li&gt;I prefer the default behaviour of the &lt;code class=&quot;highlighter-rouge&quot;&gt;s&lt;/code&gt; key so I’ve unbound it in folke/flash.nvim.&lt;/li&gt;
-  &lt;li&gt;I like having inline git blame, and added the configuration to the gitsigns plugin.&lt;/li&gt;
-  &lt;li&gt;The keybindings in &lt;code class=&quot;highlighter-rouge&quot;&gt;kylechui/nvim-surround&lt;/code&gt; work better in my mind than the LazyVim extra has configured&lt;/li&gt;
+  &lt;li&gt;I’ve been using Tim Pope’s
+&lt;a href=&quot;https://github.com/tpope/vim-fugitive&quot;&gt;vim-fugitive&lt;/a&gt; plugin with vim for well
+over a decade, and I often prefer to open vim to use fugitive instead of the
+git command line. I’ve switched out LazyGit to use Fugitive instead, and added
+&lt;a href=&quot;https://github.com/tpope/vim-rhubarb&quot;&gt;vim-rhubarb&lt;/a&gt; for better integration
+with GitHub.&lt;/li&gt;
+  &lt;li&gt;I prefer the default behaviour of the &lt;code class=&quot;highlighter-rouge&quot;&gt;s&lt;/code&gt; key so
+&lt;a href=&quot;https://github.com/kmckelvin/lazy-nvimrc/blob/master/lua/plugins/flash.lua&quot;&gt;I’ve unbound it&lt;/a&gt;
+in folke/flash.nvim.&lt;/li&gt;
+  &lt;li&gt;I like having inline git blame, and
+&lt;a href=&quot;https://github.com/kmckelvin/lazy-nvimrc/blob/master/lua/plugins/gitsigns.lua&quot;&gt;added the configuration&lt;/a&gt;
+to the gitsigns plugin.&lt;/li&gt;
+  &lt;li&gt;The keybindings in &lt;code class=&quot;highlighter-rouge&quot;&gt;kylechui/nvim-surround&lt;/code&gt; work better in my mind than the
+LazyVim extra has configured&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;sticking-with-it&quot;&gt;Sticking with it&lt;/h2&gt;
 
-&lt;p&gt;I’ve been using my new LazyVim-based configuration on Ruby, Go and TypeScript codebases for a week now and I’m going to stick with it going forward. It’s been a long time since I’ve felt this excited about an editor, and for it to still be Neovim having used vim for over a decade is particularly satisfying. If you’ve tried using vim before, but felt the burden of learning vimscript or lua configure it wasn’t worthwhile, have a look at Neovim with LazyVim.&lt;/p&gt;
+&lt;p&gt;I’ve been using my new LazyVim-based configuration on Ruby, Go and TypeScript
+codebases for some time now and I’m going to stick with it going forward. It’s
+been a long time since I’ve felt this excited about an editor, and for it to
+still be Neovim having used vim for over a decade is particularly satisfying. If
+you’ve tried using vim before, but felt the burden of learning vimscript or lua
+configure it wasn’t worthwhile, have a look at Neovim with LazyVim.&lt;/p&gt;
 
-&lt;p&gt;When I’m coding I don’t want to be distracted by issues with my text editor. If Neovim gets in my way, I’d be better off using another tool. LazyVim with its Lazy Extras, show great promise as a stable baseline that I can sprinkle a small amount of custom settings over.&lt;/p&gt;
+&lt;p&gt;When I’m coding I don’t want to be distracted by issues with my text editor. If
+Neovim gets in my way, I’d be better off using another tool. LazyVim with its
+Lazy Extras, show great promise as a stable baseline that I can sprinkle a small
+amount of custom settings over.&lt;/p&gt;
 
-&lt;p&gt;If you’re looking for some inspiration, I’ve &lt;a href=&quot;https://github.com/kmckelvin/lazy-nvimrc&quot;&gt;pushed my configuration&lt;/a&gt; to GitHub. The &lt;code class=&quot;highlighter-rouge&quot;&gt;lua/config&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;lua/plugins&lt;/code&gt; contain the most interesting parts.&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">Presentation: Docker at Golang North East April 2020</title><link href="https://kmckelvin.com/blog/2020/05/golang-north-east-docker-presentation/" rel="alternate" type="text/html" title="Presentation: Docker at Golang North East April 2020" /><published>2020-05-09T00:00:00+01:00</published><updated>2020-05-09T00:00:00+01:00</updated><id>repo://posts.collection/_posts/2020-05-09-golang-north-east-docker-presentation.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2020/05/golang-north-east-docker-presentation/">&lt;p&gt;I had the privilege to speak for the first &lt;strong&gt;online&lt;/strong&gt; &lt;a href=&quot;https://www.meetup.com/Golang-North-East/events/qtpnmqybcgblc/&quot;&gt;Golang North East&lt;/a&gt; meetup on 28 April 2020.&lt;/p&gt;
+&lt;p&gt;If you’re looking for some inspiration, I’ve
+&lt;a href=&quot;https://github.com/kmckelvin/lazy-nvimrc&quot;&gt;pushed my configuration&lt;/a&gt; to GitHub.
+The &lt;code class=&quot;highlighter-rouge&quot;&gt;lua/config&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;lua/plugins&lt;/code&gt; contain the most interesting parts.&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">Presentation: Docker at Golang North East April 2020</title><link href="https://kmckelvin.com/blog/2020/05/golang-north-east-docker-presentation/" rel="alternate" type="text/html" title="Presentation: Docker at Golang North East April 2020" /><published>2020-05-09T00:00:00+01:00</published><updated>2020-05-09T00:00:00+01:00</updated><id>repo://posts.collection/_posts/2020-05-09-golang-north-east-docker-presentation.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2020/05/golang-north-east-docker-presentation/">&lt;p&gt;I had the privilege to speak for the first &lt;strong&gt;online&lt;/strong&gt; &lt;a href=&quot;https://www.meetup.com/Golang-North-East/events/qtpnmqybcgblc/&quot;&gt;Golang North East&lt;/a&gt; meetup on 28 April 2020.&lt;/p&gt;
 
 &lt;p&gt;After a short introduction to Docker Images and Containers, I spoke about using Docker in development workflows and spent most of the time live coding and demonstrating how to build a simple Go web application that connected to Redis and ran together using &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose&lt;/code&gt;.&lt;/p&gt;
 
