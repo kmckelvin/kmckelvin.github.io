@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Rails World 2025 | Kevin McKelvin</title>
+
+<meta name="description" content="" />
+
+<link rel="icon" type="image/x-icon" href="/images/profile.jpg">
+<link rel="stylesheet" href="/_bridgetown/static/index.M7MOGLPK.css" />
+<script src="/_bridgetown/static/index.KN36LEOD.js" defer></script>
+<script type="module">let lastmod = 0
+function startReloadConnection() {
+  const evtSource = new EventSource("/_bridgetown/live_reload")
+  evtSource.onmessage = event => {
+    if (document.querySelector("#bridgetown-build-error")) document.querySelector("#bridgetown-build-error").close()
+    if (event.data == "reloaded!") {
+      location.reload()
+    } else {
+      const newmod = Number(event.data)
+      if (lastmod > 0 && newmod > 0 && lastmod < newmod) {
+        location.reload()
+      } else {
+        lastmod = newmod
+      }
+    }
+  }
+  evtSource.addEventListener("builderror", event => {
+    let dialog = document.querySelector("#bridgetown-build-error")
+    if (!dialog) {
+      dialog = document.createElement("dialog")
+      dialog.id = "bridgetown-build-error"
+      dialog.style.borderColor = "red"
+      dialog.style.fontSize = "110%"
+      dialog.innerHTML = `
+        <p style="color:red">There was an error when building the site:</p>
+        <output><pre></pre></output>
+        <p><small>Check your Bridgetown logs for further details.</small></p>
+      `
+      document.body.appendChild(dialog)
+      dialog.showModal()
+    }
+    dialog.querySelector("pre").textContent = JSON.parse(event.data)
+  })
+  evtSource.onerror = event => {
+    if (evtSource.readyState === 2) {
+      // reconnect with new object
+      evtSource.close()
+      console.warn("Live reload: attempting to reconnect in 3 seconds...")
+
+      setTimeout(() => startReloadConnection(), 3000)
+    }
+  }
+}
+setTimeout(() => {
+  startReloadConnection()
+}, 500)
+</script>
+<!-- Begin Bridgetown SEO tag v6.0.0 -->
+<title>Rails World 2025 | Kevin McKelvin</title>
+<meta property="og:title" content="Rails World 2025" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://kmckelvin.com/blog/2025/09/rails-world-2025/" />
+<meta property="og:url" content="https://kmckelvin.com/blog/2025/09/rails-world-2025/" />
+<meta property="og:site_name" content="Kevin McKelvin" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-09-07T00:00:00+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Rails World 2025" />
+<!-- End Bridgetown SEO tag -->
+
+<link type="application/atom+xml" rel="alternate" href="https://kmckelvin.com/feed.xml" title="Kevin McKelvin" />
+
+  </head>
+  <body class="post ">
+    <div class="page-content">
+      <header class="site-header">
+  <a href="/">
+    <div class="site-header-content">
+      <img src="/images/profile.jpg" class="site-header-content__avatar">
+      <div>
+        <div class="site-header-content__title">Kevin McKelvin</div>
+        <div class="site-header-content__subtitle">Software developer, blogger, speaker, CTO</div>
+      </div>
+    </div>
+  </a>
+</header>
+
+<nav class="site-nav">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/posts">Posts</a></li>
+  </ul>
+</nav>
+
+
+
+      <main>
+        <h1>Rails World 2025</h1>
+<p class="published-at"> 7 September 2025</p>
+
+
+<p>Rails World 2025, in Amsterdam, NL is a wrap! What an experience it’s been.</p>
+
+<p>I haven’t attended many conferences since before COVID. But this felt like a
+rekindling of everything I remembered from being in the Ruby conference and user
+group circuit in South Africa until 2017.</p>
+
+<p>My visa meant I could only arrive on the morning of the first day of the
+conference, and missed the pre-conference registration and drinks. But the
+3:30AM wakeup for a 6AM flight from Newcastle to Schiphol, and the mad rush to
+get from the arrivals gate to Beurs van Berlage was absolutely worth it.</p>
+
+<p><img src="/images/rails-world-2025/mcs.jpeg" alt="MCs" /></p>
+
+<p>DHH was on typical passionate, enthusiastic form for his keynote. Citing “Pax
+Railsana” as we’re truly in the golden age of Rails, where we’re able to solve
+the whole problem of web development. A slightly tangential demo of his Omarchy
+Linux distribution was greatly enjoyed by the audience, who are by definition
+already swayed to some degree by DHH’s aesthetic sensibilities.</p>
+
+<p><a href="https://github.com/basecamp/activerecord-tenanted">ActiveRecord::Tentanted</a> got
+me the most excited. In essence, it takes the idea of sharding to the point
+where every tenant in a multi-tenant system gets an entire isolated database.
+It’s an idea I toyed with in about 2017 or 2018, but abandoned because of the
+sheer number of edges I ran into with the likes of migrations, schema version
+management between databases, identifying which database to read for background
+workers, connection pooling, and what to do with the data that should be shared
+between accounts. I’m excited to see where this new gem goes, and if I can help
+contribute to it.</p>
+
+<p><img src="/images/rails-world-2025/tenanted.jpeg" alt="ActiveRecord::Tenanted" /></p>
+
+<p>Aaron Patterson’s signature pun-filled, trolling keynote closed out the
+conference. 30_001 assertions, a ton of laughs, and a dive into ZJIT later, and
+we were all left truly excited for the future of both Ruby, and of Rails. All of
+us owe Shopify a massive debt of gratitude for the work they put in to building
+world class tooling for Ruby.</p>
+
+<p>I could wax lyrical about the quality of the talks, and they were truly
+fantastic, but the best part of attending a conference like Rails World in
+person is meeting people. I reconnected with old colleagues from South Africa,
+and international Ruby friends I hadn’t seen in a decade since I was involved in
+the Rubyfuza conference in Cape Town. As well as new acquaintances I had only
+recently met at the Brighton Ruby conference earlier in 2025.</p>
+
+<p>The sponsors were on top form too. Framework was there demoing their laptops and
+desktop. Rails staples such as Intercom, GitHub, GitLab, Basecamp, Sentry were
+all there supporting the conference and community. Thanks in particular to
+Cedarcode who sponsored barista coffee for the conference!</p>
+
+<p>Shopify put on the after party at the ridiculously fun STRAAT Museum, with “Off
+The Rails” Pale Ale, drinks, food and music. Being in a room with a few hundred
+friends, where you could walk up to anyone and strike up a conversation and find
+common ground is an experience I won’t forget in a hurry.</p>
+
+<p><img src="/images/rails-world-2025/off-the-rails.jpeg" alt="Off The Rails Pale Ale" /></p>
+
+<p>Amanda Perino and the crew at the Rails Foundation who put together the
+conference deserve a massive round of applause, and I hope they’re all able to
+relax after a job well done. The attention to detail in organisation was
+spectacular, from the choice of the venue, to having a cloakroom (and luggage
+store for those of us who could only arrive on the day), to having apple juice
+served in wine glasses and top quality barista coffee. Thank you 👏.</p>
+
+<p>I can’t wait for the next one in Austin, TX. See you there 🍻</p>
+
+
+      </main>
+
+      <footer class="site-footer">Copyright <span class="copyright">&copy;</span> Kevin McKelvin 2025</footer>
+
+<script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+<noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
+
+    </div>
+
+  </body>
+</html>

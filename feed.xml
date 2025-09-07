@@ -1,4 +1,67 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://bridgetownrb.com/" version="1.3.4">Bridgetown</generator><link href="https://kmckelvin.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://kmckelvin.com/" rel="alternate" type="text/html" /><updated>2025-03-05T14:14:25+00:00</updated><id>https://kmckelvin.com/feed.xml</id><title type="html">Kevin McKelvin</title><subtitle></subtitle><entry><title type="html">Rails ActiveRecord’s ‘none’ method</title><link href="https://kmckelvin.com/blog/2024/11/activerecord-none-relations/" rel="alternate" type="text/html" title="Rails ActiveRecord&apos;s &apos;none&apos; method" /><published>2024-11-29T00:00:00+00:00</published><updated>2024-11-29T00:00:00+00:00</updated><id>repo://posts.collection/_posts/2024-11-29-activerecord-none-relations.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2024/11/activerecord-none-relations/">&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;none&lt;/code&gt; query method in Rails ActiveRecord is a hidden &lt;em&gt;gem&lt;/em&gt; I hadn’t come
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://bridgetownrb.com/" version="1.3.4">Bridgetown</generator><link href="https://kmckelvin.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://kmckelvin.com/" rel="alternate" type="text/html" /><updated>2025-09-07T21:43:18+01:00</updated><id>https://kmckelvin.com/feed.xml</id><title type="html">Kevin McKelvin</title><subtitle></subtitle><entry><title type="html">Rails World 2025</title><link href="https://kmckelvin.com/blog/2025/09/rails-world-2025/" rel="alternate" type="text/html" title="Rails World 2025" /><published>2025-09-07T00:00:00+01:00</published><updated>2025-09-07T00:00:00+01:00</updated><id>repo://posts.collection/_posts/2025-09-07-rails-world-2025.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2025/09/rails-world-2025/">&lt;p&gt;Rails World 2025, in Amsterdam, NL is a wrap! What an experience it’s been.&lt;/p&gt;
+
+&lt;p&gt;I haven’t attended many conferences since before COVID. But this felt like a
+rekindling of everything I remembered from being in the Ruby conference and user
+group circuit in South Africa until 2017.&lt;/p&gt;
+
+&lt;p&gt;My visa meant I could only arrive on the morning of the first day of the
+conference, and missed the pre-conference registration and drinks. But the
+3:30AM wakeup for a 6AM flight from Newcastle to Schiphol, and the mad rush to
+get from the arrivals gate to Beurs van Berlage was absolutely worth it.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/rails-world-2025/mcs.jpeg&quot; alt=&quot;MCs&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;DHH was on typical passionate, enthusiastic form for his keynote. Citing “Pax
+Railsana” as we’re truly in the golden age of Rails, where we’re able to solve
+the whole problem of web development. A slightly tangential demo of his Omarchy
+Linux distribution was greatly enjoyed by the audience, who are by definition
+already swayed to some degree by DHH’s aesthetic sensibilities.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/basecamp/activerecord-tenanted&quot;&gt;ActiveRecord::Tentanted&lt;/a&gt; got
+me the most excited. In essence, it takes the idea of sharding to the point
+where every tenant in a multi-tenant system gets an entire isolated database.
+It’s an idea I toyed with in about 2017 or 2018, but abandoned because of the
+sheer number of edges I ran into with the likes of migrations, schema version
+management between databases, identifying which database to read for background
+workers, connection pooling, and what to do with the data that should be shared
+between accounts. I’m excited to see where this new gem goes, and if I can help
+contribute to it.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/rails-world-2025/tenanted.jpeg&quot; alt=&quot;ActiveRecord::Tenanted&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Aaron Patterson’s signature pun-filled, trolling keynote closed out the
+conference. 30_001 assertions, a ton of laughs, and a dive into ZJIT later, and
+we were all left truly excited for the future of both Ruby, and of Rails. All of
+us owe Shopify a massive debt of gratitude for the work they put in to building
+world class tooling for Ruby.&lt;/p&gt;
+
+&lt;p&gt;I could wax lyrical about the quality of the talks, and they were truly
+fantastic, but the best part of attending a conference like Rails World in
+person is meeting people. I reconnected with old colleagues from South Africa,
+and international Ruby friends I hadn’t seen in a decade since I was involved in
+the Rubyfuza conference in Cape Town. As well as new acquaintances I had only
+recently met at the Brighton Ruby conference earlier in 2025.&lt;/p&gt;
+
+&lt;p&gt;The sponsors were on top form too. Framework was there demoing their laptops and
+desktop. Rails staples such as Intercom, GitHub, GitLab, Basecamp, Sentry were
+all there supporting the conference and community. Thanks in particular to
+Cedarcode who sponsored barista coffee for the conference!&lt;/p&gt;
+
+&lt;p&gt;Shopify put on the after party at the ridiculously fun STRAAT Museum, with “Off
+The Rails” Pale Ale, drinks, food and music. Being in a room with a few hundred
+friends, where you could walk up to anyone and strike up a conversation and find
+common ground is an experience I won’t forget in a hurry.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/rails-world-2025/off-the-rails.jpeg&quot; alt=&quot;Off The Rails Pale Ale&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Amanda Perino and the crew at the Rails Foundation who put together the
+conference deserve a massive round of applause, and I hope they’re all able to
+relax after a job well done. The attention to detail in organisation was
+spectacular, from the choice of the venue, to having a cloakroom (and luggage
+store for those of us who could only arrive on the day), to having apple juice
+served in wine glasses and top quality barista coffee. Thank you 👏.&lt;/p&gt;
+
+&lt;p&gt;I can’t wait for the next one in Austin, TX. See you there 🍻&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">Rails ActiveRecord’s ‘none’ method</title><link href="https://kmckelvin.com/blog/2024/11/activerecord-none-relations/" rel="alternate" type="text/html" title="Rails ActiveRecord&apos;s &apos;none&apos; method" /><published>2024-11-29T00:00:00+00:00</published><updated>2024-11-29T00:00:00+00:00</updated><id>repo://posts.collection/_posts/2024-11-29-activerecord-none-relations.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2024/11/activerecord-none-relations/">&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;none&lt;/code&gt; query method in Rails ActiveRecord is a hidden &lt;em&gt;gem&lt;/em&gt; I hadn’t come
 across until this week.&lt;/p&gt;
 
 &lt;p&gt;It creates a relation that returns no results unless combined with other
@@ -858,60 +921,4 @@ published or not, but I’m going to leave that for a future post. Stay tuned!&l
 &lt;p&gt;To install, just use the gem package manager to install the latest rails gem:
 &lt;code class=&quot;highlighter-rouge&quot;&gt;gem install rails --version 3.0.0&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Enjoy! :)&lt;/p&gt;</content><author><name></name></author></entry><entry><title type="html">The NHibernate 3 Music Store – Mappings and the first glimpse! – Part 6</title><link href="https://kmckelvin.com/blog/2010/08/the-nh3-music-store-part-6-mappings-and-the-first-glimpse/" rel="alternate" type="text/html" title="The NHibernate 3 Music Store – Mappings and the first glimpse! – Part 6" /><published>2010-08-29T12:12:09+01:00</published><updated>2010-08-29T12:12:09+01:00</updated><id>repo://posts.collection/_posts/2010-08-29-the-nh3-music-store-part-6-mappings-and-the-first-glimpse.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2010/08/the-nh3-music-store-part-6-mappings-and-the-first-glimpse/">&lt;p&gt;Having sorted out the infrastructure issues of changing EF4 out with NHibernate, the last bit of the job is to map all of the entities. There are a few ways I can accomplish this: XML files, Fluent NHibernate or Fabio Maulo’s ConfORM.&lt;/p&gt;
-
-&lt;p&gt;Despite the fact that I really hate writing xml, I still prefer using the .hbm.xml files over the other options. The NHibernate guys have made it really easy to write these xml files – like an XSD to provide IntelliSense and reasonable default values for non-essential properties.&lt;/p&gt;
-
-&lt;p&gt;I’m not going to post all of the XML here (it’s all on &lt;a href=&quot;http://github.com/kmckelvin/NH3-MusicStore&quot;&gt;GitHub&lt;/a&gt;), here’s just one sample that maps the Album class.&lt;/p&gt;
-
-&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;hibernate-mapping&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;xmlns=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;urn:nhibernate-mapping-2.2&quot;&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;assembly=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Mvc Music Store&quot;&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;namespace=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;MvcMusicStore.Models&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;class&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Album&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;id&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;AlbumId&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;generator&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;identity&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/id&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;many-to-one&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Genre&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;GenreId&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;many-to-one&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Artist&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ArtistId&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Title&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Price&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;AlbumArtUrl&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;bag&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;OrderDetails&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;cascade=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;all&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;key&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;column=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;AlbumId&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-      &lt;span class=&quot;nt&quot;&gt;&amp;lt;one-to-many&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;OrderDetail&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/bag&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/class&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/hibernate-mapping&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;So at this point the solution is compiling and runs, I’ve got one last problem to iron out however. NHibernate doesn’t like this LINQ query on the HomeController:&lt;/p&gt;
-
-&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;storeContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Albums&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;OrderBy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;OrderDetails&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Take&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;To get this to work I’ve changed the query around to use the QueryOver API&lt;/p&gt;
-
-&lt;div class=&quot;language-csharp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;storeContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Session&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;QueryOver&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Album&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Fetch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;OrderDetails&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Eager&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Album&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;()&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Take&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;ToList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;I know this isn’t ideal, unbounded result sets everywhere, however I’m more interested in getting the system to work in the first place than performance at this point. That aside, the query that EF4 generates here is just as bad. If there are any suggestions, I’d love to see how you’d write this query.&lt;/p&gt;
-
-&lt;p&gt;So, holding thumbs I hit F5 again, and here’s what we get:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/nh3-music-store/first-glimpse.png&quot; alt=&quot;First Glimpse&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Tada! :D&lt;/strong&gt; In my brief explorations I haven’t found anything that is &lt;strong&gt;not&lt;/strong&gt; working. I still have to do quite a bit of work to know for sure.&lt;/p&gt;
-
-&lt;p&gt;But for now (at least until I get more time to test this) that’s the NHibernate 3 ASP.NET MVC Music Store! There are still a few issues to iron out with the NHibernate implementation. I’ve had a lot of fun and learnt a heck of a lot in the last bit while working on this and writing about it.&lt;/p&gt;
-
-&lt;p&gt;All of the code is available on GitHub at &lt;a href=&quot;http://github.com/kmckelvin/NH3-MusicStore&quot;&gt;http://github.com/kmckelvin/NH3-MusicStore&lt;/a&gt;. Please go check it out, any feedback and constructive criticism is most welcome.&lt;/p&gt;</content><author><name></name></author></entry></feed>
+&lt;p&gt;Enjoy! :)&lt;/p&gt;</content><author><name></name></author></entry></feed>
