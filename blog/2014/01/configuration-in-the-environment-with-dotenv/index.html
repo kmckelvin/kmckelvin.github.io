@@ -9,7 +9,7 @@
 <meta name="description" content="" />
 
 <link rel="icon" type="image/x-icon" href="/images/profile.jpg">
-<link rel="stylesheet" href="/_bridgetown/static/index.M7MOGLPK.css" />
+<link rel="stylesheet" href="/_bridgetown/static/index.AZWEWEXO.css" />
 <script src="/_bridgetown/static/index.KN36LEOD.js" defer></script>
 <script type="module">let lastmod = 0
 function startReloadConnection() {
@@ -106,8 +106,8 @@ setTimeout(() => {
         <h1>Configuration in the environment with dotenv</h1>
 <p class="published-at">24 January 2014</p>
 
-
-<p>Security’s one of the most easily overlooked risks when developing software. The Rails community has recently had <em>another</em> dispute about the best way of storing access credentials to 3rd party services. According to the <a href="http://12factor.net">12Factor</a> app manifesto, configuration should be stored in the environment. This is where the <code class="highlighter-rouge">dotenv</code> gem becomes useful.</p>
+<div class="blog-post">
+  <p>Security’s one of the most easily overlooked risks when developing software. The Rails community has recently had <em>another</em> dispute about the best way of storing access credentials to 3rd party services. According to the <a href="http://12factor.net">12Factor</a> app manifesto, configuration should be stored in the environment. This is where the <code class="highlighter-rouge">dotenv</code> gem becomes useful.</p>
 
 <p><code class="highlighter-rouge">dotenv</code> is a Ruby gem that lets you configure environment variables in a dotfile in the root of your project rather than setting them in your shell. It’s pretty useful and has made life a heck of a lot easier.</p>
 
@@ -130,6 +130,7 @@ setTimeout(() => {
 
 <p>When running in the development or test environments, those environment variables will be read from the <code class="highlighter-rouge">.env</code> file. When you run in production, just set the secret as part of the environment configuration and it will be read as normal. As an alternative, those settings can be stored in a shared <code class="highlighter-rouge">.env</code> file that’s symlinked as part of a Capistrano deploy. All of this is documented on the <a href="https://github.com/bkeepers/dotenv">dotenv Github page</a>.</p>
 
+</div>
 
       </main>
 

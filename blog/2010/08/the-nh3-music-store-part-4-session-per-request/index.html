@@ -9,7 +9,7 @@
 <meta name="description" content="" />
 
 <link rel="icon" type="image/x-icon" href="/images/profile.jpg">
-<link rel="stylesheet" href="/_bridgetown/static/index.M7MOGLPK.css" />
+<link rel="stylesheet" href="/_bridgetown/static/index.AZWEWEXO.css" />
 <script src="/_bridgetown/static/index.KN36LEOD.js" defer></script>
 <script type="module">let lastmod = 0
 function startReloadConnection() {
@@ -106,8 +106,8 @@ setTimeout(() => {
         <h1>The NHibernate 3 Music Store – Session per Request – Part 4</h1>
 <p class="published-at">28 August 2010</p>
 
-
-<p>I started looking at the controllers in the Music Store application and pretty quickly realised that before I could really do much there, I needed to have my IMusicStoreContext available. This meant I need an ISession from NHibernate.</p>
+<div class="blog-post">
+  <p>I started looking at the controllers in the Music Store application and pretty quickly realised that before I could really do much there, I needed to have my IMusicStoreContext available. This meant I need an ISession from NHibernate.</p>
 
 <p>The accepted way of using NHibernate is to use a pattern known as “Session per request” – where at the beginning of a request we bind a session to the CurrentSessionContext – then unbind it at the end of the request.</p>
 
@@ -193,6 +193,7 @@ setTimeout(() => {
 
 <p>And from here I have an NHibernate session available to my controllers, per request! I’m still deciding whether I should change things around to do some IoC or not, StructureMap really makes this kind of stuff easy without referring to a static method and tightly coupling a controller to the MvcApplication. The other way might be to use a custom controller loader – but that’s a discussion for another post.</p>
 
+</div>
 
       </main>
 

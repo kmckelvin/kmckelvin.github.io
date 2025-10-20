@@ -9,7 +9,7 @@
 <meta name="description" content="" />
 
 <link rel="icon" type="image/x-icon" href="/images/profile.jpg">
-<link rel="stylesheet" href="/_bridgetown/static/index.M7MOGLPK.css" />
+<link rel="stylesheet" href="/_bridgetown/static/index.AZWEWEXO.css" />
 <script src="/_bridgetown/static/index.KN36LEOD.js" defer></script>
 <script type="module">let lastmod = 0
 function startReloadConnection() {
@@ -106,8 +106,8 @@ setTimeout(() => {
         <h1>The NHibernate 3 Music Store – Part 1</h1>
 <p class="published-at">28 August 2010</p>
 
-
-<p>Ok so I’ve got the code up on Git, got the solution running in VS2008 again (I really need to get VS2010 some time…).</p>
+<div class="blog-post">
+  <p>Ok so I’ve got the code up on Git, got the solution running in VS2008 again (I really need to get VS2010 some time…).</p>
 
 <p>First thing I’m going to do is delete the Models/StoreDB.edmx file which houses the ADO.NET EF4 Entities and object contexts.  Obviously this means that just about none of the code will compile, but that’s ok for now :)</p>
 
@@ -149,6 +149,7 @@ setTimeout(() => {
 
 <p>I don’t believe in locking the ORM behind layers of abstraction, when I build out a concrete implementation of the IMusicStoreContext I want to be able to address my NHibernate ISession directly if needed.  In most scenarios however, just exposing the IQueryable that’s now available in NH3 should suffice.</p>
 
+</div>
 
       </main>
 

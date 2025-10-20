@@ -9,7 +9,7 @@
 <meta name="description" content="" />
 
 <link rel="icon" type="image/x-icon" href="/images/profile.jpg">
-<link rel="stylesheet" href="/_bridgetown/static/index.M7MOGLPK.css" />
+<link rel="stylesheet" href="/_bridgetown/static/index.AZWEWEXO.css" />
 <script src="/_bridgetown/static/index.KN36LEOD.js" defer></script>
 <script type="module">let lastmod = 0
 function startReloadConnection() {
@@ -106,8 +106,8 @@ setTimeout(() => {
         <h1>ActiveRecord and Uniqueness</h1>
 <p class="published-at">21 September 2015</p>
 
-
-<p>The uniqueness validation in ActiveRecord is a lie as soon as you have more than one app server process (or thread) running.</p>
+<div class="blog-post">
+  <p>The uniqueness validation in ActiveRecord is a lie as soon as you have more than one app server process (or thread) running.</p>
 
 <p>It performs a SQL select to ensure that no other records with the same value appear in the database before marking the record as valid. However if two processes happen to check for the same value at the same time before saving, both records are going to appear valid in Rails and will then be saved.</p>
 
@@ -135,6 +135,7 @@ setTimeout(() => {
 
 <p>Data integrity matters!</p>
 
+</div>
 
       </main>
 
