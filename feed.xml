@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://bridgetownrb.com/" version="1.3.4">Bridgetown</generator><link href="https://kmckelvin.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://kmckelvin.com/" rel="alternate" type="text/html" /><updated>2025-10-25T20:49:39+01:00</updated><id>https://kmckelvin.com/feed.xml</id><title type="html">Kevin McKelvin</title><subtitle></subtitle><entry><title type="html">Practice Makes Permanent</title><link href="https://kmckelvin.com/blog/2025/10/practice-makes-permanent/" rel="alternate" type="text/html" title="Practice Makes Permanent" /><published>2025-10-25T00:00:00+01:00</published><updated>2025-10-25T00:00:00+01:00</updated><id>repo://posts.collection/_posts/2025-10-25-practice-makes-permanent.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2025/10/practice-makes-permanent/">&lt;p&gt;&lt;em&gt;Originally published
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://bridgetownrb.com/" version="1.3.4">Bridgetown</generator><link href="https://kmckelvin.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://kmckelvin.com/" rel="alternate" type="text/html" /><updated>2025-10-25T20:54:26+01:00</updated><id>https://kmckelvin.com/feed.xml</id><title type="html">Kevin McKelvin</title><subtitle></subtitle><entry><title type="html">Practice Makes Permanent</title><link href="https://kmckelvin.com/blog/2025/10/practice-makes-permanent/" rel="alternate" type="text/html" title="Practice Makes Permanent" /><published>2025-10-25T00:00:00+01:00</published><updated>2025-10-25T00:00:00+01:00</updated><id>repo://posts.collection/_posts/2025-10-25-practice-makes-permanent.md</id><content type="html" xml:base="https://kmckelvin.com/blog/2025/10/practice-makes-permanent/">&lt;p&gt;&lt;em&gt;Originally published
 &lt;a href=&quot;https://medium.com/offline-camp/practice-makes-permanent-979bac41af48&quot;&gt;on Medium&lt;/a&gt;
 after my lightning talk at Offline Camp in 2017&lt;/em&gt;&lt;/p&gt;
 
@@ -67,14 +67,14 @@ to experiment with different approaches and techniques throughout the day. I
 can point to production code I’ve written (that’s stood the test of time)
 where I’ve applied lessons learned directly from doing a dozen Code Retreats.
 Find a craftsmanship group near you and run a Code Retreat!
-(&lt;a href=&quot;http://coderetreat.org/&quot;&gt;http://coderetreat.org/&lt;/a&gt;)&lt;/p&gt;
+(&lt;a href=&quot;https://coderetreat.org/&quot;&gt;https://coderetreat.org/&lt;/a&gt;)&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;Code Katas&lt;/strong&gt;: Similarly to how a kata in martial arts involves a series of
 defined steps to move from a beginning position to an ending position, a code
 kata is a well-defined problem that is intended to be repeated frequently.
-There’s a library of good katas at &lt;a href=&quot;http://codekata.com/&quot;&gt;http://codekata.com/&lt;/a&gt;. Once you’ve
-mastered a solution to a code kata, you’re free to experiment with new
+There’s a library of good katas at &lt;a href=&quot;https://www.codurance.com/katas&quot;&gt;https://www.codurance.com/katas&lt;/a&gt;. Once
+you’ve mastered a solution to a code kata, you’re free to experiment with new
 techniques, or impose further constraints on your solution that can lead to
 interesting patterns and learnings. For example, what happens if you try write
 Conway’s Game of Life without ‘if’ conditions? Or what about not passing bare
